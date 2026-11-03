@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codevoper Learning — Complete Interactive Learning Portal</title>
+  <meta name="description" content="A playful, personalized learning platform for children. Explore coding, languages, math, puzzles, and the world through immersive adventures.">
+  <meta property="og:title" content="Codevoper Learning — Where Learning Becomes an Adventure!">
+  <meta property="og:description" content="Coding, languages, math, puzzles, and world discovery — designed to make every child's learning journey magical.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional Enhancements for All-in-One Master Portal */
+    .world-hub-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(124, 58, 237, 0.25);
+    }
+    .world-hub-card a:hover {
+      filter: brightness(1.15);
+      transform: scale(1.02);
+    }
+    .nav-links a.active-link {
+      color: #A78BFA !important;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="main.html" onclick="closeMobileMenu()">🏠 Home</a>
+    <a href="dashboard-preprimary.html" onclick="closeMobileMenu()">🧸 Pre-Primary Hub</a>
+    <a href="story-world.html" onclick="closeMobileMenu()">📖 Story World (English & Hindi)</a>
+    <a href="number-world.html" onclick="closeMobileMenu()">🔢 Number World (Math & Logic)</a>
+    <a href="dashboard-primary.html" onclick="closeMobileMenu()">🎒 Primary School (Ages 6–10)</a>
+    <a href="dashboard-senior.html" onclick="closeMobileMenu()">🎓 Senior School (Ages 10+)</a>
+    <a href="progress-report.html" onclick="closeMobileMenu()">📊 Progress & Scores</a>
+    <a href="#" class="btn btn-primary btn-large" onclick="closeMobileMenu(); openClassOverlay(); return false;">🎁 Choose Class</a>
+  </div>
+
+  <!-- ============================
+       FULLSCREEN CLASS SELECTOR
+       Just closed boxes → click to open & reveal person
+       ============================ -->
+  <div class="class-overlay" id="classOverlay">
+    <button class="class-overlay-close" id="classOverlayClose" aria-label="Close">✕</button>
+
+    <!-- Playful floating decorations -->
+    <div class="overlay-decos">
+      <span class="overlay-deco overlay-deco-star" style="top:8%;left:10%;animation-delay:0s">⭐</span>
+      <span class="overlay-deco overlay-deco-star" style="top:15%;right:12%;animation-delay:-2s;font-size:1.2rem">✨</span>
+      <span class="overlay-deco overlay-deco-star" style="bottom:20%;left:8%;animation-delay:-4s">🌟</span>
+      <span class="overlay-deco overlay-deco-star" style="bottom:12%;right:15%;animation-delay:-1s;font-size:1rem">💫</span>
+      <span class="overlay-deco overlay-deco-star" style="top:40%;left:5%;animation-delay:-3s;font-size:2rem">✦</span>
+      <span class="overlay-deco overlay-deco-star" style="top:30%;right:6%;animation-delay:-2.5s;font-size:1.5rem">⭐</span>
+      <div class="overlay-deco overlay-deco-circle" style="top:22%;left:18%;animation-delay:-1s"></div>
+      <div class="overlay-deco overlay-deco-circle" style="bottom:25%;right:20%;animation-delay:-3.5s;width:14px;height:14px"></div>
+      <div class="overlay-deco overlay-deco-ring" style="top:12%;left:30%;animation-delay:-2s"></div>
+      <div class="overlay-deco overlay-deco-ring" style="bottom:15%;right:28%;animation-delay:-4s;width:40px;height:40px"></div>
+      <div class="overlay-deco overlay-deco-dot" style="top:35%;right:10%;animation-delay:-0.5s"></div>
+      <div class="overlay-deco overlay-deco-dot" style="bottom:35%;left:12%;animation-delay:-2.5s;background:var(--clr-pink)"></div>
+      <div class="overlay-deco overlay-deco-dot" style="top:60%;left:6%;animation-delay:-3s;background:var(--clr-teal)"></div>
+      <div class="overlay-deco overlay-deco-triangle" style="top:50%;right:8%;animation-delay:-1.5s"></div>
+      <div class="overlay-deco overlay-deco-triangle" style="bottom:40%;left:15%;animation-delay:-3.5s"></div>
+      <span class="overlay-deco overlay-deco-cross" style="top:18%;right:25%;animation-delay:-2s">✚</span>
+      <span class="overlay-deco overlay-deco-cross" style="bottom:18%;left:25%;animation-delay:-4s">✚</span>
+    </div>
+
+    <h2 class="class-overlay-title">Choose Your <span class="text-gradient">Class</span></h2>
+    <p class="class-overlay-subtitle">Click a box to see who's inside! 🎁</p>
+    <div class="class-boxes-grid">
+
+      <!-- Pre Primary Box -->
+      <div class="class-box" id="box-preprimary" data-url="dashboard-preprimary.html" onclick="openClassBox(this)">
+        <div class="class-box-closed">
+          <img src="images/closed-box-yellow.png" alt="Pre Primary box">
+        </div>
+        <div class="class-box-child">
+          <img src="images/box-preprimary.png" alt="Pre Primary student">
+        </div>
+        <div class="class-box-sparkles"></div>
+        <div class="class-box-label">Pre Primary (Ages 3–6)</div>
+      </div>
+
+      <!-- Primary Box -->
+      <div class="class-box" id="box-primary" data-url="dashboard-primary.html" onclick="openClassBox(this)">
+        <div class="class-box-closed">
+          <img src="images/closed-box-green.png" alt="Primary box">
+        </div>
+        <div class="class-box-child">
+          <img src="images/box-primary.png" alt="Primary student">
+        </div>
+        <div class="class-box-sparkles"></div>
+        <div class="class-box-label">Primary (Classes 1–5)</div>
+      </div>
+
+      <!-- Senior Box -->
+      <div class="class-box" id="box-senior" data-url="dashboard-senior.html" onclick="openClassBox(this)">
+        <div class="class-box-closed">
+          <img src="images/closed-box-purple.png" alt="Senior box">
+        </div>
+        <div class="class-box-child">
+          <img src="images/box-senior.png" alt="Senior student">
+        </div>
+        <div class="class-box-sparkles"></div>
+        <div class="class-box-label">Senior (Classes 6–10)</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================
+       NAVIGATION BAR
+       ============================ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="main.html" class="logo" id="logo">
+        <img src="images/logo-icon.png" alt="Codevoper Learning" class="logo-icon">
+        <span class="logo-text">Code<span class="highlight">voper</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#worlds" style="color: #A78BFA; font-weight: 700;">✨ All Worlds</a>
+        <a href="dashboard-preprimary.html">🧸 Pre-Primary</a>
+        <a href="story-world.html">📖 Story</a>
+        <a href="number-world.html">🔢 Numbers</a>
+        <a href="dashboard-primary.html">🎒 Primary</a>
+        <a href="dashboard-senior.html">🎓 Senior</a>
+        <a href="progress-report.html">📊 Progress</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#" onclick="openClassOverlay(); return false;" class="btn btn-primary" id="signup-btn">🎁 Choose Class</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================
+       HERO
+       ============================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          🪄 Complete Offline Ready Learning Website
+        </div>
+        <h1 class="hero-title">
+          Where Learning<br>
+          Becomes a <span class="text-gradient">Magical</span><br>
+          <span class="text-gradient">Adventure!</span>
+        </h1>
+        <p class="hero-subtitle">
+          Specially crafted for young minds to explore coding, languages, mathematics, puzzles, and the wonders of our world — all through playful, immersive world adventures with zero backend required.
+        </p>
+        <div class="hero-cta" style="display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;">
+          <a href="dashboard-preprimary.html" class="btn btn-hero-primary" id="hero-preprimary-btn" style="box-shadow: 0 6px 25px rgba(124, 58, 237, 0.45);">
+            🚀 Enter Pre-Primary World Hub →
+          </a>
+          <a href="#" onclick="openClassOverlay(); return false;" class="btn btn-hero-secondary" id="hero-start-btn" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.95rem 1.6rem; border-radius: var(--radius-full); font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; transition: var(--transition);">
+            🎁 Choose Your Class
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Offline & Client-Side</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Interactive Games</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Backend Servers Needed</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroVisual">
+        <img src="images/hero-islands.png" alt="Codevoper Learning Worlds" class="hero-image" onclick="openClassOverlay()" style="cursor: pointer;">
+        <a href="story-world.html" class="floating-badge floating-badge-1" title="Open Story World" style="text-decoration: none; cursor: pointer;">
+          <span class="badge-icon">📖</span> Story World
+        </a>
+        <a href="number-world.html" class="floating-badge floating-badge-2" title="Open Number World" style="text-decoration: none; cursor: pointer;">
+          <span class="badge-icon">🔢</span> Number World
+        </a>
+        <a href="dashboard-primary.html" class="floating-badge floating-badge-3" title="Open Primary Hub" style="text-decoration: none; cursor: pointer;">
+          <span class="badge-icon">💻</span> Code World
+        </a>
+        <div class="hero-visual-hint" onclick="openClassOverlay()" style="cursor: pointer;">🖱️ Click to explore classes!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="dot"></span>Language Learning</span>
+      <span class="marquee-item"><span class="dot"></span>Math Adventures</span>
+      <span class="marquee-item"><span class="dot"></span>Brain Puzzles</span>
+      <span class="marquee-item"><span class="dot"></span>World Discovery</span>
+      <span class="marquee-item"><span class="dot"></span>Hindi Letter Tracing</span>
+      <span class="marquee-item"><span class="dot"></span>Arithmetic Games</span>
+      <span class="marquee-item"><span class="dot"></span>Pattern Solving</span>
+      <span class="marquee-item"><span class="dot"></span>Celebration Rewards</span>
+      <span class="marquee-item"><span class="dot"></span>Language Learning</span>
+      <span class="marquee-item"><span class="dot"></span>Math Adventures</span>
+      <span class="marquee-item"><span class="dot"></span>Brain Puzzles</span>
+      <span class="marquee-item"><span class="dot"></span>World Discovery</span>
+    </div>
+  </div>
+
+  <!-- ============================
+       EXPLORE ALL LEARNING WORLDS (Direct Access to Complete Website)
+       ============================ -->
+  <section class="worlds-hub-section" id="worlds" style="padding: 4.5rem 0 3rem; position: relative;">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="line"></span> Instant Access <span class="line"></span>
+        </div>
+        <h2 class="section-title">
+          Explore All <span class="text-gradient">Learning Worlds & Activities</span>
+        </h2>
+        <p class="section-desc">Click any world or activity below to start immediately — everything is self-contained and playable!</p>
+      </div>
+
+      <div class="worlds-hub-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        
+        <!-- World 1: Pre-Primary Cosmic Hub -->
+        <div class="world-hub-card" style="background: linear-gradient(145deg, #1A1333 0%, #221B38 100%); border: 1px solid rgba(124, 58, 237, 0.35); border-radius: 24px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); transition: all 0.3s ease;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; background: rgba(124, 58, 237, 0.2); width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(124, 58, 237, 0.4);">🗺️</span>
+              <span style="background: rgba(124, 58, 237, 0.25); color: #A78BFA; border: 1px solid rgba(124, 58, 237, 0.45); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">Ages 3–6 Hub</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Pre-Primary Cosmic Map</h3>
+            <p style="font-size: 0.92rem; color: var(--clr-text-muted); line-height: 1.5; margin-bottom: 1.25rem;">The central dashboard featuring the interactive cosmic map, world pinpoints, mascot avatar, streaks, and navigation gateways.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem;">
+              <span style="background: rgba(255,255,255,0.06); color: #E2E8F0; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;">🌟 Interactive Map</span>
+              <span style="background: rgba(255,255,255,0.06); color: #E2E8F0; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;">🐱 Mascot Avatar</span>
+              <span style="background: rgba(255,255,255,0.06); color: #E2E8F0; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;">🔥 Daily Streaks</span>
+            </div>
+          </div>
+          <a href="dashboard-preprimary.html" style="background: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%); color: #fff; text-align: center; padding: 0.85rem 1.25rem; border-radius: 14px; font-weight: 700; font-family: var(--font-display); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
+            Enter Pre-Primary Hub →
+          </a>
+        </div>
+
+        <!-- World 2: Story World (English & Hindi) -->
+        <div class="world-hub-card" style="background: linear-gradient(145deg, #1A1333 0%, #221B38 100%); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 24px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); transition: all 0.3s ease;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; background: rgba(245, 158, 11, 0.2); width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(245, 158, 11, 0.4);">📖</span>
+              <span style="background: rgba(245, 158, 11, 0.25); color: #FCD34D; border: 1px solid rgba(245, 158, 11, 0.45); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">Language World</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Story World (English & Hindi)</h3>
+            <p style="font-size: 0.92rem; color: var(--clr-text-muted); line-height: 1.5; margin-bottom: 1.25rem;">Interactive letter tracing, phonics, vocabulary games, word unscrambling, and sentence comprehension with celebrations.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem;">
+              <a href="story-english.html" style="background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(37, 99, 235, 0.4); color: #60A5FA; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px; text-decoration: none;">🔤 English (15 Modules)</a>
+              <a href="story-hindi.html" style="background: rgba(236, 72, 153, 0.2); border: 1px solid rgba(236, 72, 153, 0.4); color: #F472B6; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px; text-decoration: none;">अ Hindi (9 Modules)</a>
+            </div>
+          </div>
+          <a href="story-world.html" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #fff; text-align: center; padding: 0.85rem 1.25rem; border-radius: 14px; font-weight: 700; font-family: var(--font-display); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);">
+            Explore Story World →
+          </a>
+        </div>
+
+        <!-- World 3: Number World (Math & Logic) -->
+        <div class="world-hub-card" style="background: linear-gradient(145deg, #1A1333 0%, #221B38 100%); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 24px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); transition: all 0.3s ease;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; background: rgba(16, 185, 129, 0.2); width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(16, 185, 129, 0.4);">🔢</span>
+              <span style="background: rgba(16, 185, 129, 0.25); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.45); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">Math World</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Number World (6 Math Paths)</h3>
+            <p style="font-size: 0.92rem; color: var(--clr-text-muted); line-height: 1.5; margin-bottom: 1.25rem;">Complete gamified math learning path: counting, patterns, numbers recognition, arithmetic, measurement, and shapes.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem;">
+              <a href="number-counting.html" style="background: rgba(20, 184, 166, 0.2); border: 1px solid rgba(20, 184, 166, 0.4); color: #5EEAD4; font-size: 0.78rem; padding: 4px 8px; border-radius: 8px; text-decoration: none;">Counting (5)</a>
+              <a href="number-patterns.html" style="background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.4); color: #C084FC; font-size: 0.78rem; padding: 4px 8px; border-radius: 8px; text-decoration: none;">Patterns (3)</a>
+              <a href="number-arithmetic.html" style="background: rgba(249, 115, 22, 0.2); border: 1px solid rgba(249, 115, 22, 0.4); color: #FB923C; font-size: 0.78rem; padding: 4px 8px; border-radius: 8px; text-decoration: none;">Arithmetic (11)</a>
+              <a href="number-shapes.html" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #F87171; font-size: 0.78rem; padding: 4px 8px; border-radius: 8px; text-decoration: none;">Shapes (3)</a>
+            </div>
+          </div>
+          <a href="number-world.html" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: #fff; text-align: center; padding: 0.85rem 1.25rem; border-radius: 14px; font-weight: 700; font-family: var(--font-display); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);">
+            Explore Number World →
+          </a>
+        </div>
+
+        <!-- World 4: Primary & Senior Classes -->
+        <div class="world-hub-card" style="background: linear-gradient(145deg, #1A1333 0%, #221B38 100%); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 24px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); transition: all 0.3s ease;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; background: rgba(59, 130, 246, 0.2); width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(59, 130, 246, 0.4);">🎒</span>
+              <span style="background: rgba(59, 130, 246, 0.25); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.45); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">Classes 1–10</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Primary & Senior Classes</h3>
+            <p style="font-size: 0.92rem; color: var(--clr-text-muted); line-height: 1.5; margin-bottom: 1.25rem;">Next-level learning paths for older students covering coding logic, algorithms, science and creative projects.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem;">
+              <a href="dashboard-primary.html" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: #93C5FD; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px; text-decoration: none;">Primary (Ages 6-10)</a>
+              <a href="dashboard-senior.html" style="background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.4); color: #D8B4FE; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px; text-decoration: none;">Senior (Ages 10+)</a>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <a href="dashboard-primary.html" style="flex: 1; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #fff; text-align: center; padding: 0.85rem; border-radius: 14px; font-weight: 700; font-family: var(--font-display); text-decoration: none;">Primary →</a>
+            <a href="dashboard-senior.html" style="flex: 1; background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.4); color: #fff; text-align: center; padding: 0.85rem; border-radius: 14px; font-weight: 700; font-family: var(--font-display); text-decoration: none;">Senior →</a>
+          </div>
+        </div>
+
+        <!-- World 5: Live Progress Report -->
+        <div class="world-hub-card" style="background: linear-gradient(145deg, #1A1333 0%, #221B38 100%); border: 1px solid rgba(236, 72, 153, 0.35); border-radius: 24px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); transition: all 0.3s ease;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; background: rgba(236, 72, 153, 0.2); width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; border: 1px solid rgba(236, 72, 153, 0.4);">📊</span>
+              <span style="background: rgba(236, 72, 153, 0.25); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.45); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">Analytics</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Live Progress & Scores</h3>
+            <p style="font-size: 0.92rem; color: var(--clr-text-muted); line-height: 1.5; margin-bottom: 1.25rem;">View comprehensive student progress, game scores, badges, and learning analytics saved in local browser storage.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem;">
+              <span style="background: rgba(255,255,255,0.06); color: #E2E8F0; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;">🏆 Star Badges</span>
+              <span style="background: rgba(255,255,255,0.06); color: #E2E8F0; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;">📈 Activity History</span>
+              <span style="background: rgba(255,255,255,0.06); color: #E2E8F0; font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;">💾 Zero Server Needed</span>
+            </div>
+          </div>
+          <a href="progress-report.html" style="background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%); color: #fff; text-align: center; padding: 0.85rem 1.25rem; border-radius: 14px; font-weight: 700; font-family: var(--font-display); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.35);">
+            View Progress Report →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       FEATURES (What Makes Us Special)
+       ============================ -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="line"></span> What Makes Us Special <span class="line"></span>
+        </div>
+        <h2 class="section-title">
+          What Makes Codevoper <span class="text-gradient">Special?</span>
+        </h2>
+        <p class="section-desc">Each adventure is designed to develop a core skill through play, exploration, and wonder.</p>
+      </div>
+      <div class="features-grid stagger-children" id="features-grid">
+        <a href="story-world.html" class="feature-card feature-card-1" id="feature-language" style="text-decoration: none; color: inherit; cursor: pointer;">
+          <div class="feature-card-icon">📚</div>
+          <h3 class="feature-card-title">Language Learning</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Master English and Hindi alphabets with fun, interactive exercises. Visual recognition and writing practice included!</p>
+          <span style="color: var(--clr-primary-light); font-weight: 700; font-size: 0.88rem; margin-top: 1rem; display: inline-block;">Open Story World →</span>
+        </a>
+        <a href="number-world.html" class="feature-card feature-card-2" id="feature-math" style="text-decoration: none; color: inherit; cursor: pointer;">
+          <div class="feature-card-icon">🔢</div>
+          <h3 class="feature-card-title">Math Adventures</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Numbers come alive! Learn counting, addition, and more through exciting games and activities.</p>
+          <span style="color: var(--clr-success); font-weight: 700; font-size: 0.88rem; margin-top: 1rem; display: inline-block;">Open Number World →</span>
+        </a>
+        <a href="dashboard-preprimary.html" class="feature-card feature-card-3" id="feature-puzzles" style="text-decoration: none; color: inherit; cursor: pointer;">
+          <div class="feature-card-icon">🧩</div>
+          <h3 class="feature-card-title">Brain Puzzles</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Challenge your mind with engaging puzzles that develop problem-solving and critical thinking skills.</p>
+          <span style="color: var(--clr-accent-light); font-weight: 700; font-size: 0.88rem; margin-top: 1rem; display: inline-block;">Explore Puzzles →</span>
+        </a>
+      </div>
+      <div class="features-grid-bottom stagger-children" id="features-grid-bottom">
+        <a href="dashboard-preprimary.html" class="feature-card feature-card-4" id="feature-world" style="text-decoration: none; color: inherit; cursor: pointer;">
+          <div class="feature-card-icon">🌍</div>
+          <h3 class="feature-card-title">Discover Our World</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Explore the body, nature, society, environment, Earth and space through meaningful activities.</p>
+          <span style="color: var(--clr-teal); font-weight: 700; font-size: 0.88rem; margin-top: 1rem; display: inline-block;">Explore World Map →</span>
+        </a>
+        <div class="feature-card feature-card-5" id="feature-life">
+          <div class="feature-card-icon">🌟</div>
+          <h3 class="feature-card-title">Skills for Independence</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Build confidence with practical routines, communication, self-care and safety skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       HOW IT WORKS
+       ============================ -->
+  <section class="steps-section" id="how-it-works">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="line"></span> Simple & Fun <span class="line"></span>
+        </div>
+        <h2 class="section-title">
+          Start Your <span class="text-gradient">Adventure</span> in 4 Easy Steps
+        </h2>
+      </div>
+      <div class="steps-grid stagger-children" id="steps-grid">
+        <div class="step-card" id="step-1">
+          <div class="step-number">1</div>
+          <h3 class="step-card-title">Create Your Profile</h3>
+          <p class="step-card-desc">Sign up in seconds. Tell us about your child's age and interests.</p>
+        </div>
+        <div class="step-card" id="step-2">
+          <div class="step-number">2</div>
+          <h3 class="step-card-title">Choose Your Class</h3>
+          <p class="step-card-desc">Pick from Pre Primary, Primary or Senior to match your child's level.</p>
+        </div>
+        <div class="step-card" id="step-3">
+          <div class="step-number">3</div>
+          <h3 class="step-card-title">Play & Learn</h3>
+          <p class="step-card-desc">Dive into interactive games, puzzles, and creative activities.</p>
+        </div>
+        <div class="step-card" id="step-4">
+          <div class="step-number">4</div>
+          <h3 class="step-card-title">Track Progress</h3>
+          <p class="step-card-desc">Watch your child grow with milestones and achievements!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       MISSION
+       ============================ -->
+  <section class="mission-section" id="mission">
+    <div class="container">
+      <div class="mission-content">
+        <div class="mission-text reveal-left">
+          <div class="section-eyebrow"><span class="line"></span> Our Mission</div>
+          <h2 class="mission-title">
+            Our <span class="text-gradient">Mission</span>
+          </h2>
+          <p class="mission-desc">
+            Codevoper Learning is an innovative educational platform designed to make learning enjoyable and effective for children aged 3-14. We believe every child deserves access to quality education that adapts to their unique learning style.
+          </p>
+          <div class="mission-features">
+            <div class="mission-feature">
+              <div class="mission-feature-icon">🎯</div>
+              <div class="mission-feature-text">
+                <h4>Personalized Learning Paths</h4>
+                <p>Content adapts to each child's progress and strengths.</p>
+              </div>
+            </div>
+            <div class="mission-feature">
+              <div class="mission-feature-icon">🎮</div>
+              <div class="mission-feature-text">
+                <h4>Gamified Experience</h4>
+                <p>Badges, streaks, and rewards make every lesson a game.</p>
+              </div>
+            </div>
+            <div class="mission-feature">
+              <div class="mission-feature-icon">👨‍👩‍👧</div>
+              <div class="mission-feature-text">
+                <h4>Parent Dashboard</h4>
+                <p>Real-time insights into your child's learning journey.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-visual reveal-right">
+          <img src="images/mission.png" alt="Children learning together" class="mission-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       TESTIMONIALS
+       ============================ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span class="line"></span> Loved by Families <span class="line"></span></div>
+        <h2 class="section-title">What <span class="text-gradient">Parents</span> Are Saying</h2>
+      </div>
+      <div class="testimonials-grid stagger-children" id="testimonials-grid">
+        <div class="testimonial-card" id="testimonial-1">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"My daughter loves the Story Time activities! She went from struggling with letters to reading simple words in just 3 weeks."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">P</div>
+            <div>
+              <div class="testimonial-name">Priya Sharma</div>
+              <div class="testimonial-role">Mother of 5-year-old</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" id="testimonial-2">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"The math games are brilliant! My son now loves numbers. The parent dashboard helps me track exactly what he's learning."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">R</div>
+            <div>
+              <div class="testimonial-name">Rahul Verma</div>
+              <div class="testimonial-role">Father of 8-year-old</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" id="testimonial-3">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"As a teacher, I recommend Codevoper to all parents. The curriculum is well-structured and kids genuinely enjoy it!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Anita Patel</div>
+              <div class="testimonial-role">Primary School Teacher</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       CTA — Full Screen with BG
+       ============================ -->
+  <section class="cta-section" id="cta">
+    <img src="images/cta-bg.png" alt="" class="cta-bg" aria-hidden="true">
+    <div class="cta-overlay"></div>
+    <div class="cta-content reveal">
+      <h2 class="cta-title">Ready to Start Your Child's Learning Adventure?</h2>
+      <p class="cta-desc">Explore all worlds, languages, math, and coding games — 100% free with no backend needed.</p>
+      <a href="dashboard-preprimary.html" class="btn btn-cta-full" id="cta-start-btn">🚀 Start Learning For Free</a>
+    </div>
+  </section>
+
+  <!-- ============================
+       SIMPLE FOOTER BAR
+       ============================ -->
+  <footer class="footer-bar" id="footer">
+    <div class="container">
+      <div class="footer-bar-inner">
+        <div class="footer-bar-left">
+          <img src="images/logo-icon.png" alt="Codevoper" class="logo-icon">
+          <span class="logo-text">Code<span class="highlight">voper</span></span>
+        </div>
+        <div class="footer-bar-center">
+          <a href="main.html">Home</a>
+          <a href="dashboard-preprimary.html">Pre-Primary</a>
+          <a href="story-world.html">Story World</a>
+          <a href="number-world.html">Number World</a>
+          <a href="progress-report.html">Progress</a>
+        </div>
+        <div class="footer-bar-right">
+          © 2026 Codevoper Learning. Made with ❤️ for young learners.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

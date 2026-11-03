@@ -1,0 +1,3071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counting Path — Number World | Codevoper Learning</title>
+  <meta name="description" content="Learn counting from 1 to 20 with interactive games, farm animals, space voyages, and swimming fish. Pre-Primary math learning path on Codevoper Learning.">
+
+  <!-- Google Fonts Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --clr-primary: #2563EB;
+      --clr-primary-light: #60A5FA;
+      --clr-primary-dark: #1D4ED8;
+      --clr-secondary: #7C3AED;
+      --clr-secondary-light: #A78BFA;
+      --clr-accent: #F59E0B;
+      --clr-accent-light: #FCD34D;
+      --clr-success: #10B981;
+      --clr-success-light: #34D399;
+      --clr-teal: #14B8A6;
+      --clr-pink: #EC4899;
+      --clr-pink-light: #F472B6;
+      --clr-orange: #F97316;
+      --clr-red: #EF4444;
+
+      --clr-bg: #0F0A1F;
+      --clr-bg-alt: #1A1333;
+      --clr-surface: #221B38;
+      --clr-surface-light: #2D2549;
+      --clr-surface-hover: #362D52;
+      --clr-text: #F8FAFC;
+      --clr-text-muted: #94A3B8;
+      --clr-text-subtle: #64748B;
+      --clr-border: rgba(255, 255, 255, 0.08);
+
+      --grad-primary: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+      --grad-counting: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+      --grad-card1: linear-gradient(135deg, #1E3A8A 0%, #065F46 100%);
+      --grad-card2: linear-gradient(135deg, #166534 0%, #854D0E 100%);
+      --grad-card3: linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%);
+      --grad-card4: linear-gradient(135deg, #581C87 0%, #9D174D 100%);
+      --grad-card5: linear-gradient(135deg, #0C4A6E 0%, #0369A1 100%);
+      --grad-gold: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-body: 'Outfit', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --shadow-glow: 0 0 35px rgba(37, 99, 235, 0.35);
+
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* Ambient Glow Background Orbs */
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.18;
+      animation: floatOrb 22s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: #2563EB;
+      top: -120px;
+      left: -120px;
+    }
+
+    .orb-2 {
+      width: 480px;
+      height: 480px;
+      background: #10B981;
+      bottom: -60px;
+      right: -60px;
+      animation-delay: -7s;
+    }
+
+    .orb-3 {
+      width: 500px;
+      height: 500px;
+      background: #7C3AED;
+      top: 45%;
+      left: 55%;
+      animation-delay: -14s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(45px, 35px) scale(1.08); }
+    }
+
+    /* ========================================================
+       1. STANDARD STICKY HEADER BAR
+       ======================================================== */
+    .header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 10, 31, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--clr-border);
+      transition: var(--transition);
+    }
+
+    .header-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-icon-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-icon-nav:hover {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: rgba(96, 165, 250, 0.4);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .btn-home-nav {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      justify-content: center;
+      font-size: 1.15rem;
+    }
+
+    .header-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .header-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .header-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .header-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--clr-text);
+      letter-spacing: -0.3px;
+    }
+
+    .header-subtitle {
+      font-size: 0.84rem;
+      color: var(--clr-text-muted);
+      font-weight: 500;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .sound-toggle-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--clr-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--clr-text);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .sound-toggle-btn:hover {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: rgba(96, 165, 250, 0.4);
+      transform: scale(1.05);
+    }
+
+    .progress-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 220px;
+    }
+
+    .progress-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--clr-accent-light);
+    }
+
+    .stat-divider {
+      color: var(--clr-border);
+    }
+
+    .header-prog-bar-bg {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header-prog-bar-fill {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, #3B82F6, #10B981);
+      border-radius: var(--radius-full);
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .header-prog-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: barGleam 2.5s infinite;
+    }
+
+    @keyframes barGleam {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ========================================================
+       2. HERO SECTION
+       ======================================================== */
+    .main-wrap {
+      flex: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2.2rem 1.75rem 3.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-banner {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1.1rem;
+      border-radius: var(--radius-full);
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      color: var(--clr-primary-light);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--clr-text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ========================================================
+       3. GAMIFIED LIBRARY CARDS (Responsive 3 -> 2 -> 1)
+       ======================================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+    }
+
+    .game-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      box-shadow: var(--shadow-md);
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(37, 99, 235, 0.25);
+      border-color: rgba(96, 165, 250, 0.35);
+    }
+
+    /* Highlighted Up-Next Card */
+    .game-card.up-next-card {
+      border: 2px solid var(--clr-accent);
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.22);
+    }
+
+    .game-card.up-next-card:hover {
+      border-color: var(--clr-accent-light);
+      box-shadow: 0 0 45px rgba(245, 158, 11, 0.4);
+    }
+
+    /* CSS Art Header Area */
+    .card-art-head {
+      position: relative;
+      height: 145px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #1A1333;
+    }
+
+    .card-art-head::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.35;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+    }
+
+    .art-card1 { background: var(--grad-card1); }
+    .art-card2 { background: var(--grad-card2); }
+    .art-card3 { background: var(--grad-card3); }
+    .art-card4 { background: var(--grad-card4); }
+    .art-card5 { background: var(--grad-card5); }
+
+    /* Animated CSS Art Items inside Cards */
+    .art-tokens-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 2;
+    }
+
+    .token-bubble {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      animation: tokenBob 3.5s ease-in-out infinite alternate;
+      user-select: none;
+    }
+
+    .token-bubble:nth-child(2) {
+      animation-delay: -1.2s;
+      transform: translateY(-5px);
+    }
+
+    .token-bubble:nth-child(3) {
+      animation-delay: -2.4s;
+    }
+
+    @keyframes tokenBob {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    /* Card Badge Status */
+    .card-badge-status {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 0.32rem 0.8rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      z-index: 3;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-mastered {
+      background: rgba(16, 185, 129, 0.35);
+      color: #A7F3D0;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+    }
+
+    .badge-up-next {
+      background: var(--grad-gold);
+      color: #1A0D00;
+      border: 1px solid rgba(245, 158, 11, 0.6);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      font-weight: 800;
+    }
+
+    .badge-doing-great {
+      background: rgba(124, 58, 237, 0.35);
+      color: #DDD6FE;
+      border: 1px solid rgba(167, 139, 250, 0.4);
+    }
+
+    .badge-locked {
+      background: rgba(100, 116, 139, 0.3);
+      color: #CBD5E1;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .card-number-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFF;
+      z-index: 3;
+    }
+
+    /* Card Content Body */
+    .card-content-body {
+      padding: 1.35rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .card-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .card-game-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.2px;
+    }
+
+    .card-level-chip {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--clr-primary-light);
+      background: rgba(37, 99, 235, 0.15);
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      white-space: nowrap;
+    }
+
+    .card-description {
+      font-size: 0.92rem;
+      color: var(--clr-text-muted);
+      line-height: 1.45;
+      min-height: 42px;
+    }
+
+    .card-dep-note {
+      font-size: 0.78rem;
+      color: var(--clr-accent-light);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    /* Progress Inside Card */
+    .card-score-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .card-score-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+    }
+
+    .card-score-label {
+      color: var(--clr-text-subtle);
+      font-weight: 600;
+    }
+
+    .card-score-val {
+      font-weight: 700;
+      color: var(--clr-accent-light);
+    }
+
+    .card-bar-track {
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .card-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: var(--grad-counting);
+      transition: width 0.8s ease;
+    }
+
+    /* Card Action Button */
+    .card-btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .card-btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.55);
+      background: linear-gradient(135deg, #1D4ED8 0%, #6D28D9 100%);
+    }
+
+    .card-btn-action .btn-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .game-card:hover .card-btn-action .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .btn-gold {
+      background: var(--grad-gold);
+      color: #1A0D00;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #FBBF24 0%, #B45309 100%);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.55);
+    }
+
+    /* ========================================================
+       4. FULLSCREEN INTERACTIVE MODAL GAMES
+       ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 10, 31, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .game-container {
+      width: 100%;
+      max-width: 860px;
+      max-height: 94vh;
+      background: var(--clr-surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.75rem;
+      background: rgba(26, 19, 51, 0.85);
+      border-bottom: 1px solid var(--clr-border);
+      z-index: 10;
+    }
+
+    .btn-modal-exit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-modal-exit:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #FFFFFF;
+    }
+
+    .modal-center-info {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .modal-game-heading {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .round-step-pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      color: var(--clr-primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+    }
+
+    .modal-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .modal-score-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--clr-accent-light);
+    }
+
+    .btn-speak-again {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--clr-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #FFFFFF;
+      transition: var(--transition);
+    }
+
+    .btn-speak-again:hover {
+      background: rgba(37, 99, 235, 0.3);
+      transform: scale(1.08);
+    }
+
+    .btn-modal-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--clr-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--clr-text-muted);
+      transition: var(--transition);
+    }
+
+    .btn-modal-close:hover {
+      background: rgba(239, 68, 68, 0.3);
+      color: #FFFFFF;
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .modal-content-area {
+      flex: 1;
+      width: 100%;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .game-stage-card {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 2rem 2.2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Common Game Prompt Area */
+    .game-prompt-box {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .game-prompt-title {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .game-prompt-hint {
+      font-size: 0.95rem;
+      color: var(--clr-text-muted);
+    }
+
+    /* Answer Choices Buttons Row */
+    .choices-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 580px;
+      margin-top: 1.8rem;
+    }
+
+    .btn-choice {
+      min-height: 64px;
+      background: var(--clr-surface-light);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-choice:hover {
+      background: var(--clr-surface-hover);
+      border-color: var(--clr-primary-light);
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-choice.correct {
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: #10B981 !important;
+      color: #A7F3D0 !important;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6) !important;
+      animation: pulseChoice 0.6s ease;
+    }
+
+    .btn-choice.wrong {
+      background: rgba(239, 68, 68, 0.25) !important;
+      border-color: #EF4444 !important;
+      color: #FECACA !important;
+      animation: shakeWrong 0.5s ease;
+    }
+
+    @keyframes pulseChoice {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shakeWrong {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* ---------------------------------------------
+       GAME 1: TOUCH TO COUNT
+       --------------------------------------------- */
+    .g1-objects-stage {
+      min-height: 240px;
+      width: 100%;
+      background: rgba(15, 10, 31, 0.65);
+      border: 2px dashed rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      position: relative;
+    }
+
+    .count-object-item {
+      width: 76px;
+      height: 76px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+
+    .count-object-item:hover {
+      transform: scale(1.12);
+      border-color: var(--clr-primary-light);
+      background: rgba(37, 99, 235, 0.18);
+    }
+
+    .count-object-item.counted {
+      border-color: var(--clr-accent);
+      background: rgba(245, 158, 11, 0.2);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+
+    .count-badge-stamp {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      color: #1A0D00;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    .live-tally-pill {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--clr-accent-light);
+      background: rgba(245, 158, 11, 0.15);
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* ---------------------------------------------
+       GAME 2: FARM ANIMALS COUNTING
+       --------------------------------------------- */
+    .farm-scene-stage {
+      width: 100%;
+      height: 270px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #1E293B 0%, #15803D 55%, #166534 100%);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .farm-fence-line {
+      position: absolute;
+      bottom: 25px;
+      left: 0;
+      width: 100%;
+      height: 18px;
+      background: repeating-linear-gradient(90deg, #78350F 0px, #78350F 12px, transparent 12px, transparent 28px);
+      border-top: 3px solid #92400E;
+      opacity: 0.7;
+    }
+
+    .farm-barn-icon {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 2.8rem;
+      opacity: 0.6;
+    }
+
+    .farm-sun {
+      position: absolute;
+      top: 15px;
+      left: 25px;
+      font-size: 2.4rem;
+      filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.8));
+    }
+
+    .farm-animal-sprite {
+      position: absolute;
+      cursor: pointer;
+      font-size: 3rem;
+      user-select: none;
+      transition: transform 0.25s ease;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+    }
+
+    .farm-animal-sprite:hover {
+      transform: scale(1.2);
+    }
+
+    .farm-animal-sprite.tapped {
+      filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.9));
+    }
+
+    .farm-animal-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      color: #1A0D00;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ---------------------------------------------
+       GAME 3: SPACE ADVENTURE COUNTING
+       --------------------------------------------- */
+    .space-scene-stage {
+      width: 100%;
+      height: 280px;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at center, #1E1B4B 0%, #0B071A 100%);
+      border: 2px solid rgba(124, 58, 237, 0.3);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .space-star-dot {
+      position: absolute;
+      background: #FFF;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: twinkleStar 2s infinite alternate;
+    }
+
+    @keyframes twinkleStar {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    .space-object-sprite {
+      position: absolute;
+      cursor: pointer;
+      font-size: 2.8rem;
+      user-select: none;
+      transition: all 0.25s ease;
+      animation: spaceFloat 4s ease-in-out infinite alternate;
+    }
+
+    .space-object-sprite:hover {
+      transform: scale(1.25) rotate(10deg);
+    }
+
+    .space-object-sprite.counted {
+      filter: drop-shadow(0 0 16px rgba(96, 165, 250, 0.9));
+    }
+
+    @keyframes spaceFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    /* ---------------------------------------------
+       GAME 4: NUMBER-QUANTITY MATCHING
+       --------------------------------------------- */
+    .g4-matching-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 1.8rem;
+      width: 100%;
+      max-width: 780px;
+      align-items: center;
+    }
+
+    .g4-number-target-card {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(37, 99, 235, 0.25));
+      border: 2px dashed rgba(167, 139, 250, 0.4);
+      border-radius: var(--radius-xl);
+      padding: 1.8rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 220px;
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+    }
+
+    .g4-target-digit {
+      font-family: var(--font-display);
+      font-size: 5.5rem;
+      font-weight: 800;
+      color: var(--clr-accent-light);
+      line-height: 1;
+      text-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+    }
+
+    .g4-target-label {
+      font-size: 0.9rem;
+      color: var(--clr-text-muted);
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    .g4-groups-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .g4-group-card {
+      background: var(--clr-surface-light);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+
+    .g4-group-card:hover {
+      background: var(--clr-surface-hover);
+      border-color: var(--clr-primary-light);
+      transform: translateX(6px);
+    }
+
+    .g4-group-card.correct {
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: #10B981 !important;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.5) !important;
+    }
+
+    .g4-group-card.wrong {
+      background: rgba(239, 68, 68, 0.25) !important;
+      border-color: #EF4444 !important;
+      animation: shakeWrong 0.5s ease;
+    }
+
+    .g4-items-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 2.2rem;
+    }
+
+    .g4-group-badge {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--clr-text-subtle);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+
+    /* ---------------------------------------------
+       GAME 5: COUNT MOVING OBJECTS (AQUARIUM)
+       --------------------------------------------- */
+    .aquarium-stage {
+      width: 100%;
+      height: 290px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #0284C7 0%, #0369A1 40%, #0C4A6E 85%, #082F49 100%);
+      border: 2px solid rgba(56, 189, 248, 0.35);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .aquarium-ray {
+      position: absolute;
+      top: 0;
+      width: 70px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 80%);
+      transform: skewX(-20deg);
+      pointer-events: none;
+    }
+
+    .bubble-sprite {
+      position: absolute;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatBubble 5s linear infinite;
+    }
+
+    @keyframes floatBubble {
+      0% { transform: translateY(320px) scale(0.6); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-50px) scale(1.1); opacity: 0; }
+    }
+
+    .swimming-fish {
+      position: absolute;
+      cursor: pointer;
+      font-size: 3rem;
+      user-select: none;
+      transition: filter 0.2s;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .swimming-fish:hover {
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    }
+
+    .swimming-fish.counted {
+      filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.9));
+    }
+
+    .swimming-fish.direction-left {
+      transform: scaleX(-1);
+    }
+
+    .fish-badge-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      color: #1A0D00;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ---------------------------------------------
+       5. GAME COMPLETION CELEBRATION CARD
+       --------------------------------------------- */
+    .celebration-view {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .celebration-view.active {
+      display: flex;
+    }
+
+    .game-complete-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg), 0 0 50px rgba(124, 58, 237, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .complete-trophy-badge {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+      animation: trophyFloat 3s ease-in-out infinite alternate;
+      filter: drop-shadow(0 10px 20px rgba(245, 158, 11, 0.4));
+    }
+
+    @keyframes trophyFloat {
+      0% { transform: translateY(0) rotate(-4deg); }
+      100% { transform: translateY(-12px) rotate(4deg); }
+    }
+
+    .complete-headline {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+
+    .complete-submessage {
+      font-size: 1rem;
+      color: var(--clr-text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 380px;
+    }
+
+    .complete-score-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 2rem;
+      width: 100%;
+      margin-bottom: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .complete-score-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--clr-text-subtle);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .complete-score-value {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--clr-accent-light);
+      line-height: 1;
+    }
+
+    .complete-mastery-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #A7F3D0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-top: 0.4rem;
+    }
+
+    .btn-complete-next {
+      width: 100%;
+      padding: 0.95rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: var(--grad-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 1rem;
+    }
+
+    .btn-complete-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+    }
+
+    .complete-bottom-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .btn-complete-sub {
+      flex: 1;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text-muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-complete-sub:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    /* ---------------------------------------------
+       6. DEPENDENCY PROMPT DIALOG
+       --------------------------------------------- */
+    .dep-dialog-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 10, 31, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .dep-dialog-overlay.active {
+      display: flex;
+    }
+
+    .dep-dialog-card {
+      background: var(--clr-surface);
+      border: 2px solid var(--clr-accent);
+      border-radius: var(--radius-xl);
+      padding: 2.2rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 45px rgba(245, 158, 11, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .dep-dialog-icon {
+      font-size: 4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .dep-dialog-title {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+
+    .dep-dialog-msg {
+      font-size: 0.98rem;
+      color: var(--clr-text-muted);
+      margin-bottom: 1.6rem;
+      line-height: 1.5;
+    }
+
+    .dep-dialog-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .btn-dep-primary {
+      padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: var(--grad-gold);
+      color: #1A0D00;
+      border: none;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-dep-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+    }
+
+    .btn-dep-secondary {
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--clr-text);
+      border: 1px solid var(--clr-border);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-dep-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFF;
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1500;
+    }
+
+    /* ========================================================
+       7. FOOTER
+       ======================================================== */
+    .page-footer {
+      border-top: 1px solid var(--clr-border);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--clr-text-muted);
+      background: rgba(15, 10, 31, 0.6);
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+    }
+
+    /* ========================================================
+       8. RESPONSIVE BREAKPOINTS
+       ======================================================== */
+    @media (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.4rem;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-wrap: wrap;
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+      }
+      .header-center {
+        order: 3;
+        width: 100%;
+        margin-top: 0.25rem;
+      }
+      .header-title {
+        font-size: 1.35rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 540px;
+        margin: 0 auto;
+      }
+      .g4-matching-layout {
+        grid-template-columns: 1fr;
+      }
+      .g4-number-target-card {
+        min-height: 160px;
+        padding: 1rem;
+      }
+      .g4-target-digit {
+        font-size: 4rem;
+      }
+      .choices-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .modal-top-bar {
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-title {
+        font-size: 1.85rem;
+      }
+      .hero-desc {
+        font-size: 0.92rem;
+      }
+      .progress-box {
+        min-width: 170px;
+        padding: 0.4rem 0.75rem;
+      }
+      .stat-item {
+        font-size: 0.68rem;
+      }
+      .modal-game-heading {
+        font-size: 1.1rem;
+      }
+      .round-step-pill {
+        display: none;
+      }
+      .game-prompt-title {
+        font-size: 1.35rem;
+      }
+      .count-object-item {
+        width: 62px;
+        height: 62px;
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glowing Background Orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ========================================================
+       1. STICKY HEADER BAR
+       ======================================================== -->
+  <header class="header-bar">
+    <div class="header-container">
+      <!-- Left: Navigation Links -->
+      <div class="header-left">
+        <a href="number-world.html" class="btn-icon-nav" title="Back to Number World">
+          <span>←</span>
+          <span>Number World</span>
+        </a>
+        <a href="dashboard-preprimary.html" class="btn-icon-nav btn-home-nav" title="Pre-Primary Dashboard">
+          <span>🏠</span>
+        </a>
+      </div>
+
+      <!-- Center: Title & Subtitle -->
+      <div class="header-center">
+        <div class="header-title-wrap">
+          <span class="header-icon">🔢</span>
+          <h1 class="header-title">Counting</h1>
+          <span style="color: var(--clr-text-subtle);">·</span>
+          <span class="header-subtitle" style="color: var(--clr-primary-light); font-weight: 600;">Number World</span>
+        </div>
+        <div class="header-subtitle">Let's Learn Counting! Count from 1 to 20, one step at a time</div>
+      </div>
+
+      <!-- Right: Sound Toggle & Dynamic Progress Box -->
+      <div class="header-right">
+        <button id="nav-sound-toggle" class="sound-toggle-btn" title="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+
+        <div class="progress-box">
+          <div class="progress-top-row">
+            <div class="stat-item">
+              <span id="header-score-text">35%</span>
+              <span style="color: var(--clr-text-muted);">COUNTING SCORE</span>
+            </div>
+            <span class="stat-divider">|</span>
+            <div class="stat-item" style="color: var(--clr-primary-light);">
+              <span id="header-modules-text">2/5</span>
+              <span style="color: var(--clr-text-muted);">TRIED</span>
+            </div>
+          </div>
+          <div class="header-prog-bar-bg">
+            <div id="header-prog-fill" class="header-prog-bar-fill" style="width: 35%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       2. HERO SECTION
+       ======================================================== -->
+  <main class="main-wrap">
+    <section class="hero-banner">
+      <div class="hero-eyebrow">
+        <span>🔢</span>
+        <span>Pre-Primary Math · Learning Path 1</span>
+      </div>
+      <h2 class="hero-title">Counting Adventures</h2>
+      <p class="hero-desc">
+        Touch, count, and explore numbers through interactive games, farm animals, cosmic voyages, and swimming fish!
+      </p>
+    </section>
+
+    <!-- ========================================================
+         3. GAMIFIED LIBRARY CARDS (5 Cards matching Image 2)
+         ======================================================== -->
+    <div class="cards-grid">
+
+      <!-- Card 1: Touch to Count (Easy) - Status: Mastered | 100% -->
+      <article class="game-card" id="card-game-1">
+        <div class="card-art-head art-card1">
+          <div class="card-number-tag">1</div>
+          <div class="card-badge-status badge-mastered" id="badge-game-1">
+            <span>✓</span>
+            <span>Mastered</span>
+          </div>
+          <div class="art-tokens-row">
+            <div class="token-bubble">🍎</div>
+            <div class="token-bubble">👆</div>
+            <div class="token-bubble">🎈</div>
+          </div>
+        </div>
+        <div class="card-content-body">
+          <div class="card-text-block">
+            <div class="card-title-row">
+              <h3 class="card-game-title">Touch to Count</h3>
+              <span class="card-level-chip">✨ Up next</span>
+            </div>
+            <p class="card-description">Touch each picture and count out loud!</p>
+          </div>
+          <div class="card-score-progress">
+            <div class="card-score-meta">
+              <span class="card-score-label">BEST SCORE</span>
+              <span class="card-score-val" id="score-text-g1">100%</span>
+            </div>
+            <div class="card-bar-track">
+              <div class="card-bar-fill" id="bar-fill-g1" style="width: 100%;"></div>
+            </div>
+          </div>
+          <button class="card-btn-action" onclick="openGame(1)">
+            <span>Play Again</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 2: Farm Animals Counting (Up Next - Highlighted) - Status: Not played yet -->
+      <article class="game-card up-next-card" id="card-game-2">
+        <div class="card-art-head art-card2">
+          <div class="card-number-tag">2</div>
+          <div class="card-badge-status badge-up-next" id="badge-game-2">
+            <span>⭐</span>
+            <span>Up Next</span>
+          </div>
+          <div class="art-tokens-row">
+            <div class="token-bubble">🐄</div>
+            <div class="token-bubble">🐑</div>
+            <div class="token-bubble">🐷</div>
+          </div>
+        </div>
+        <div class="card-content-body">
+          <div class="card-text-block">
+            <div class="card-title-row">
+              <h3 class="card-game-title">Farm Animals Counting</h3>
+              <span class="card-level-chip" style="color: var(--clr-accent-light); border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.15);">Featured</span>
+            </div>
+            <p class="card-description">Count cows, chickens, pigs and more!</p>
+          </div>
+          <div class="card-score-progress">
+            <div class="card-score-meta">
+              <span class="card-score-label">BEST SCORE</span>
+              <span class="card-score-val" id="score-text-g2">Not played yet</span>
+            </div>
+            <div class="card-bar-track">
+              <div class="card-bar-fill" id="bar-fill-g2" style="width: 0%;"></div>
+            </div>
+          </div>
+          <button class="card-btn-action btn-gold" onclick="openGame(2)">
+            <span>Play Now</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 3: Space Adventure Counting (Easy) - Dependency: Farm Animals -->
+      <article class="game-card" id="card-game-3">
+        <div class="card-art-head art-card3">
+          <div class="card-number-tag">3</div>
+          <div class="card-badge-status badge-locked" id="badge-game-3">
+            <span>🔒</span>
+            <span>Try Farm First</span>
+          </div>
+          <div class="art-tokens-row">
+            <div class="token-bubble">🚀</div>
+            <div class="token-bubble">⭐</div>
+            <div class="token-bubble">🪐</div>
+          </div>
+        </div>
+        <div class="card-content-body">
+          <div class="card-text-block">
+            <div class="card-title-row">
+              <h3 class="card-game-title">Space Adventure Counting</h3>
+              <span class="card-level-chip">Adventure</span>
+            </div>
+            <p class="card-description">Count rockets, stars and planets in space!</p>
+            <div class="card-dep-note" id="dep-note-g3">
+              <span>🔒</span>
+              <span>Try Farm Animals Counting first</span>
+            </div>
+          </div>
+          <div class="card-score-progress">
+            <div class="card-score-meta">
+              <span class="card-score-label">BEST SCORE</span>
+              <span class="card-score-val" id="score-text-g3">Not played yet</span>
+            </div>
+            <div class="card-bar-track">
+              <div class="card-bar-fill" id="bar-fill-g3" style="width: 0%;"></div>
+            </div>
+          </div>
+          <button class="card-btn-action" onclick="handleCardClickWithDependency(3)">
+            <span>Play</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 4: Number-Quantity Matching (Medium) - Status: Doing Great | 75% -->
+      <article class="game-card" id="card-game-4">
+        <div class="card-art-head art-card4">
+          <div class="card-number-tag">4</div>
+          <div class="card-badge-status badge-doing-great" id="badge-game-4">
+            <span>✨</span>
+            <span>Doing Great</span>
+          </div>
+          <div class="art-tokens-row">
+            <div class="token-bubble" style="font-weight: 800; font-family: var(--font-display);">4</div>
+            <div class="token-bubble" style="font-size: 1.3rem;">➔</div>
+            <div class="token-bubble">🌟</div>
+          </div>
+        </div>
+        <div class="card-content-body">
+          <div class="card-text-block">
+            <div class="card-title-row">
+              <h3 class="card-game-title">Number-Quantity Matching</h3>
+              <span class="card-level-chip">Matching</span>
+            </div>
+            <p class="card-description">Match each number with the right amount!</p>
+          </div>
+          <div class="card-score-progress">
+            <div class="card-score-meta">
+              <span class="card-score-label">BEST SCORE</span>
+              <span class="card-score-val" id="score-text-g4">75%</span>
+            </div>
+            <div class="card-bar-track">
+              <div class="card-bar-fill" id="bar-fill-g4" style="width: 75%;"></div>
+            </div>
+          </div>
+          <button class="card-btn-action" onclick="openGame(4)">
+            <span>Play</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 5: Count Moving Objects (Medium) - Dependency: Farm Animals -->
+      <article class="game-card" id="card-game-5">
+        <div class="card-art-head art-card5">
+          <div class="card-number-tag">5</div>
+          <div class="card-badge-status badge-locked" id="badge-game-5">
+            <span>🔒</span>
+            <span>Try Farm First</span>
+          </div>
+          <div class="art-tokens-row">
+            <div class="token-bubble">🐠</div>
+            <div class="token-bubble">🫧</div>
+            <div class="token-bubble">🐟</div>
+          </div>
+        </div>
+        <div class="card-content-body">
+          <div class="card-text-block">
+            <div class="card-title-row">
+              <h3 class="card-game-title">Count Moving Objects</h3>
+              <span class="card-level-chip">Challenge</span>
+            </div>
+            <p class="card-description">Count the fish while they swim!</p>
+            <div class="card-dep-note" id="dep-note-g5">
+              <span>🔒</span>
+              <span>Try Farm Animals Counting first</span>
+            </div>
+          </div>
+          <div class="card-score-progress">
+            <div class="card-score-meta">
+              <span class="card-score-label">BEST SCORE</span>
+              <span class="card-score-val" id="score-text-g5">Not played yet</span>
+            </div>
+            <div class="card-bar-track">
+              <div class="card-bar-fill" id="bar-fill-g5" style="width: 0%;"></div>
+            </div>
+          </div>
+          <button class="card-btn-action" onclick="handleCardClickWithDependency(5)">
+            <span>Play</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ========================================================
+       4. DEPENDENCY CONFIRMATION PROMPT DIALOG
+       ======================================================== -->
+  <div class="dep-dialog-overlay" id="dep-dialog-overlay">
+    <div class="dep-dialog-card">
+      <div class="dep-dialog-icon">🚜</div>
+      <h3 class="dep-dialog-title">Try Farm Animals First!</h3>
+      <p class="dep-dialog-msg" id="dep-dialog-msg">
+        We recommend playing <strong>Farm Animals Counting</strong> first to warm up your counting skills! Would you like to visit the farm, or jump right in?
+      </p>
+      <div class="dep-dialog-actions">
+        <button class="btn-dep-primary" id="btn-dep-go-farm" onclick="confirmDependencyFarm()">
+          🚜 Play Farm Animals Counting
+        </button>
+        <button class="btn-dep-secondary" id="btn-dep-play-anyway" onclick="confirmDependencyAnyway()">
+          Play This Game Anyway →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       5. FULLSCREEN INTERACTIVE MODAL OVERLAY
+       ======================================================== -->
+  <div class="modal-overlay" id="game-modal">
+    <div class="game-container">
+    <!-- Top Modal Navigation Bar -->
+    <div class="modal-top-bar">
+      <button class="btn-modal-exit" onclick="closeGameModal()">
+        <span>←</span>
+        <span>Exit Game</span>
+      </button>
+
+      <div class="modal-center-info">
+        <h2 class="modal-game-heading" id="modal-game-title">Touch to Count</h2>
+        <span class="round-step-pill" id="modal-round-pill">Round 1 of 8</span>
+      </div>
+
+      <div class="modal-right-actions">
+        <button class="btn-speak-again" onclick="speakCurrentRoundPrompt()" title="Repeat Audio">
+          <span>🔊</span>
+        </button>
+        <div class="modal-score-chip" id="modal-score-chip">
+          <span>⭐</span>
+          <span id="modal-score-text">Score: 0</span>
+        </div>
+        <button class="btn-modal-close" onclick="closeGameModal()" title="Close">✕</button>
+      </div>
+    </div>
+
+    <!-- Modal Content Stage Area -->
+    <div class="modal-content-area">
+
+      <!-- ============================================
+           STAGE FOR ACTIVE GAME (1 of 5)
+           ============================================ -->
+      <div class="game-stage-card" id="game-active-stage">
+
+        <div class="game-prompt-box">
+          <h3 class="game-prompt-title" id="stage-prompt-title">Touch each apple to count!</h3>
+          <p class="game-prompt-hint" id="stage-prompt-hint">Tap each picture one by one, then choose the number.</p>
+        </div>
+
+        <!-- Container for Game-Specific Interactive Scenes -->
+        <div id="game-dynamic-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+          <!-- Injected via JavaScript based on current game -->
+        </div>
+
+        <!-- Live Tally Pill -->
+        <div class="live-tally-pill" id="live-tally-pill" style="display: none;">
+          Counted: <span id="tally-current">0</span> / <span id="tally-target">0</span>
+        </div>
+
+        <!-- 4 Large Choice Buttons Row -->
+        <div class="choices-row" id="stage-choices-row">
+          <!-- Injected dynamically -->
+        </div>
+
+      </div>
+
+      <!-- ============================================
+           CELEBRATION FINISH SCREEN
+           ============================================ -->
+      <div class="celebration-view" id="celebration-view">
+        <div class="game-complete-card">
+          <div class="complete-trophy-badge" id="celeb-trophy-icon">🏆</div>
+          <h2 class="complete-headline" id="celeb-title-text">Counting Superstar! 🎊</h2>
+          <p class="complete-submessage" id="celeb-message">You counted all the objects with flying colors!</p>
+
+          <div class="complete-score-box">
+            <div class="complete-score-label">YOUR SCORE</div>
+            <div class="complete-score-value" id="celeb-final-score">8/8</div>
+            <div class="complete-mastery-tag" id="celeb-mastery-tag">
+              <span id="celeb-stars-display">⭐⭐⭐</span>
+              <span id="celeb-mastery-text">Master level</span>
+            </div>
+          </div>
+
+          <button class="btn-complete-next" id="btn-complete-next" onclick="nextGameFromCelebration()">
+            <span id="btn-next-game-text">Next: Farm Animals Counting</span>
+            <span style="font-size: 1.2rem;">→</span>
+          </button>
+
+          <div class="complete-bottom-actions">
+            <button class="btn-complete-sub" onclick="replayCurrentGame()">Play Again</button>
+            <button class="btn-complete-sub" onclick="closeGameModal()">Back</button>
+            <a href="dashboard-preprimary.html" class="btn-complete-sub">Dashboard</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       7. FOOTER
+       ======================================================== -->
+  <footer class="page-footer">
+    © 2026 Codevoper Learning. Made with ❤️
+  </footer>
+
+  <!-- ========================================================
+       EMBEDDED GAME LOGIC & AUDIO SYNTHESIZER
+       ======================================================== -->
+  <script>
+    /* ======================================================
+       1. WEB AUDIO API SYNTHESIZER & SPEECH SYNTHESIS ENGINE
+       ====================================================== */
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type, duration, startTime = 0, gainVal = 0.18) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime + startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + startTime);
+        osc.stop(ctx.currentTime + startTime + duration);
+      } catch (e) {
+        console.warn('Audio play failed', e);
+      }
+    }
+
+    function playSound(name) {
+      if (!soundEnabled) return;
+      if (name === 'correct') {
+        // Bright arpeggio chime: C5 -> E5 -> G5 -> C6
+        playTone(523.25, 'sine', 0.16, 0, 0.2);
+        playTone(659.25, 'sine', 0.16, 0.08, 0.2);
+        playTone(783.99, 'sine', 0.2, 0.16, 0.22);
+        playTone(1046.50, 'triangle', 0.35, 0.24, 0.24);
+      } else if (name === 'wrong') {
+        // Gentle soft boing
+        playTone(220, 'triangle', 0.2, 0, 0.18);
+        playTone(174.6, 'sine', 0.3, 0.1, 0.18);
+      } else if (name === 'pop') {
+        // Crisp pop
+        playTone(880, 'sine', 0.08, 0, 0.25);
+      } else if (name === 'bubble') {
+        // Water aquatic pop
+        playTone(600, 'sine', 0.07, 0, 0.2);
+        playTone(900, 'triangle', 0.12, 0.04, 0.2);
+      } else if (name === 'star') {
+        // Twinkling two-tone chime
+        playTone(987.77, 'sine', 0.14, 0, 0.18);
+        playTone(1318.51, 'sine', 0.25, 0.09, 0.2);
+      } else if (name === 'win') {
+        // Joyful victory fanfare
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        notes.forEach((freq, idx) => playTone(freq, 'triangle', 0.35, idx * 0.12, 0.22));
+      }
+    }
+
+    function speakText(text) {
+      if (!soundEnabled) return;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.88;
+        utterance.pitch = 1.1;
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Header Sound Toggle
+    const navSoundToggle = document.getElementById('nav-sound-toggle');
+    const soundIcon = document.getElementById('sound-icon');
+
+    navSoundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        soundIcon.textContent = '🔊';
+        playSound('pop');
+      } else {
+        soundIcon.textContent = '🔇';
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      }
+    });
+
+    /* ======================================================
+       2. CANVAS CONFETTI SYSTEM
+       ====================================================== */
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimId = null;
+
+    function resizeConfetti() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfetti);
+    resizeConfetti();
+
+    function triggerConfetti(duration = 2600) {
+      confettiParticles = [];
+      const colors = ['#2563EB', '#10B981', '#F59E0B', '#7C3AED', '#EC4899', '#38BDF8', '#FCD34D'];
+      for (let i = 0; i < 90; i++) {
+        confettiParticles.push({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height * 0.4,
+          w: Math.random() * 10 + 6,
+          h: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 6,
+          vy: Math.random() * 4 + 3,
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 10,
+          shape: Math.random() > 0.3 ? 'rect' : 'circle'
+        });
+      }
+      const startTime = performance.now();
+
+      function animateConfetti(time) {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        confettiParticles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vRot;
+          confettiCtx.save();
+          confettiCtx.translate(p.x, p.y);
+          confettiCtx.rotate((p.rot * Math.PI) / 180);
+          confettiCtx.fillStyle = p.color;
+          if (p.shape === 'rect') {
+            confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          } else {
+            confettiCtx.beginPath();
+            confettiCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+            confettiCtx.fill();
+          }
+          confettiCtx.restore();
+        });
+
+        if (time - startTime < duration) {
+          confettiAnimId = requestAnimationFrame(animateConfetti);
+        } else {
+          confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+          cancelAnimationFrame(confettiAnimId);
+        }
+      }
+      cancelAnimationFrame(confettiAnimId);
+      confettiAnimId = requestAnimationFrame(animateConfetti);
+    }
+
+    /* ======================================================
+       3. LOCALSTORAGE & PROGRESS STATE MANAGEMENT
+       ====================================================== */
+    // Initial defaults matching prompt: G1=100%, G4=75%, G2/G3/G5=unplayed
+    function initLocalStorageDefaults() {
+      if (localStorage.getItem('number_counting_g1_best') === null) {
+        localStorage.setItem('number_counting_g1_best', '100');
+      }
+      if (localStorage.getItem('number_counting_g4_best') === null) {
+        localStorage.setItem('number_counting_g4_best', '75');
+      }
+    }
+
+    initLocalStorageDefaults();
+
+    function getGameScore(gameNum) {
+      const val = localStorage.getItem(`number_counting_g${gameNum}_best`);
+      return val !== null ? parseInt(val, 10) : null;
+    }
+
+    function saveGameScore(gameNum, pctScore) {
+      const current = getGameScore(gameNum);
+      if (current === null || pctScore > current) {
+        localStorage.setItem(`number_counting_g${gameNum}_best`, pctScore.toString());
+      }
+      updateUIProgress();
+    }
+
+    function updateUIProgress() {
+      let modulesTried = 0;
+      let totalScoreSum = 0;
+
+      for (let g = 1; g <= 5; g++) {
+        const score = getGameScore(g);
+        const scoreValEl = document.getElementById(`score-text-g${g}`);
+        const barFillEl = document.getElementById(`bar-fill-g${g}`);
+        const badgeEl = document.getElementById(`badge-game${g}`);
+
+        if (score !== null && score > 0) {
+          modulesTried++;
+          totalScoreSum += score;
+          if (scoreValEl) scoreValEl.textContent = `${score}%`;
+          if (barFillEl) barFillEl.style.width = `${score}%`;
+        } else {
+          if (scoreValEl) scoreValEl.textContent = 'Not played yet';
+          if (barFillEl) barFillEl.style.width = '0%';
+        }
+      }
+
+      // Overall Counting Score = average across 5 modules
+      const overallAvg = Math.round(totalScoreSum / 5);
+      const headerScoreText = document.getElementById('header-score-text');
+      const headerModulesText = document.getElementById('header-modules-text');
+      const headerProgFill = document.getElementById('header-prog-fill');
+
+      if (headerScoreText) headerScoreText.textContent = `${overallAvg}%`;
+      if (headerModulesText) headerModulesText.textContent = `${modulesTried}/5`;
+      if (headerProgFill) headerProgFill.style.width = `${overallAvg}%`;
+
+      // Update Card 3 & 5 dependencies if Farm Animals (G2) has been played
+      const g2Score = getGameScore(2);
+      const isFarmPlayed = g2Score !== null && g2Score > 0;
+
+      if (isFarmPlayed) {
+        const depNote3 = document.getElementById('dep-note-g3');
+        const depNote5 = document.getElementById('dep-note-g5');
+        const badge3 = document.getElementById('badge-game-3');
+        const badge5 = document.getElementById('badge-game-5');
+
+        if (depNote3) depNote3.style.display = 'none';
+        if (depNote5) depNote5.style.display = 'none';
+
+        const g3Score = getGameScore(3);
+        if (badge3 && (g3Score === null || g3Score === 0)) {
+          badge3.className = 'card-badge-status badge-doing-great';
+          badge3.innerHTML = '<span>⚡</span><span>Unlocked</span>';
+        }
+
+        const g5Score = getGameScore(5);
+        if (badge5 && (g5Score === null || g5Score === 0)) {
+          badge5.className = 'card-badge-status badge-doing-great';
+          badge5.innerHTML = '<span>⚡</span><span>Unlocked</span>';
+        }
+      }
+    }
+
+    updateUIProgress();
+
+    /* ======================================================
+       4. DEPENDENCY MODAL HANDLER FOR CARD 3 & 5
+       ===================================================== */
+    let pendingTargetGame = null;
+    const depDialogOverlay = document.getElementById('dep-dialog-overlay');
+    const depDialogMsg = document.getElementById('dep-dialog-msg');
+
+    function handleCardClickWithDependency(gameNum) {
+      const g2Score = getGameScore(2);
+      const isFarmPlayed = g2Score !== null && g2Score > 0;
+
+      if (!isFarmPlayed) {
+        pendingTargetGame = gameNum;
+        const targetTitle = gameNum === 3 ? 'Space Adventure Counting' : 'Count Moving Objects';
+        depDialogMsg.innerHTML = `We recommend playing <strong>Farm Animals Counting</strong> first! Would you like to visit the farm, or jump into <strong>${targetTitle}</strong> directly?`;
+        depDialogOverlay.classList.add('active');
+        playSound('pop');
+        speakText('Let\'s visit Farm Animals first, or play this game directly!');
+      } else {
+        openGame(gameNum);
+      }
+    }
+
+    function confirmDependencyFarm() {
+      depDialogOverlay.classList.remove('active');
+      openGame(2);
+    }
+
+    function confirmDependencyAnyway() {
+      depDialogOverlay.classList.remove('active');
+      if (pendingTargetGame) {
+        openGame(pendingTargetGame);
+      }
+    }
+
+    /* ======================================================
+       5. GAME DATA & ROUND DEFINITIONS
+       ====================================================== */
+    const GAME_META = {
+      1: { title: 'Touch to Count', totalRounds: 8, nextGame: 2, nextName: 'Farm Animals Counting' },
+      2: { title: 'Farm Animals Counting', totalRounds: 8, nextGame: 3, nextName: 'Space Adventure Counting' },
+      3: { title: 'Space Adventure Counting', totalRounds: 8, nextGame: 4, nextName: 'Number-Quantity Matching' },
+      4: { title: 'Number-Quantity Matching', totalRounds: 6, nextGame: 5, nextName: 'Count Moving Objects' },
+      5: { title: 'Count Moving Objects', totalRounds: 6, nextGame: 1, nextName: 'Touch to Count' }
+    };
+
+    // Game 1 Data: Touch to Count (8 rounds)
+    const G1_ROUNDS = [
+      { emoji: '🍎', name: 'Apples', count: 3, choices: [2, 3, 4, 5] },
+      { emoji: '🎈', name: 'Balloons', count: 4, choices: [3, 4, 5, 6] },
+      { emoji: '🦆', name: 'Ducks', count: 5, choices: [4, 5, 6, 7] },
+      { emoji: '⭐', name: 'Stars', count: 6, choices: [5, 6, 7, 8] },
+      { emoji: '🍓', name: 'Strawberries', count: 7, choices: [5, 6, 7, 8] },
+      { emoji: '🚗', name: 'Cars', count: 8, choices: [6, 7, 8, 9] },
+      { emoji: '🍪', name: 'Cookies', count: 9, choices: [7, 8, 9, 10] },
+      { emoji: '🌸', name: 'Flowers', count: 10, choices: [8, 9, 10, 11] }
+    ];
+
+    // Game 2 Data: Farm Animals Counting (8 rounds)
+    const G2_ROUNDS = [
+      { targetEmoji: '🐄', targetName: 'cows', count: 3, distractEmoji: '🐑', distractCount: 2, choices: [2, 3, 4, 5] },
+      { targetEmoji: '🐑', targetName: 'sheep', count: 4, distractEmoji: '🐔', distractCount: 2, choices: [3, 4, 5, 6] },
+      { targetEmoji: '🐷', targetName: 'pigs', count: 5, distractEmoji: '🐄', distractCount: 2, choices: [4, 5, 6, 7] },
+      { targetEmoji: '🐔', targetName: 'hens', count: 6, distractEmoji: '🐷', distractCount: 3, choices: [5, 6, 7, 8] },
+      { targetEmoji: '🐴', targetName: 'horses', count: 4, distractEmoji: '🐑', distractCount: 3, choices: [3, 4, 5, 6] },
+      { targetEmoji: '🦆', targetName: 'ducks', count: 7, distractEmoji: '🐴', distractCount: 2, choices: [5, 6, 7, 8] },
+      { targetEmoji: '🐇', targetName: 'rabbits', count: 5, distractEmoji: '🐄', distractCount: 2, choices: [3, 4, 5, 6] },
+      { targetEmoji: '🐐', targetName: 'goats', count: 8, distractEmoji: '🐷', distractCount: 2, choices: [6, 7, 8, 9] }
+    ];
+
+    // Game 3 Data: Space Adventure Counting (8 rounds)
+    const G3_ROUNDS = [
+      { targetEmoji: '🚀', targetName: 'rockets', count: 4, distractEmoji: '⭐', distractCount: 2, choices: [3, 4, 5, 6] },
+      { targetEmoji: '⭐', targetName: 'glowing stars', count: 5, distractEmoji: '🪐', distractCount: 2, choices: [4, 5, 6, 7] },
+      { targetEmoji: '🪐', targetName: 'planets', count: 3, distractEmoji: '🚀', distractCount: 3, choices: [2, 3, 4, 5] },
+      { targetEmoji: '🛸', targetName: 'flying saucers', count: 6, distractEmoji: '☄️', distractCount: 2, choices: [4, 5, 6, 7] },
+      { targetEmoji: '👨‍🚀', targetName: 'astronauts', count: 4, distractEmoji: '⭐', distractCount: 3, choices: [3, 4, 5, 6] },
+      { targetEmoji: '☄️', targetName: 'meteors', count: 7, distractEmoji: '🛸', distractCount: 2, choices: [5, 6, 7, 8] },
+      { targetEmoji: '⭐', targetName: 'stars', count: 8, distractEmoji: '🪐', distractCount: 3, choices: [6, 7, 8, 9] },
+      { targetEmoji: '🪐', targetName: 'planets', count: 9, distractEmoji: '👨‍🚀', distractCount: 2, choices: [7, 8, 9, 10] }
+    ];
+
+    // Game 4 Data: Number-Quantity Matching (6 rounds)
+    const G4_ROUNDS = [
+      {
+        digit: 2,
+        groups: [
+          { emoji: '🍒', count: 2, label: 'Cherries' },
+          { emoji: '🍊', count: 4, label: 'Oranges' },
+          { emoji: '🍌', count: 3, label: 'Bananas' }
+        ]
+      },
+      {
+        digit: 5,
+        groups: [
+          { emoji: '🐶', count: 3, label: 'Puppies' },
+          { emoji: '🐱', count: 5, label: 'Kittens' },
+          { emoji: '🐸', count: 6, label: 'Frogs' }
+        ]
+      },
+      {
+        digit: 3,
+        groups: [
+          { emoji: '🌲', count: 4, label: 'Trees' },
+          { emoji: '🌸', count: 2, label: 'Flowers' },
+          { emoji: '🍄', count: 3, label: 'Mushrooms' }
+        ]
+      },
+      {
+        digit: 6,
+        groups: [
+          { emoji: '🧁', count: 6, label: 'Cupcakes' },
+          { emoji: '🍬', count: 5, label: 'Candies' },
+          { emoji: '🍩', count: 7, label: 'Doughnuts' }
+        ]
+      },
+      {
+        digit: 4,
+        groups: [
+          { emoji: '⚽', count: 3, label: 'Soccer Balls' },
+          { emoji: '🏀', count: 4, label: 'Basketballs' },
+          { emoji: '⚾', count: 5, label: 'Baseballs' }
+        ]
+      },
+      {
+        digit: 7,
+        groups: [
+          { emoji: '✈️', count: 6, label: 'Airplanes' },
+          { emoji: '🚂', count: 8, label: 'Trains' },
+          { emoji: '🚗', count: 7, label: 'Cars' }
+        ]
+      }
+    ];
+
+    // Game 5 Data: Count Moving Objects (6 rounds)
+    const G5_ROUNDS = [
+      { emoji: '🐠', name: 'clownfish', count: 3, choices: [2, 3, 4, 5] },
+      { emoji: '🐟', name: 'blue tangs', count: 4, choices: [3, 4, 5, 6] },
+      { emoji: '🐡', name: 'pufferfish', count: 5, choices: [4, 5, 6, 7] },
+      { emoji: '🐢', name: 'sea turtles', count: 6, choices: [4, 5, 6, 7] },
+      { emoji: '🪼', name: 'jellyfish', count: 7, choices: [5, 6, 7, 8] },
+      { emoji: '🐠', name: 'fish friends', count: 8, choices: [6, 7, 8, 9] }
+    ];
+
+    /* ======================================================
+       6. ACTIVE MODAL GAME CONTROLLER
+       ====================================================== */
+    let currentGameNum = 1;
+    let currentRoundIndex = 0;
+    let currentScore = 0;
+    let currentCountedItems = 0;
+    let activeMovingIntervals = [];
+
+    const gameModal = document.getElementById('game-modal');
+    const modalGameTitle = document.getElementById('modal-game-title');
+    const modalRoundPill = document.getElementById('modal-round-pill');
+    const modalScoreText = document.getElementById('modal-score-text');
+    const gameActiveStage = document.getElementById('game-active-stage');
+    const celebrationView = document.getElementById('celebration-view');
+
+    const stagePromptTitle = document.getElementById('stage-prompt-title');
+    const stagePromptHint = document.getElementById('stage-prompt-hint');
+    const gameDynamicContainer = document.getElementById('game-dynamic-container');
+    const liveTallyPill = document.getElementById('live-tally-pill');
+    const tallyCurrent = document.getElementById('tally-current');
+    const tallyTarget = document.getElementById('tally-target');
+    const stageChoicesRow = document.getElementById('stage-choices-row');
+
+    function openGame(gameNum) {
+      currentGameNum = gameNum;
+      currentRoundIndex = 0;
+      currentScore = 0;
+
+      modalGameTitle.textContent = GAME_META[gameNum].title;
+      gameModal.classList.add('active');
+      gameActiveStage.style.display = 'flex';
+      celebrationView.classList.remove('active');
+      document.body.style.overflow = 'hidden';
+
+      loadRound();
+    }
+
+    function closeGameModal() {
+      clearMovingFish();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      gameModal.classList.remove('active');
+      document.body.style.overflow = '';
+      updateUIProgress();
+    }
+
+    function clearMovingFish() {
+      activeMovingIntervals.forEach(id => clearInterval(id));
+      activeMovingIntervals = [];
+    }
+
+    function speakCurrentRoundPrompt() {
+      if (gameActiveStage.style.display !== 'none') {
+        const text = stagePromptTitle.textContent + '. ' + stagePromptHint.textContent;
+        speakText(text);
+      }
+    }
+
+    function loadRound() {
+      clearMovingFish();
+      const meta = GAME_META[currentGameNum];
+      modalRoundPill.textContent = `Round ${currentRoundIndex + 1} of ${meta.totalRounds}`;
+      modalScoreText.textContent = `Score: ${currentScore}`;
+      currentCountedItems = 0;
+      liveTallyPill.style.display = 'none';
+
+      if (currentGameNum === 1) renderGame1Round();
+      else if (currentGameNum === 2) renderGame2Round();
+      else if (currentGameNum === 3) renderGame3Round();
+      else if (currentGameNum === 4) renderGame4Round();
+      else if (currentGameNum === 5) renderGame5Round();
+    }
+
+    /* ---------------------------------------------
+       RENDER GAME 1: TOUCH TO COUNT
+       --------------------------------------------- */
+    function renderGame1Round() {
+      const data = G1_ROUNDS[currentRoundIndex];
+      stagePromptTitle.textContent = `Touch each ${data.name.toLowerCase()} to count!`;
+      stagePromptHint.textContent = `Touch each picture one by one, then choose how many there are.`;
+      speakText(`Touch each ${data.name.toLowerCase()} to count!`);
+
+      liveTallyPill.style.display = 'inline-flex';
+      tallyCurrent.textContent = '0';
+      tallyTarget.textContent = data.count;
+
+      gameDynamicContainer.innerHTML = '';
+      const stage = document.createElement('div');
+      stage.className = 'g1-objects-stage';
+
+      for (let i = 0; i < data.count; i++) {
+        const item = document.createElement('div');
+        item.className = 'count-object-item';
+        item.textContent = data.emoji;
+        item.dataset.tapped = 'false';
+
+        item.addEventListener('click', () => {
+          if (item.dataset.tapped === 'false') {
+            item.dataset.tapped = 'true';
+            item.classList.add('counted');
+            currentCountedItems++;
+            tallyCurrent.textContent = currentCountedItems;
+
+            const badge = document.createElement('div');
+            badge.className = 'count-badge-stamp';
+            badge.textContent = currentCountedItems;
+            item.appendChild(badge);
+
+            playSound('pop');
+            speakText(`${currentCountedItems}`);
+
+            if (currentCountedItems === data.count) {
+              playSound('star');
+              setTimeout(() => {
+                speakText(`Great! You found all ${data.count} ${data.name.toLowerCase()}! Now choose ${data.count}!`);
+              }, 400);
+            }
+          }
+        });
+
+        stage.appendChild(item);
+      }
+
+      gameDynamicContainer.appendChild(stage);
+      renderChoiceButtons(data.choices, data.count, data.name.toLowerCase());
+    }
+
+    /* ---------------------------------------------
+       RENDER GAME 2: FARM ANIMALS COUNTING
+       --------------------------------------------- */
+    function renderGame2Round() {
+      const data = G2_ROUNDS[currentRoundIndex];
+      stagePromptTitle.textContent = `How many ${data.targetName} do you see?`;
+      stagePromptHint.textContent = `Tap the ${data.targetName} in the meadow, or tap the number button below.`;
+      speakText(`How many ${data.targetName} do you see?`);
+
+      liveTallyPill.style.display = 'inline-flex';
+      tallyCurrent.textContent = '0';
+      tallyTarget.textContent = data.count;
+
+      gameDynamicContainer.innerHTML = '';
+      const stage = document.createElement('div');
+      stage.className = 'farm-scene-stage';
+
+      // Barn, sun, and fence backdrop
+      const sun = document.createElement('div');
+      sun.className = 'farm-sun';
+      sun.textContent = '☀️';
+      const barn = document.createElement('div');
+      barn.className = 'farm-barn-icon';
+      barn.textContent = '🏡';
+      const fence = document.createElement('div');
+      fence.className = 'farm-fence-line';
+
+      stage.appendChild(sun);
+      stage.appendChild(barn);
+      stage.appendChild(fence);
+
+      // Create target animals + distractors with random positions
+      const animalList = [];
+      for (let i = 0; i < data.count; i++) animalList.push({ isTarget: true, emoji: data.targetEmoji });
+      for (let i = 0; i < data.distractCount; i++) animalList.push({ isTarget: false, emoji: data.distractEmoji });
+
+      // Shuffle positions nicely
+      animalList.sort(() => Math.random() - 0.5);
+
+      const positions = [
+        { left: '10%', top: '35%' },
+        { left: '26%', top: '55%' },
+        { left: '42%', top: '30%' },
+        { left: '58%', top: '58%' },
+        { left: '74%', top: '35%' },
+        { left: '86%', top: '55%' },
+        { left: '18%', top: '70%' },
+        { left: '50%', top: '72%' },
+        { left: '68%', top: '68%' },
+        { left: '34%', top: '42%' },
+        { left: '80%', top: '72%' }
+      ];
+
+      animalList.forEach((a, idx) => {
+        const sprite = document.createElement('div');
+        sprite.className = 'farm-animal-sprite';
+        sprite.textContent = a.emoji;
+        const pos = positions[idx % positions.length];
+        sprite.style.left = pos.left;
+        sprite.style.top = pos.top;
+        sprite.dataset.tapped = 'false';
+
+        sprite.addEventListener('click', () => {
+          if (a.isTarget) {
+            if (sprite.dataset.tapped === 'false') {
+              sprite.dataset.tapped = 'true';
+              sprite.classList.add('tapped');
+              currentCountedItems++;
+              tallyCurrent.textContent = currentCountedItems;
+
+              const badge = document.createElement('div');
+              badge.className = 'farm-animal-badge';
+              badge.textContent = currentCountedItems;
+              sprite.appendChild(badge);
+
+              playSound('pop');
+              speakText(`${currentCountedItems}`);
+            }
+          } else {
+            playSound('wrong');
+            speakText(`That's a different animal! Look for the ${data.targetName}!`);
+          }
+        });
+
+        stage.appendChild(sprite);
+      });
+
+      gameDynamicContainer.appendChild(stage);
+      renderChoiceButtons(data.choices, data.count, data.targetName);
+    }
+
+    /* ---------------------------------------------
+       RENDER GAME 3: SPACE ADVENTURE COUNTING
+       --------------------------------------------- */
+    function renderGame3Round() {
+      const data = G3_ROUNDS[currentRoundIndex];
+      stagePromptTitle.textContent = `How many ${data.targetName} are in space?`;
+      stagePromptHint.textContent = `Tap them in the night sky or pick the correct number below.`;
+      speakText(`How many ${data.targetName} do you see in space?`);
+
+      liveTallyPill.style.display = 'inline-flex';
+      tallyCurrent.textContent = '0';
+      tallyTarget.textContent = data.count;
+
+      gameDynamicContainer.innerHTML = '';
+      const stage = document.createElement('div');
+      stage.className = 'space-scene-stage';
+
+      // Background twinkling stars
+      for (let s = 0; s < 25; s++) {
+        const star = document.createElement('div');
+        star.className = 'space-star-dot';
+        star.style.width = `${Math.random() * 3 + 2}px`;
+        star.style.height = star.style.width;
+        star.style.left = `${Math.random() * 95}%`;
+        star.style.top = `${Math.random() * 90}%`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        stage.appendChild(star);
+      }
+
+      const items = [];
+      for (let i = 0; i < data.count; i++) items.push({ isTarget: true, emoji: data.targetEmoji });
+      for (let i = 0; i < data.distractCount; i++) items.push({ isTarget: false, emoji: data.distractEmoji });
+
+      items.sort(() => Math.random() - 0.5);
+
+      const positions = [
+        { left: '12%', top: '20%' },
+        { left: '28%', top: '55%' },
+        { left: '44%', top: '25%' },
+        { left: '60%', top: '60%' },
+        { left: '76%', top: '22%' },
+        { left: '88%', top: '58%' },
+        { left: '16%', top: '65%' },
+        { left: '38%', top: '70%' },
+        { left: '70%', top: '68%' },
+        { left: '52%', top: '42%' },
+        { left: '84%', top: '25%' }
+      ];
+
+      items.forEach((item, idx) => {
+        const sprite = document.createElement('div');
+        sprite.className = 'space-object-sprite';
+        sprite.textContent = item.emoji;
+        const pos = positions[idx % positions.length];
+        sprite.style.left = pos.left;
+        sprite.style.top = pos.top;
+        sprite.style.animationDelay = `${(idx * 0.4)}s`;
+        sprite.dataset.tapped = 'false';
+
+        sprite.addEventListener('click', () => {
+          if (item.isTarget) {
+            if (sprite.dataset.tapped === 'false') {
+              sprite.dataset.tapped = 'true';
+              sprite.classList.add('counted');
+              currentCountedItems++;
+              tallyCurrent.textContent = currentCountedItems;
+
+              const badge = document.createElement('div');
+              badge.className = 'farm-animal-badge';
+              badge.textContent = currentCountedItems;
+              sprite.appendChild(badge);
+
+              playSound('star');
+              speakText(`${currentCountedItems}`);
+            }
+          } else {
+            playSound('wrong');
+            speakText(`Look for the ${data.targetName}!`);
+          }
+        });
+
+        stage.appendChild(sprite);
+      });
+
+      gameDynamicContainer.appendChild(stage);
+      renderChoiceButtons(data.choices, data.count, data.targetName);
+    }
+
+    /* ---------------------------------------------
+       RENDER GAME 4: NUMBER-QUANTITY MATCHING
+       --------------------------------------------- */
+    function renderGame4Round() {
+      const data = G4_ROUNDS[currentRoundIndex];
+      stagePromptTitle.textContent = `Match the Number ${data.digit}!`;
+      stagePromptHint.textContent = `Tap the group that has exactly ${data.digit} items.`;
+      speakText(`Find the group that has ${data.digit} items!`);
+
+      stageChoicesRow.innerHTML = ''; // Not using bottom number buttons for matching
+      gameDynamicContainer.innerHTML = '';
+
+      const layout = document.createElement('div');
+      layout.className = 'g4-matching-layout';
+
+      // Left Target Card
+      const targetCard = document.createElement('div');
+      targetCard.className = 'g4-number-target-card';
+      targetCard.innerHTML = `
+        <div class="g4-target-digit">${data.digit}</div>
+        <div class="g4-target-label">Match this number!</div>
+      `;
+      layout.appendChild(targetCard);
+
+      // Right Groups List
+      const groupsList = document.createElement('div');
+      groupsList.className = 'g4-groups-list';
+
+      data.groups.forEach(g => {
+        const card = document.createElement('div');
+        card.className = 'g4-group-card';
+
+        let itemsHtml = '';
+        for (let i = 0; i < g.count; i++) {
+          itemsHtml += `<span>${g.emoji}</span>`;
+        }
+
+        card.innerHTML = `
+          <div class="g4-items-container">${itemsHtml}</div>
+          <div class="g4-group-badge">${g.count} ${g.label}</div>
+        `;
+
+        card.addEventListener('click', () => {
+          if (g.count === data.digit) {
+            card.classList.add('correct');
+            playSound('correct');
+            speakText(`Yes! ${g.count} ${g.label.toLowerCase()} match number ${data.digit}!`);
+            currentScore++;
+            modalScoreText.textContent = `Score: ${currentScore}`;
+
+            setTimeout(() => {
+              advanceRound();
+            }, 1200);
+          } else {
+            card.classList.add('wrong');
+            playSound('wrong');
+            speakText(`Count carefully! That group has ${g.count}, but we need ${data.digit}. Try again!`);
+            setTimeout(() => card.classList.remove('wrong'), 600);
+          }
+        });
+
+        groupsList.appendChild(card);
+      });
+
+      layout.appendChild(groupsList);
+      gameDynamicContainer.appendChild(layout);
+    }
+
+    /* ---------------------------------------------
+       RENDER GAME 5: COUNT MOVING OBJECTS
+       --------------------------------------------- */
+    function renderGame5Round() {
+      const data = G5_ROUNDS[currentRoundIndex];
+      stagePromptTitle.textContent = `Count the swimming ${data.name}!`;
+      stagePromptHint.textContent = `Tap each fish while it swims, then choose the number below!`;
+      speakText(`Count the swimming ${data.name}! Tap each fish!`);
+
+      liveTallyPill.style.display = 'inline-flex';
+      tallyCurrent.textContent = '0';
+      tallyTarget.textContent = data.count;
+
+      gameDynamicContainer.innerHTML = '';
+      const stage = document.createElement('div');
+      stage.className = 'aquarium-stage';
+
+      // Light rays & bubbles
+      const ray1 = document.createElement('div');
+      ray1.className = 'aquarium-ray';
+      ray1.style.left = '25%';
+      const ray2 = document.createElement('div');
+      ray2.className = 'aquarium-ray';
+      ray2.style.left = '65%';
+      stage.appendChild(ray1);
+      stage.appendChild(ray2);
+
+      for (let b = 0; b < 10; b++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble-sprite';
+        const size = Math.random() * 14 + 8;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 90}%`;
+        bubble.style.animationDelay = `${Math.random() * 4}s`;
+        bubble.style.animationDuration = `${Math.random() * 3 + 3}s`;
+        stage.appendChild(bubble);
+      }
+
+      // Swimming Fish
+      const fishItems = [];
+      for (let i = 0; i < data.count; i++) {
+        const fish = document.createElement('div');
+        fish.className = 'swimming-fish';
+        fish.textContent = data.emoji;
+        fish.dataset.tapped = 'false';
+
+        // Assign initial position, speed, and direction
+        const startX = Math.random() * 70 + 5; // in %
+        const topY = 25 + (i * (200 / data.count)); // nicely distributed vertically
+        let speed = (Math.random() * 0.35 + 0.25) * (Math.random() > 0.5 ? 1 : -1);
+
+        fish.style.left = `${startX}%`;
+        fish.style.top = `${topY}px`;
+        if (speed < 0) fish.classList.add('direction-left');
+
+        let posX = startX;
+
+        // Interval movement
+        const intervalId = setInterval(() => {
+          posX += speed;
+          if (posX > 90) {
+            speed = -Math.abs(speed);
+            fish.classList.add('direction-left');
+          } else if (posX < 5) {
+            speed = Math.abs(speed);
+            fish.classList.remove('direction-left');
+          }
+          fish.style.left = `${posX}%`;
+        }, 50);
+
+        activeMovingIntervals.push(intervalId);
+
+        fish.addEventListener('click', () => {
+          if (fish.dataset.tapped === 'false') {
+            fish.dataset.tapped = 'true';
+            fish.classList.add('counted');
+            currentCountedItems++;
+            tallyCurrent.textContent = currentCountedItems;
+
+            const badge = document.createElement('div');
+            badge.className = 'fish-badge-count';
+            badge.textContent = currentCountedItems;
+            fish.appendChild(badge);
+
+            playSound('bubble');
+            speakText(`${currentCountedItems}`);
+
+            if (currentCountedItems === data.count) {
+              playSound('star');
+              setTimeout(() => {
+                speakText(`Awesome swimmer! All ${data.count} fish counted! Tap ${data.count} below!`);
+              }, 400);
+            }
+          }
+        });
+
+        stage.appendChild(fish);
+      }
+
+      gameDynamicContainer.appendChild(stage);
+      renderChoiceButtons(data.choices, data.count, data.name);
+    }
+
+    /* ---------------------------------------------
+       COMMON CHOICE BUTTONS RENDERER
+       --------------------------------------------- */
+    function renderChoiceButtons(choices, targetCount, itemName) {
+      stageChoicesRow.innerHTML = '';
+
+      choices.forEach(val => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-choice';
+        btn.textContent = val;
+
+        btn.addEventListener('click', () => {
+          if (val === targetCount) {
+            btn.classList.add('correct');
+            playSound('correct');
+            speakText(`That's right! ${targetCount} ${itemName}!`);
+            currentScore++;
+            modalScoreText.textContent = `Score: ${currentScore}`;
+
+            setTimeout(() => {
+              advanceRound();
+            }, 1200);
+          } else {
+            btn.classList.add('wrong');
+            playSound('wrong');
+            speakText(`Oops! That's ${val}, count again!`);
+            setTimeout(() => btn.classList.remove('wrong'), 550);
+          }
+        });
+
+        stageChoicesRow.appendChild(btn);
+      });
+    }
+
+    /* ---------------------------------------------
+       ADVANCE ROUND OR SHOW CELEBRATION
+       --------------------------------------------- */
+    function advanceRound() {
+      const meta = GAME_META[currentGameNum];
+      currentRoundIndex++;
+
+      if (currentRoundIndex < meta.totalRounds) {
+        loadRound();
+      } else {
+        showCelebration();
+      }
+    }
+
+    function showCelebration() {
+      clearMovingFish();
+      const meta = GAME_META[currentGameNum];
+      gameActiveStage.style.display = 'none';
+      celebrationView.classList.add('active');
+
+      const pct = Math.round((currentScore / meta.totalRounds) * 100);
+      saveGameScore(currentGameNum, pct);
+
+      const celebFinalScore = document.getElementById('celeb-final-score');
+      const celebStars = document.getElementById('celeb-stars-display');
+      const celebMasteryText = document.getElementById('celeb-mastery-text');
+      const celebHeadline = document.getElementById('celeb-title-text');
+      const celebMessage = document.getElementById('celeb-message');
+      const btnNextText = document.getElementById('btn-next-game-text');
+
+      celebFinalScore.textContent = `${currentScore}/${meta.totalRounds}`;
+      btnNextText.textContent = `Next: ${meta.nextName}`;
+
+      if (pct >= 85) {
+        celebStars.textContent = '⭐⭐⭐';
+        celebMasteryText.textContent = 'Master level';
+        celebHeadline.textContent = 'Counting Superstar! 🌟';
+        celebMessage.textContent = `Incredible work! You scored ${pct}% on ${meta.title}!`;
+      } else if (pct >= 60) {
+        celebStars.textContent = '⭐⭐';
+        celebMasteryText.textContent = 'Great progress';
+        celebHeadline.textContent = 'Great Job! 🎈';
+        celebMessage.textContent = `You scored ${pct}% on ${meta.title}! Keep practicing!`;
+      } else {
+        celebStars.textContent = '⭐';
+        celebMasteryText.textContent = 'Good start';
+        celebHeadline.textContent = 'Keep Counting! 🌱';
+        celebMessage.textContent = `You scored ${pct}%. Every count makes you smarter!`;
+      }
+
+      playSound('win');
+      triggerConfetti(3500);
+      speakText(`Congratulations! You finished ${meta.title} with ${currentScore} out of ${meta.totalRounds}!`);
+    }
+
+    function replayCurrentGame() {
+      openGame(currentGameNum);
+    }
+
+    function nextGameFromCelebration() {
+      const meta = GAME_META[currentGameNum];
+      openGame(meta.nextGame);
+    }
+
+  </script>
+</body>
+</html>

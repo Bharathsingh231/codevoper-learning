@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codevoper Learning — Where Learning Becomes an Adventure!</title>
+  <meta name="description" content="A playful, personalized learning platform for children. Explore coding, languages, math, puzzles, and the world through immersive adventures.">
+  <meta property="og:title" content="Codevoper Learning — Where Learning Becomes an Adventure!">
+  <meta property="og:description" content="Coding, languages, math, puzzles, and world discovery — designed to make every child's learning journey magical.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="closeMobileMenu()">Home</a>
+    <a href="#features" onclick="closeMobileMenu()">Courses</a>
+    <a href="#how-it-works" onclick="closeMobileMenu()">Activities</a>
+    <a href="#mission" onclick="closeMobileMenu()">About Us</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">For Parents</a>
+    <a href="#" class="btn btn-primary btn-large" onclick="closeMobileMenu()">Sign Up Free</a>
+  </div>
+
+  <!-- ============================
+       FULLSCREEN CLASS SELECTOR
+       Just closed boxes → click to open & reveal person
+       ============================ -->
+  <div class="class-overlay" id="classOverlay">
+    <button class="class-overlay-close" id="classOverlayClose" aria-label="Close">✕</button>
+
+    <!-- Playful floating decorations -->
+    <div class="overlay-decos">
+      <span class="overlay-deco overlay-deco-star" style="top:8%;left:10%;animation-delay:0s">⭐</span>
+      <span class="overlay-deco overlay-deco-star" style="top:15%;right:12%;animation-delay:-2s;font-size:1.2rem">✨</span>
+      <span class="overlay-deco overlay-deco-star" style="bottom:20%;left:8%;animation-delay:-4s">🌟</span>
+      <span class="overlay-deco overlay-deco-star" style="bottom:12%;right:15%;animation-delay:-1s;font-size:1rem">💫</span>
+      <span class="overlay-deco overlay-deco-star" style="top:40%;left:5%;animation-delay:-3s;font-size:2rem">✦</span>
+      <span class="overlay-deco overlay-deco-star" style="top:30%;right:6%;animation-delay:-2.5s;font-size:1.5rem">⭐</span>
+      <div class="overlay-deco overlay-deco-circle" style="top:22%;left:18%;animation-delay:-1s"></div>
+      <div class="overlay-deco overlay-deco-circle" style="bottom:25%;right:20%;animation-delay:-3.5s;width:14px;height:14px"></div>
+      <div class="overlay-deco overlay-deco-ring" style="top:12%;left:30%;animation-delay:-2s"></div>
+      <div class="overlay-deco overlay-deco-ring" style="bottom:15%;right:28%;animation-delay:-4s;width:40px;height:40px"></div>
+      <div class="overlay-deco overlay-deco-dot" style="top:35%;right:10%;animation-delay:-0.5s"></div>
+      <div class="overlay-deco overlay-deco-dot" style="bottom:35%;left:12%;animation-delay:-2.5s;background:var(--clr-pink)"></div>
+      <div class="overlay-deco overlay-deco-dot" style="top:60%;left:6%;animation-delay:-3s;background:var(--clr-teal)"></div>
+      <div class="overlay-deco overlay-deco-triangle" style="top:50%;right:8%;animation-delay:-1.5s"></div>
+      <div class="overlay-deco overlay-deco-triangle" style="bottom:40%;left:15%;animation-delay:-3.5s"></div>
+      <span class="overlay-deco overlay-deco-cross" style="top:18%;right:25%;animation-delay:-2s">✚</span>
+      <span class="overlay-deco overlay-deco-cross" style="bottom:18%;left:25%;animation-delay:-4s">✚</span>
+    </div>
+
+    <h2 class="class-overlay-title">Choose Your <span class="text-gradient">Class</span></h2>
+    <p class="class-overlay-subtitle">Click a box to see who's inside! 🎁</p>
+    <div class="class-boxes-grid">
+
+      <!-- Pre Primary Box -->
+      <div class="class-box" id="box-preprimary" data-url="dashboard-preprimary.html" onclick="openClassBox(this)">
+        <div class="class-box-closed">
+          <img src="images/closed-box-yellow.png" alt="Pre Primary box">
+        </div>
+        <div class="class-box-child">
+          <img src="images/box-preprimary.png" alt="Pre Primary student">
+        </div>
+        <div class="class-box-sparkles"></div>
+        <div class="class-box-label">Pre Primary</div>
+      </div>
+
+      <!-- Primary Box -->
+      <div class="class-box" id="box-primary" data-url="dashboard-primary.html" onclick="openClassBox(this)">
+        <div class="class-box-closed">
+          <img src="images/closed-box-green.png" alt="Primary box">
+        </div>
+        <div class="class-box-child">
+          <img src="images/box-primary.png" alt="Primary student">
+        </div>
+        <div class="class-box-sparkles"></div>
+        <div class="class-box-label">Primary</div>
+      </div>
+
+      <!-- Senior Box -->
+      <div class="class-box" id="box-senior" data-url="dashboard-senior.html" onclick="openClassBox(this)">
+        <div class="class-box-closed">
+          <img src="images/closed-box-purple.png" alt="Senior box">
+        </div>
+        <div class="class-box-child">
+          <img src="images/box-senior.png" alt="Senior student">
+        </div>
+        <div class="class-box-sparkles"></div>
+        <div class="class-box-label">Senior</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================
+       NAVIGATION
+       ============================ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="logo" id="logo">
+        <img src="images/logo-icon.png" alt="Codevoper Learning" class="logo-icon">
+        <span class="logo-text">Code<span class="highlight">voper</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#" onclick="openClassOverlay(); return false;">Explore Worlds</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#mission">Our Mission</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#" class="btn btn-ghost" id="login-btn">Log In</a>
+        <a href="#" onclick="openClassOverlay(); return false;" class="btn btn-primary" id="signup-btn">Sign Up Free</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================
+       HERO
+       ============================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          🪄 Now with AI-Powered Learning Paths
+        </div>
+        <h1 class="hero-title">
+          Where Learning<br>
+          Becomes a <span class="text-gradient">Magical</span><br>
+          <span class="text-gradient">Adventure!</span>
+        </h1>
+        <p class="hero-subtitle">
+          Specially designed for young minds to explore coding, languages, math, puzzles, and the wonders of our world — all through playful, immersive world adventures.
+        </p>
+        <div class="hero-cta">
+          <a href="#" onclick="openClassOverlay(); return false;" class="btn btn-hero-primary" id="hero-start-btn">
+            🚀 Start Learning For Free
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number counter" data-target="50000" data-format="k">50K+</div>
+            <div class="stat-label">Happy Learners</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number counter" data-target="500">500+</div>
+            <div class="stat-label">Interactive Lessons</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">4.9 <span class="stat-star">★</span></div>
+            <div class="stat-label">Parent Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroVisual" onclick="openClassOverlay()">
+        <img src="images/hero-islands.png" alt="Codevoper Learning Worlds" class="hero-image">
+        <div class="floating-badge floating-badge-1">
+          <span class="badge-icon">🗂️</span> Story World
+        </div>
+        <div class="floating-badge floating-badge-2">
+          <span class="badge-icon">🔢</span> Number World
+        </div>
+        <div class="floating-badge floating-badge-3">
+          <span class="badge-icon">💻</span> Code World
+        </div>
+        <div class="hero-visual-hint">🖱️ Click to explore classes!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="dot"></span>Language Learning</span>
+      <span class="marquee-item"><span class="dot"></span>Math Adventures</span>
+      <span class="marquee-item"><span class="dot"></span>Brain Puzzles</span>
+      <span class="marquee-item"><span class="dot"></span>World Discovery</span>
+      <span class="marquee-item"><span class="dot"></span>Coding Skills</span>
+      <span class="marquee-item"><span class="dot"></span>Life Skills</span>
+      <span class="marquee-item"><span class="dot"></span>AI-Powered</span>
+      <span class="marquee-item"><span class="dot"></span>Personalized Paths</span>
+      <span class="marquee-item"><span class="dot"></span>Language Learning</span>
+      <span class="marquee-item"><span class="dot"></span>Math Adventures</span>
+      <span class="marquee-item"><span class="dot"></span>Brain Puzzles</span>
+      <span class="marquee-item"><span class="dot"></span>World Discovery</span>
+      <span class="marquee-item"><span class="dot"></span>Coding Skills</span>
+      <span class="marquee-item"><span class="dot"></span>Life Skills</span>
+      <span class="marquee-item"><span class="dot"></span>AI-Powered</span>
+      <span class="marquee-item"><span class="dot"></span>Personalized Paths</span>
+    </div>
+  </div>
+
+  <!-- ============================
+       FEATURES (What Makes Us Special)
+       ============================ -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="line"></span> What Makes Us Special <span class="line"></span>
+        </div>
+        <h2 class="section-title">
+          What Makes Codevoper <span class="text-gradient">Special?</span>
+        </h2>
+        <p class="section-desc">Each adventure is designed to develop a core skill through play, exploration, and wonder.</p>
+      </div>
+      <div class="features-grid stagger-children" id="features-grid">
+        <div class="feature-card feature-card-1" id="feature-language">
+          <div class="feature-card-icon">📚</div>
+          <h3 class="feature-card-title">Language Learning</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Master English and Hindi alphabets with fun, interactive exercises. Visual recognition and writing practice included!</p>
+        </div>
+        <div class="feature-card feature-card-2" id="feature-math">
+          <div class="feature-card-icon">🔢</div>
+          <h3 class="feature-card-title">Math Adventures</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Numbers come alive! Learn counting, addition, and more through exciting games and activities.</p>
+        </div>
+        <div class="feature-card feature-card-3" id="feature-puzzles">
+          <div class="feature-card-icon">🧩</div>
+          <h3 class="feature-card-title">Brain Puzzles</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Challenge your mind with engaging puzzles that develop problem-solving and critical thinking skills.</p>
+        </div>
+      </div>
+      <div class="features-grid-bottom stagger-children" id="features-grid-bottom">
+        <div class="feature-card feature-card-4" id="feature-world">
+          <div class="feature-card-icon">🌍</div>
+          <h3 class="feature-card-title">Discover Our World</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Explore the body, nature, society, environment, Earth and space through meaningful activities.</p>
+        </div>
+        <div class="feature-card feature-card-5" id="feature-life">
+          <div class="feature-card-icon">🌟</div>
+          <h3 class="feature-card-title">Skills for Independence</h3>
+          <div class="feature-card-divider"></div>
+          <p class="feature-card-desc">Build confidence with practical routines, communication, self-care and safety skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       HOW IT WORKS
+       ============================ -->
+  <section class="steps-section" id="how-it-works">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="line"></span> Simple & Fun <span class="line"></span>
+        </div>
+        <h2 class="section-title">
+          Start Your <span class="text-gradient">Adventure</span> in 4 Easy Steps
+        </h2>
+      </div>
+      <div class="steps-grid stagger-children" id="steps-grid">
+        <div class="step-card" id="step-1">
+          <div class="step-number">1</div>
+          <h3 class="step-card-title">Create Your Profile</h3>
+          <p class="step-card-desc">Sign up in seconds. Tell us about your child's age and interests.</p>
+        </div>
+        <div class="step-card" id="step-2">
+          <div class="step-number">2</div>
+          <h3 class="step-card-title">Choose Your Class</h3>
+          <p class="step-card-desc">Pick from Pre Primary, Primary or Senior to match your child's level.</p>
+        </div>
+        <div class="step-card" id="step-3">
+          <div class="step-number">3</div>
+          <h3 class="step-card-title">Play & Learn</h3>
+          <p class="step-card-desc">Dive into interactive games, puzzles, and creative activities.</p>
+        </div>
+        <div class="step-card" id="step-4">
+          <div class="step-number">4</div>
+          <h3 class="step-card-title">Track Progress</h3>
+          <p class="step-card-desc">Watch your child grow with milestones and achievements!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       MISSION
+       ============================ -->
+  <section class="mission-section" id="mission">
+    <div class="container">
+      <div class="mission-content">
+        <div class="mission-text reveal-left">
+          <div class="section-eyebrow"><span class="line"></span> Our Mission</div>
+          <h2 class="mission-title">
+            Our <span class="text-gradient">Mission</span>
+          </h2>
+          <p class="mission-desc">
+            Codevoper Learning is an innovative educational platform designed to make learning enjoyable and effective for children aged 3-14. We believe every child deserves access to quality education that adapts to their unique learning style.
+          </p>
+          <div class="mission-features">
+            <div class="mission-feature">
+              <div class="mission-feature-icon">🎯</div>
+              <div class="mission-feature-text">
+                <h4>Personalized Learning Paths</h4>
+                <p>AI adapts content to each child's progress and strengths.</p>
+              </div>
+            </div>
+            <div class="mission-feature">
+              <div class="mission-feature-icon">🎮</div>
+              <div class="mission-feature-text">
+                <h4>Gamified Experience</h4>
+                <p>Badges, streaks, and rewards make every lesson a game.</p>
+              </div>
+            </div>
+            <div class="mission-feature">
+              <div class="mission-feature-icon">👨‍👩‍👧</div>
+              <div class="mission-feature-text">
+                <h4>Parent Dashboard</h4>
+                <p>Real-time insights into your child's learning journey.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-visual reveal-right">
+          <img src="images/mission.png" alt="Children learning together" class="mission-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       TESTIMONIALS
+       ============================ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span class="line"></span> Loved by Families <span class="line"></span></div>
+        <h2 class="section-title">What <span class="text-gradient">Parents</span> Are Saying</h2>
+      </div>
+      <div class="testimonials-grid stagger-children" id="testimonials-grid">
+        <div class="testimonial-card" id="testimonial-1">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"My daughter loves the Story Time activities! She went from struggling with letters to reading simple words in just 3 weeks."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">P</div>
+            <div>
+              <div class="testimonial-name">Priya Sharma</div>
+              <div class="testimonial-role">Mother of 5-year-old</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" id="testimonial-2">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"The math games are brilliant! My son now loves numbers. The parent dashboard helps me track exactly what he's learning."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">R</div>
+            <div>
+              <div class="testimonial-name">Rahul Verma</div>
+              <div class="testimonial-role">Father of 8-year-old</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" id="testimonial-3">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-text">"As a teacher, I recommend Codevoper to all parents. The curriculum is well-structured and kids genuinely enjoy it!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Anita Patel</div>
+              <div class="testimonial-role">Primary School Teacher</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       CTA — Full Screen with BG
+       ============================ -->
+  <section class="cta-section" id="cta">
+    <img src="images/cta-bg.png" alt="" class="cta-bg" aria-hidden="true">
+    <div class="cta-overlay"></div>
+    <div class="cta-content reveal">
+      <h2 class="cta-title">Ready to Start Your Child's Learning Adventure?</h2>
+      <p class="cta-desc">Join 50,000+ families who chose Codevoper Learning. Start free — no credit card required.</p>
+      <a href="#" class="btn btn-cta-full" id="cta-start-btn">🚀 Start Learning For Free</a>
+    </div>
+  </section>
+
+  <!-- ============================
+       SIMPLE FOOTER BAR
+       ============================ -->
+  <footer class="footer-bar" id="footer">
+    <div class="container">
+      <div class="footer-bar-inner">
+        <div class="footer-bar-left">
+          <img src="images/logo-icon.png" alt="Codevoper" class="logo-icon">
+          <span class="logo-text">Code<span class="highlight">voper</span></span>
+        </div>
+        <div class="footer-bar-center">
+          <a href="#">Terms of Use</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <div class="footer-bar-right">
+          © 2026 Codevoper Learning. Made with ❤️ for young learners.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
