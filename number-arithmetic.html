@@ -1,0 +1,3175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arithmetic — Number World | Codevoper Learning</title>
+  <meta name="description" content="Master Pre-Primary Arithmetic: addition, seesaw balance, number bonds, subtraction rescue, multiplication garden, and fair-share division.">
+
+  <!-- Google Fonts Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       CODEVOPER LEARNING — PRE-PRIMARY ARITHMETIC PATH
+       Dark Theme Palette (#0F0A1F, #221B38, #2D2549)
+       ======================================================== */
+    :root {
+      --clr-bg: #0F0A1F;
+      --clr-bg-alt: #1A1333;
+      --clr-surface: #221B38;
+      --clr-surface-light: #2D2549;
+      --clr-surface-hover: #362D52;
+      --clr-text: #F8FAFC;
+      --clr-text-muted: #94A3B8;
+      --clr-text-subtle: #64748B;
+      --clr-border: rgba(255, 255, 255, 0.08);
+
+      --clr-primary: #F97316;
+      --clr-primary-light: #FB923C;
+      --clr-primary-dark: #C2410C;
+      --clr-secondary: #7C3AED;
+      --clr-secondary-light: #A78BFA;
+      --clr-accent: #F59E0B;
+      --clr-accent-light: #FCD34D;
+      --clr-success: #10B981;
+      --clr-teal: #14B8A6;
+      --clr-pink: #EC4899;
+      --clr-blue: #3B82F6;
+      --clr-red: #EF4444;
+
+      --grad-arithmetic: linear-gradient(135deg, #F97316 0%, #EAB308 100%);
+      --grad-addition: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+      --grad-balance: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+      --grad-bonds: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+      --grad-subtraction: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+      --grad-garden: linear-gradient(135deg, #10B981 0%, #84CC16 100%);
+      --grad-picnic: linear-gradient(135deg, #EC4899 0%, #F43F5E 100%);
+      --grad-division: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);
+      --grad-gold: linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%);
+      --grad-purple: linear-gradient(135deg, #7C3AED 0%, #6366F1 100%);
+
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-body: 'Outfit', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 35px rgba(249, 115, 22, 0.35);
+
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* Ambient Glowing Orbs Background */
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.18;
+      animation: floatOrb 22s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: #F97316;
+      top: -120px;
+      left: -120px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: #7C3AED;
+      bottom: 5%;
+      right: -100px;
+      animation-delay: -7s;
+    }
+
+    .orb-3 {
+      width: 420px;
+      height: 420px;
+      background: #10B981;
+      top: 45%;
+      left: 50%;
+      opacity: 0.12;
+      animation-delay: -14s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 35px) scale(1.08); }
+    }
+
+    /* ========================================================
+       1. STANDARD STICKY HEADER BAR
+       ======================================================== */
+    .header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 10, 31, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--clr-border);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-icon-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-icon-nav:hover {
+      background: rgba(249, 115, 22, 0.2);
+      border-color: rgba(251, 146, 60, 0.4);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .btn-home-nav {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      justify-content: center;
+      font-size: 1.15rem;
+    }
+
+    .header-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .header-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .header-icon {
+      font-size: 1.5rem;
+      filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.4));
+    }
+
+    .header-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--clr-text);
+      letter-spacing: -0.3px;
+    }
+
+    .header-subtitle {
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .sound-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .sound-toggle-btn:hover {
+      background: rgba(249, 115, 22, 0.2);
+      border-color: rgba(251, 146, 60, 0.4);
+      transform: scale(1.03);
+    }
+
+    .progress-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 0.45rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 210px;
+    }
+
+    .progress-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--clr-accent-light);
+    }
+
+    .stat-divider {
+      color: var(--clr-border);
+    }
+
+    .header-prog-bar-bg {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header-prog-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #F97316, #EAB308);
+      border-radius: var(--radius-full);
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .header-prog-bar-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      animation: barGleam 2.4s infinite;
+    }
+
+    @keyframes barGleam {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ========================================================
+       2. HERO SECTION
+       ======================================================== */
+    .main-wrap {
+      flex: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2.25rem 1.5rem 3.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-banner {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      color: var(--clr-primary-light);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--clr-text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ========================================================
+       3. 11 GAMIFIED CARDS GRID
+       ======================================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .game-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md), 0 0 25px rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.35);
+    }
+
+    .game-card.card-highlight-pulse {
+      animation: cardPulseGlow 1.8s infinite alternate;
+      border-color: var(--clr-accent);
+    }
+
+    @keyframes cardPulseGlow {
+      0% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+      100% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.6); }
+    }
+
+    /* Top CSS Art Header */
+    .card-art-head {
+      height: 140px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    /* Gradient Backgrounds for 11 Cards */
+    .art-1 { background: linear-gradient(135deg, #78350F 0%, #B45309 60%, #D97706 100%); }
+    .art-2 { background: linear-gradient(135deg, #1E3A8A 0%, #0284C7 60%, #10B981 100%); }
+    .art-3 { background: linear-gradient(135deg, #831843 0%, #BE185D 60%, #FB7185 100%); }
+    .art-4 { background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 60%, #C084FC 100%); }
+    .art-5 { background: linear-gradient(135deg, #0C4A6E 0%, #0284C7 60%, #38BDF8 100%); }
+    .art-6 { background: linear-gradient(135deg, #991B1B 0%, #DC2626 60%, #F87171 100%); }
+    .art-7 { background: linear-gradient(135deg, #14532D 0%, #16A34A 60%, #4ADE80 100%); }
+    .art-8 { background: linear-gradient(135deg, #713F12 0%, #CA8A04 60%, #FACC15 100%); }
+    .art-9 { background: linear-gradient(135deg, #881337 0%, #E11D48 60%, #FB7185 100%); }
+    .art-10 { background: linear-gradient(135deg, #581C87 0%, #9333EA 60%, #E879F9 100%); }
+    .art-11 { background: linear-gradient(135deg, #134E4A 0%, #0D9488 60%, #2DD4BF 100%); }
+
+    /* Animated CSS Art Visuals */
+    .art-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      z-index: 2;
+    }
+
+    .art-token {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: inline-block;
+    }
+
+    .game-card:hover .art-token {
+      transform: scale(1.15) rotate(4deg);
+    }
+
+    .token-bounce-slow {
+      animation: gentleBob 2.8s ease-in-out infinite alternate;
+    }
+
+    .token-bounce-fast {
+      animation: gentleBob 2.2s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes gentleBob {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    /* Card Art Badges */
+    .card-num-chip {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(15, 10, 31, 0.65);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-full);
+      z-index: 3;
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      z-index: 3;
+      backdrop-filter: blur(8px);
+    }
+
+    .status-badge.up-next {
+      background: rgba(245, 158, 11, 0.9);
+      color: #1F1500;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.5);
+      animation: badgeGlow 1.8s infinite alternate;
+    }
+
+    @keyframes badgeGlow {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+      100% { transform: scale(1.05); box-shadow: 0 0 20px rgba(245, 158, 11, 0.8); }
+    }
+
+    .status-badge.mastered {
+      background: rgba(16, 185, 129, 0.9);
+      color: #064E3B;
+    }
+
+    .status-badge.learning {
+      background: rgba(59, 130, 246, 0.9);
+      color: #FFFFFF;
+    }
+
+    .status-badge.unplayed {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--clr-text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Card Content Body */
+    .card-body {
+      padding: 1.35rem 1.35rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--clr-text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      min-height: 42px;
+    }
+
+    /* Card Best Score Progress Bar */
+    .card-score-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--clr-text-subtle);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-score-val {
+      font-weight: 700;
+      color: var(--clr-accent-light);
+    }
+
+    .card-bar-bg {
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #F97316, #FBBF24);
+      border-radius: var(--radius-full);
+      transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card-bar-fill.fill-mastered {
+      background: linear-gradient(90deg, #10B981, #34D399);
+    }
+
+    /* Play Action Button */
+    .card-play-btn {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      border-radius: var(--radius-md);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .card-play-btn:hover {
+      background: var(--grad-arithmetic);
+      border-color: transparent;
+      box-shadow: 0 4px 18px rgba(249, 115, 22, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .card-play-btn .btn-arrow {
+      transition: transform 0.25s ease;
+    }
+
+    .card-play-btn:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ========================================================
+       4. FULLSCREEN INTERACTIVE MODAL GAMES
+       ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 6, 22, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 1.25rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-inner {
+      max-width: 900px;
+      width: 100%;
+      margin: auto;
+      background: var(--clr-surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg), 0 0 50px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Modal Header Bar */
+    .modal-header {
+      padding: 1.2rem 1.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--clr-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .modal-game-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(249, 115, 22, 0.2);
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .modal-title-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-game-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .modal-step-text {
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+      font-weight: 500;
+    }
+
+    .modal-header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .modal-score-chip {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--clr-accent-light);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .modal-close-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #FFFFFF;
+      transform: scale(1.05);
+    }
+
+    /* Modal Main Body */
+    .modal-body {
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 420px;
+      position: relative;
+    }
+
+    /* Instruction Speech Pill */
+    .speech-instruction {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--clr-border);
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .speech-instruction:hover {
+      background: rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.35);
+      transform: scale(1.02);
+    }
+
+    .speech-speaker-btn {
+      font-size: 1.2rem;
+      color: var(--clr-accent);
+    }
+
+    /* Game View Container */
+    .game-view {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .game-view.active {
+      display: flex;
+    }
+
+    /* Big Tap Choice Buttons Grid */
+    .choices-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .choice-btn {
+      min-width: 80px;
+      min-height: 70px;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--clr-surface-light);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .choice-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: var(--clr-surface-hover);
+      border-color: var(--clr-primary-light);
+    }
+
+    .choice-btn:active {
+      transform: scale(0.96);
+    }
+
+    .choice-btn.correct {
+      background: rgba(16, 185, 129, 0.3) !important;
+      border-color: var(--clr-success) !important;
+      color: #34D399 !important;
+      animation: pulseGreen 0.6s ease;
+    }
+
+    .choice-btn.wrong {
+      background: rgba(239, 68, 68, 0.3) !important;
+      border-color: var(--clr-red) !important;
+      color: #F87171 !important;
+      animation: shakeWrong 0.5s ease;
+    }
+
+    @keyframes pulseGreen {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.12); box-shadow: 0 0 25px rgba(16, 185, 129, 0.6); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shakeWrong {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* Feedback Banner Toast */
+    .feedback-banner {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 0.65rem 1.6rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 50;
+    }
+
+    .feedback-banner.show-correct {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      background: rgba(16, 185, 129, 0.95);
+      color: #FFFFFF;
+      box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .feedback-banner.show-wrong {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      background: rgba(239, 68, 68, 0.95);
+      color: #FFFFFF;
+      box-shadow: 0 6px 25px rgba(239, 68, 68, 0.4);
+    }
+
+    /* ========================================================
+       GAME SPECIFIC STYLES
+       ======================================================== */
+
+    /* Game 1: Treasure Chest */
+    .chest-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .chest-display-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1.5rem 2.5rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chest-icon-wrapper {
+      position: relative;
+      font-size: 5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .chest-icon-wrapper:hover {
+      transform: scale(1.08);
+    }
+
+    .chest-inside-count {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      background: var(--clr-accent);
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .gems-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      max-width: 200px;
+      justify-content: center;
+    }
+
+    .gem-item {
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: transform 0.25s, opacity 0.25s;
+      animation: floatOrb 4s infinite alternate;
+    }
+
+    .gem-item:hover {
+      transform: scale(1.25) rotate(10deg);
+    }
+
+    .gem-item.collected {
+      opacity: 0.2;
+      transform: scale(0.6);
+      pointer-events: none;
+    }
+
+    /* Game 2: Seesaw Balance */
+    .seesaw-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: 1.5rem 0;
+    }
+
+    .seesaw-plank-container {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .seesaw-pivot {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 28px solid transparent;
+      border-right: 28px solid transparent;
+      border-bottom: 50px solid #64748B;
+      z-index: 1;
+    }
+
+    .seesaw-plank {
+      position: absolute;
+      width: 440px;
+      height: 14px;
+      background: #F97316;
+      border-radius: 7px;
+      bottom: 66px;
+      transform-origin: center center;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .plank-pan {
+      position: absolute;
+      top: -65px;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 4px;
+      min-width: 80px;
+    }
+
+    .plank-pan.left { left: 10px; }
+    .plank-pan.right { right: 10px; }
+
+    .seesaw-weight-block {
+      width: 50px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #FFFFFF;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .weight-left { background: #3B82F6; }
+    .weight-right { background: #10B981; }
+
+    /* Game 3: Basic Addition */
+    .fruit-addition-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .fruit-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      max-width: 180px;
+      justify-content: center;
+      min-height: 50px;
+      align-items: center;
+    }
+
+    .fruit-item {
+      font-size: 2.4rem;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+      animation: gentleBob 2s infinite alternate;
+    }
+
+    .op-symbol {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--clr-accent);
+    }
+
+    /* Game 4: Number Bonds */
+    .bonds-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      margin: 1.5rem 0;
+    }
+
+    .bond-node {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: var(--grad-bonds);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+      z-index: 2;
+    }
+
+    .bond-legs-svg {
+      width: 220px;
+      height: 80px;
+      margin: -10px 0;
+      overflow: visible;
+    }
+
+    .bond-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 220px;
+    }
+
+    .bond-node-sub {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: var(--clr-surface-light);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #93C5FD;
+    }
+
+    .bond-node-sub.target-node {
+      background: rgba(245, 158, 11, 0.2);
+      border: 2px dashed var(--clr-accent);
+      color: var(--clr-accent-light);
+      animation: pulseArt 2s infinite;
+    }
+
+    /* Game 5: Subtraction Rescue */
+    .dock-stage {
+      width: 100%;
+      max-width: 580px;
+      background: linear-gradient(180deg, #1E293B 0%, #0369A1 70%, #0284C7 100%);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .dock-pier {
+      background: #78350F;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      color: #FDE68A;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .boats-harbor {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      min-height: 80px;
+      align-items: center;
+    }
+
+    .boat-item {
+      font-size: 3rem;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s;
+    }
+
+    .boat-item.sailed {
+      opacity: 0.15;
+      transform: translateX(60px) rotate(15deg) scale(0.6);
+      pointer-events: none;
+    }
+
+    /* Game 6: Crossed-out Subtraction */
+    .cross-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+      max-width: 580px;
+    }
+
+    .cross-item-wrap {
+      position: relative;
+      font-size: 3rem;
+    }
+
+    .cross-item-wrap.crossed::after {
+      content: '❌';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      opacity: 0.9;
+    }
+
+    /* Game 7: Complete Equation */
+    .equation-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1.5rem 2.5rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 700;
+    }
+
+    .eq-slot {
+      width: 74px;
+      height: 74px;
+      border-radius: 16px;
+      background: var(--clr-surface-light);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+
+    .eq-slot.missing {
+      background: rgba(245, 158, 11, 0.18);
+      border: 2px dashed var(--clr-accent);
+      color: var(--clr-accent-light);
+      animation: pulseArt 2s infinite;
+    }
+
+    /* Game 8: Multiplication Garden */
+    .garden-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: #14532D;
+      border: 2px solid #22C55E;
+      border-radius: var(--radius-xl);
+      padding: 1.5rem 2rem;
+      box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .garden-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 0.6rem 1.25rem;
+    }
+
+    .sunflower {
+      font-size: 2.6rem;
+      cursor: pointer;
+      transition: transform 0.25s;
+    }
+
+    .sunflower:hover {
+      transform: scale(1.2) rotate(15deg);
+    }
+
+    /* Game 9: Multiplication Groups */
+    .baskets-stage {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .basket-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .basket-items {
+      display: flex;
+      gap: 0.4rem;
+      font-size: 2rem;
+    }
+
+    .basket-label {
+      font-size: 0.8rem;
+      color: var(--clr-text-muted);
+      font-weight: 600;
+    }
+
+    /* Game 10: Division Picnic */
+    .picnic-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .picnic-friends-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      gap: 1.5rem;
+    }
+
+    .friend-plate-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .friend-avatar {
+      font-size: 3.2rem;
+    }
+
+    .friend-plate {
+      width: 100%;
+      min-height: 55px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.4rem;
+    }
+
+    .friend-plate span {
+      font-size: 1.8rem;
+    }
+
+    /* Game 11: Division into Boxes */
+    .boxes-stage {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 600px;
+    }
+
+    .box-container {
+      width: 120px;
+      min-height: 100px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid #0284C7;
+      border-radius: 16px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .box-blocks-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      justify-content: center;
+    }
+
+    .block-mini {
+      font-size: 1.5rem;
+    }
+
+    /* ========================================================
+       5. GAME COMPLETION CELEBRATION MODAL
+       ======================================================== */
+    .view-celebration {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .view-celebration.open {
+      display: flex;
+    }
+
+    .celeb-trophy {
+      font-size: 5rem;
+      filter: drop-shadow(0 8px 24px rgba(245, 158, 11, 0.5));
+      animation: bounceTrophy 2s ease-in-out infinite alternate;
+      margin-bottom: 0.8rem;
+    }
+
+    @keyframes bounceTrophy {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-12px) scale(1.08); }
+    }
+
+    .celeb-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+
+    .celeb-msg {
+      font-size: 1.05rem;
+      color: var(--clr-text-muted);
+      margin-bottom: 1.8rem;
+      max-width: 480px;
+    }
+
+    .celeb-score-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+      min-width: 260px;
+    }
+
+    .celeb-score-sub {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--clr-accent-light);
+    }
+
+    .celeb-fraction-score {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .celeb-stars-row {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.3rem;
+      color: #FBBF24;
+      margin-top: 0.2rem;
+    }
+
+    .celeb-badge-text {
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+      font-weight: 600;
+    }
+
+    .btn-complete-next {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 2.2rem;
+      border-radius: var(--radius-full);
+      background: var(--grad-arithmetic);
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 8px 30px rgba(249, 115, 22, 0.4);
+      transition: var(--transition);
+      cursor: pointer;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-complete-next:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(249, 115, 22, 0.6);
+    }
+
+    .celeb-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-celeb-action {
+      padding: 0.65rem 1.4rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-celeb-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* Canvas Confetti */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2000;
+    }
+
+    /* ========================================================
+       6. FOOTER
+       ======================================================== */
+    .site-footer {
+      background: rgba(15, 10, 31, 0.9);
+      border-top: 1px solid var(--clr-border);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      color: var(--clr-text-subtle);
+      font-size: 0.88rem;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========================================================
+       7. RESPONSIVE BREAKPOINTS
+       ======================================================== */
+    @media (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .header-subtitle {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0.75rem 1rem;
+      }
+      .progress-box {
+        min-width: 160px;
+        padding: 0.35rem 0.75rem;
+      }
+      .stat-item {
+        font-size: 0.68rem;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .modal-header {
+        padding: 1rem 1.25rem;
+      }
+      .modal-body {
+        padding: 1.5rem 1rem;
+      }
+      .chest-display-box {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.25rem;
+      }
+      .seesaw-plank-container {
+        max-width: 320px;
+      }
+      .seesaw-plank {
+        width: 290px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .header-left .btn-icon-nav span {
+        display: none;
+      }
+      .progress-box {
+        display: none;
+      }
+      .choice-btn {
+        min-width: 65px;
+        min-height: 60px;
+        font-size: 1.6rem;
+      }
+      .celeb-actions-row {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-celeb-action {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glowing Orbs Background -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ========================================================
+       1. STANDARD STICKY HEADER BAR
+       ======================================================== -->
+  <header class="header-bar">
+    <div class="header-container">
+      <!-- Left: Back to Number World & Pre-Primary Home -->
+      <div class="header-left">
+        <a href="number-world.html" class="btn-icon-nav" title="Back to Number World">
+          <span>←</span> Back to Number World
+        </a>
+        <a href="dashboard-preprimary.html" class="btn-icon-nav btn-home-nav" title="Pre-Primary Dashboard">
+          🏠
+        </a>
+      </div>
+
+      <!-- Center: Title & Path description -->
+      <div class="header-center">
+        <div class="header-title-wrap">
+          <span class="header-icon">🧮</span>
+          <h1 class="header-title">Arithmetic</h1>
+        </div>
+        <div class="header-subtitle">
+          Number World · Let's Do Arithmetic! Choose a module to practice with numbers
+        </div>
+      </div>
+
+      <!-- Right: Sound Toggle & Arithmetic Progress Box -->
+      <div class="header-right">
+        <button class="sound-toggle-btn" id="soundToggleBtn" title="Toggle Sound & Speech">
+          <span id="soundIcon">🔊</span>
+          <span id="soundLabel">Sound On</span>
+        </button>
+
+        <div class="progress-box">
+          <div class="progress-top-row">
+            <span class="stat-item" id="headerScoreStat">0% ARITHMETIC SCORE</span>
+            <span class="stat-divider">|</span>
+            <span class="stat-item" id="headerModulesStat">0/11 MODULES TRIED</span>
+          </div>
+          <div class="header-prog-bar-bg">
+            <div class="header-prog-bar-fill" id="headerProgressFill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       2. MAIN WRAPPER & 11 GAMIFIED ACTIVITY CARDS
+       ======================================================== -->
+  <main class="main-wrap">
+    <section class="hero-banner">
+      <div class="hero-eyebrow">
+        <span>🧮</span>
+        <span>Pre-Primary Arithmetic · Ages 3-6</span>
+      </div>
+      <h2 class="hero-title">Let's Do Arithmetic! 🌟</h2>
+      <p class="hero-desc">
+        Collect golden treasure, balance the seesaw, solve number bonds, rescue sailing boats, and share delicious treats with animal pals!
+      </p>
+    </section>
+
+    <!-- 11 Cards Responsive Grid -->
+    <div class="cards-grid">
+
+      <!-- CARD 1: Treasure Chest (Up next highlighted) -->
+      <article class="game-card" id="card-1">
+        <div class="card-art-head art-1">
+          <span class="card-num-chip">#1</span>
+          <span class="status-badge up-next" id="badge-1">⚡ Up Next</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🪙</span>
+            <span class="art-token" style="font-size:3rem;">👑</span>
+            <span class="art-token token-bounce-fast">💎</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Treasure Chest</h3>
+          <p class="card-desc">Collect treasure to fill the chest!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-1">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-1"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(1)">
+            <span>Play Treasure Chest</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 2: Balance the Seesaw -->
+      <article class="game-card" id="card-2">
+        <div class="card-art-head art-2">
+          <span class="card-num-chip">#2</span>
+          <span class="status-badge unplayed" id="badge-2">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">⚖️</span>
+            <span class="art-token">🟦</span>
+            <span class="art-token token-bounce-fast">🟨</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Balance the Seesaw</h3>
+          <p class="card-desc">Add blocks to balance the seesaw!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-2">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-2"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(2)">
+            <span>Play Balance Seesaw</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 3: Basic Addition -->
+      <article class="game-card" id="card-3">
+        <div class="card-art-head art-3">
+          <span class="card-num-chip">#3</span>
+          <span class="status-badge unplayed" id="badge-3">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🍎</span>
+            <span class="art-token" style="font-size:1.8rem; color:#FCD34D;">➕</span>
+            <span class="art-token token-bounce-fast">🍏</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Basic Addition</h3>
+          <p class="card-desc">Practice adding single-digit numbers with visual fruits!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-3">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-3"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(3)">
+            <span>Play Basic Addition</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 4: Number Bonds -->
+      <article class="game-card" id="card-4">
+        <div class="card-art-head art-4">
+          <span class="card-num-chip">#4</span>
+          <span class="status-badge unplayed" id="badge-4">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🔵</span>
+            <span class="art-token" style="font-size:1.8rem; color:#A78BFA;">🔗</span>
+            <span class="art-token token-bounce-fast">🟣</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Number Bonds</h3>
+          <p class="card-desc">Find the pairs that make a number!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-4">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-4"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(4)">
+            <span>Play Number Bonds</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 5: Subtraction Rescue -->
+      <article class="game-card" id="card-5">
+        <div class="card-art-head art-5">
+          <span class="card-num-chip">#5</span>
+          <span class="status-badge unplayed" id="badge-5">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">⛵</span>
+            <span class="art-token">🌊</span>
+            <span class="art-token token-bounce-fast">🛟</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Subtraction Rescue</h3>
+          <p class="card-desc">Move objects away and discover what remains!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-5">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-5"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(5)">
+            <span>Play Subtraction Rescue</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 6: Subtraction -->
+      <article class="game-card" id="card-6">
+        <div class="card-art-head art-6">
+          <span class="card-num-chip">#6</span>
+          <span class="status-badge unplayed" id="badge-6">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🍪</span>
+            <span class="art-token" style="font-size:2rem; color:#EF4444;">❌</span>
+            <span class="art-token token-bounce-fast">🍩</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Subtraction</h3>
+          <p class="card-desc">Take away and see what is left!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-6">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-6"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(6)">
+            <span>Play Subtraction</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 7: Complete the Equation -->
+      <article class="game-card" id="card-7">
+        <div class="card-art-head art-7">
+          <span class="card-num-chip">#7</span>
+          <span class="status-badge unplayed" id="badge-7">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🧩</span>
+            <span class="art-token" style="font-size:1.8rem; color:#34D399;">➕</span>
+            <span class="art-token token-bounce-fast">🎯</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Complete the Equation</h3>
+          <p class="card-desc">Find the missing number in the sum!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-7">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-7"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(7)">
+            <span>Play Complete Equation</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 8: Multiplication Garden -->
+      <article class="game-card" id="card-8">
+        <div class="card-art-head art-8">
+          <span class="card-num-chip">#8</span>
+          <span class="status-badge unplayed" id="badge-8">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🌻</span>
+            <span class="art-token">🌱</span>
+            <span class="art-token token-bounce-fast">🌻</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Multiplication Garden</h3>
+          <p class="card-desc">Grow equal rows and count the whole garden!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-8">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-8"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(8)">
+            <span>Play Garden</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 9: Multiplication -->
+      <article class="game-card" id="card-9">
+        <div class="card-art-head art-9">
+          <span class="card-num-chip">#9</span>
+          <span class="status-badge unplayed" id="badge-9">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🧺</span>
+            <span class="art-token" style="font-size:1.8rem; color:#FB7185;">✖️</span>
+            <span class="art-token token-bounce-fast">🧺</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Multiplication</h3>
+          <p class="card-desc">Practice equal groups and times tables!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-9">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-9"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(9)">
+            <span>Play Multiplication</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 10: Division Picnic -->
+      <article class="game-card" id="card-10">
+        <div class="card-art-head art-10">
+          <span class="card-num-chip">#10</span>
+          <span class="status-badge unplayed" id="badge-10">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">🐻</span>
+            <span class="art-token">🍪</span>
+            <span class="art-token token-bounce-fast">🐰</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Division Picnic</h3>
+          <p class="card-desc">Share snacks equally among every friend!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-10">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-10"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(10)">
+            <span>Play Division Picnic</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- CARD 11: Division -->
+      <article class="game-card" id="card-11">
+        <div class="card-art-head art-11">
+          <span class="card-num-chip">#11</span>
+          <span class="status-badge unplayed" id="badge-11">Not played yet</span>
+          <div class="art-visual">
+            <span class="art-token token-bounce-slow">📦</span>
+            <span class="art-token" style="font-size:1.8rem; color:#38BDF8;">➗</span>
+            <span class="art-token token-bounce-fast">📦</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Division</h3>
+          <p class="card-desc">Share equally and find each fair share!</p>
+          <div class="card-score-row">
+            <span>Best Score</span>
+            <span class="card-score-val" id="score-label-11">Not played yet</span>
+          </div>
+          <div class="card-bar-bg">
+            <div class="card-bar-fill" id="bar-11"></div>
+          </div>
+          <button class="card-play-btn" onclick="openGame(11)">
+            <span>Play Division</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ========================================================
+       3. FULLSCREEN INTERACTIVE MODAL SYSTEM
+       ======================================================== -->
+  <div class="modal-overlay" id="gameModal">
+    <div class="modal-inner">
+      <!-- Modal Top Header -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-game-icon" id="modalGameIcon">🧮</div>
+          <div class="modal-title-box">
+            <div class="modal-game-title" id="modalGameTitle">Activity Title</div>
+            <div class="modal-step-text" id="modalGameStep">Round 1 of 4</div>
+          </div>
+        </div>
+        <div class="modal-header-right">
+          <div class="modal-score-chip">
+            <span>⭐</span>
+            <span id="modalLiveScore">Score: 0</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeGameModal()" title="Exit Game">✕</button>
+        </div>
+      </div>
+
+      <!-- Modal Main Body -->
+      <div class="modal-body">
+
+        <!-- Voice Prompt Pill -->
+        <div class="speech-instruction" id="speechInstructionPill" onclick="repeatCurrentPrompt()">
+          <span class="speech-speaker-btn">🔊</span>
+          <span id="instructionText">Loading round...</span>
+        </div>
+
+        <!-- MODULE 1: Treasure Chest -->
+        <div class="game-view" id="view-game-1">
+          <div class="chest-stage">
+            <div class="chest-display-box">
+              <div class="chest-icon-wrapper" onclick="chestClicked()">
+                👑
+                <div class="chest-inside-count" id="chestCountBadge">3</div>
+              </div>
+              <div style="font-size:2rem; font-weight:800; color:var(--clr-accent);">➕</div>
+              <div class="gems-group" id="gemsContainer">
+                <!-- Dynamic Gems -->
+              </div>
+            </div>
+            <div style="font-size:1.1rem; color:var(--clr-text-muted);">
+              Tap gems to collect into chest or choose the total!
+            </div>
+          </div>
+          <div class="choices-row" id="choices-1"></div>
+        </div>
+
+        <!-- MODULE 2: Balance the Seesaw -->
+        <div class="game-view" id="view-game-2">
+          <div class="seesaw-stage">
+            <div class="seesaw-plank-container">
+              <div class="seesaw-plank" id="seesawPlank">
+                <div class="plank-pan left" id="panLeft"></div>
+                <div class="plank-pan right" id="panRight"></div>
+              </div>
+              <div class="seesaw-pivot"></div>
+            </div>
+            <div style="font-size:1rem; color:var(--clr-text-muted); margin-top:0.8rem;" id="seesawHint">
+              Left has 5 blocks. Right has 2 blocks. How many more blocks to balance?
+            </div>
+          </div>
+          <div class="choices-row" id="choices-2"></div>
+        </div>
+
+        <!-- MODULE 3: Basic Addition -->
+        <div class="game-view" id="view-game-3">
+          <div class="fruit-addition-box">
+            <div class="fruit-group" id="additionGroupA"></div>
+            <div class="op-symbol">➕</div>
+            <div class="fruit-group" id="additionGroupB"></div>
+            <div class="op-symbol">🟰</div>
+            <div class="fruit-group" style="font-size:2.4rem; color:var(--clr-accent);">❓</div>
+          </div>
+          <div class="choices-row" id="choices-3"></div>
+        </div>
+
+        <!-- MODULE 4: Number Bonds -->
+        <div class="game-view" id="view-game-4">
+          <div class="bonds-stage">
+            <div class="bond-node" id="bondTopNode">10</div>
+            <svg class="bond-legs-svg" viewBox="0 0 220 80">
+              <line x1="110" y1="10" x2="40" y2="70" stroke="#7C3AED" stroke-width="6" stroke-linecap="round"/>
+              <line x1="110" y1="10" x2="180" y2="70" stroke="#7C3AED" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            <div class="bond-bottom-row">
+              <div class="bond-node-sub" id="bondLeftNode">6</div>
+              <div class="bond-node-sub target-node" id="bondRightNode">?</div>
+            </div>
+          </div>
+          <div class="choices-row" id="choices-4"></div>
+        </div>
+
+        <!-- MODULE 5: Subtraction Rescue -->
+        <div class="game-view" id="view-game-5">
+          <div class="dock-stage">
+            <div class="dock-pier">
+              <span>⚓ Safe Harbor Pier</span>
+              <span id="dockBoatsCount">5 Boats docked</span>
+            </div>
+            <div class="boats-harbor" id="boatsContainer"></div>
+          </div>
+          <div class="choices-row" id="choices-5"></div>
+        </div>
+
+        <!-- MODULE 6: Subtraction (Crossed-out) -->
+        <div class="game-view" id="view-game-6">
+          <div class="cross-stage" id="crossItemsContainer"></div>
+          <div class="choices-row" id="choices-6"></div>
+        </div>
+
+        <!-- MODULE 7: Complete the Equation -->
+        <div class="game-view" id="view-game-7">
+          <div class="equation-box">
+            <div class="eq-slot" id="eqSlot1">?</div>
+            <div style="color:var(--clr-accent);" id="eqOp">➕</div>
+            <div class="eq-slot" id="eqSlot2">4</div>
+            <div style="color:var(--clr-accent);">🟰</div>
+            <div class="eq-slot" id="eqSlot3">9</div>
+          </div>
+          <div class="choices-row" id="choices-7"></div>
+        </div>
+
+        <!-- MODULE 8: Multiplication Garden -->
+        <div class="game-view" id="view-game-8">
+          <div class="garden-stage" id="gardenContainer"></div>
+          <div class="choices-row" id="choices-8"></div>
+        </div>
+
+        <!-- MODULE 9: Multiplication Groups -->
+        <div class="game-view" id="view-game-9">
+          <div class="baskets-stage" id="basketsContainer"></div>
+          <div class="choices-row" id="choices-9"></div>
+        </div>
+
+        <!-- MODULE 10: Division Picnic -->
+        <div class="game-view" id="view-game-10">
+          <div class="picnic-stage">
+            <div style="font-size:1.15rem; font-weight:700; color:var(--clr-accent-light);" id="picnicTotalLabel">
+              6 Cookies to share between 2 friends!
+            </div>
+            <div class="picnic-friends-row" id="picnicFriendsRow"></div>
+          </div>
+          <div class="choices-row" id="choices-10"></div>
+        </div>
+
+        <!-- MODULE 11: Division into Boxes -->
+        <div class="game-view" id="view-game-11">
+          <div style="font-size:1.15rem; font-weight:700; color:var(--clr-primary-light); margin-bottom:1rem;" id="divisionBoxesLabel">
+            8 Blocks divided into 4 boxes
+          </div>
+          <div class="boxes-stage" id="divisionBoxesContainer"></div>
+          <div class="choices-row" id="choices-11"></div>
+        </div>
+
+        <!-- CELEBRATION CARD VIEW -->
+        <div class="view-celebration" id="viewCelebration">
+          <div class="celeb-trophy" id="celebTrophy">🏆</div>
+          <h2 class="celeb-title" id="celebTitle">Super Math Star! 🌟</h2>
+          <p class="celeb-msg" id="celebDesc">You completed all rounds of this arithmetic adventure!</p>
+
+          <div class="celeb-score-card">
+            <span class="celeb-score-sub">YOUR SCORE</span>
+            <div class="celeb-fraction-score" id="celebFraction">4/4</div>
+            <div class="celeb-stars-row" id="celebStars">⭐⭐⭐</div>
+            <span class="celeb-badge-text" id="celebMasteryText">Master level</span>
+          </div>
+
+          <button class="btn-complete-next" id="btnNextGame" onclick="nextGameFromCelebration()">
+            <span id="btnNextGameText">Next: Balance the Seesaw</span>
+            <span>→</span>
+          </button>
+
+          <div class="celeb-actions-row">
+            <button class="btn-celeb-action" onclick="replayCurrentGame()">🔄 Play Again</button>
+            <button class="btn-celeb-action" onclick="closeGameModal()">📋 Modules Library</button>
+            <a href="dashboard-preprimary.html" class="btn-celeb-action">🏠 Dashboard</a>
+          </div>
+        </div>
+
+        <!-- Toast Feedback Banner -->
+        <div class="feedback-banner" id="feedbackBanner">Awesome! 🌟</div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       4. FOOTER
+       ======================================================== */ -->
+  <footer class="site-footer">
+    <p>© 2026 Codevoper Learning. Made with ❤️ for curious young minds.</p>
+  </footer>
+
+  <!-- ========================================================
+       5. JAVASCRIPT GAME ENGINE & AUDIO SYNTHESIS
+       ======================================================== -->
+  <script>
+    /* ========================================================
+       AUDIO SYNTHESIZER & SPEECH SYNTHESIS ENGINE
+       ======================================================== */
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type, duration, startTime = 0, gainVal = 0.2) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime + startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + startTime);
+        osc.stop(ctx.currentTime + startTime + duration);
+      } catch (e) {
+        console.warn('Audio play error:', e);
+      }
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      if (type === 'correct') {
+        // Bright arpeggio chime: C5 -> E5 -> G5 -> C6
+        playTone(523.25, 'sine', 0.18, 0, 0.22);
+        playTone(659.25, 'sine', 0.18, 0.08, 0.22);
+        playTone(783.99, 'sine', 0.22, 0.16, 0.22);
+        playTone(1046.50, 'triangle', 0.35, 0.24, 0.25);
+      } else if (type === 'wrong') {
+        // Soft low boing
+        playTone(220, 'triangle', 0.2, 0, 0.18);
+        playTone(174.6, 'sine', 0.3, 0.1, 0.18);
+      } else if (type === 'pop') {
+        playTone(880, 'sine', 0.08, 0, 0.15);
+      } else if (type === 'win') {
+        // Joyful victory fanfare
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        notes.forEach((freq, idx) => playTone(freq, 'triangle', 0.35, idx * 0.11, 0.22));
+      } else if (type === 'balance') {
+        // Seesaw leveled pleasant chord
+        playTone(440, 'sine', 0.35, 0, 0.18);
+        playTone(554.37, 'sine', 0.35, 0.05, 0.18);
+        playTone(659.25, 'sine', 0.45, 0.1, 0.2);
+      }
+    }
+
+    function speakPrompt(text) {
+      if (!soundEnabled) return;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.86;
+        utterance.pitch = 1.12;
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Nav Sound Toggle
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    const soundLabel = document.getElementById('soundLabel');
+
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        soundIcon.textContent = '🔊';
+        soundLabel.textContent = 'Sound On';
+        playSound('pop');
+      } else {
+        soundIcon.textContent = '🔇';
+        soundLabel.textContent = 'Sound Off';
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      }
+    });
+
+    /* ========================================================
+       CANVAS CONFETTI CELEBRATION
+       ======================================================== */
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimId = null;
+
+    function resizeConfetti() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfetti);
+    resizeConfetti();
+
+    function triggerConfetti(duration = 2600) {
+      confettiParticles = [];
+      const colors = ['#F97316', '#F59E0B', '#10B981', '#3B82F6', '#EC4899', '#8B5CF6', '#FCD34D'];
+      for (let i = 0; i < 90; i++) {
+        confettiParticles.push({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height * 0.4,
+          w: Math.random() * 10 + 6,
+          h: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 6,
+          vy: Math.random() * 4 + 3,
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 10,
+          shape: Math.random() > 0.3 ? 'rect' : 'circle'
+        });
+      }
+      const startTime = performance.now();
+
+      function animateConfetti(time) {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        confettiParticles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vRot;
+          confettiCtx.save();
+          confettiCtx.translate(p.x, p.y);
+          confettiCtx.rotate((p.rot * Math.PI) / 180);
+          confettiCtx.fillStyle = p.color;
+          if (p.shape === 'rect') {
+            confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          } else {
+            confettiCtx.beginPath();
+            confettiCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+            confettiCtx.fill();
+          }
+          confettiCtx.restore();
+        });
+
+        if (time - startTime < duration) {
+          confettiAnimId = requestAnimationFrame(animateConfetti);
+        } else {
+          confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+          cancelAnimationFrame(confettiAnimId);
+        }
+      }
+      cancelAnimationFrame(confettiAnimId);
+      confettiAnimId = requestAnimationFrame(animateConfetti);
+    }
+
+    /* ========================================================
+       MODULE METADATA & LOCALSTORAGE
+       ======================================================== */
+    const MODULES_META = [
+      { id: 1, name: 'Treasure Chest', icon: '👑', desc: 'Collect treasure to fill the chest!' },
+      { id: 2, name: 'Balance the Seesaw', icon: '⚖️', desc: 'Add blocks to balance the seesaw!' },
+      { id: 3, name: 'Basic Addition', icon: '🍎', desc: 'Practice adding single-digit numbers with visual fruits!' },
+      { id: 4, name: 'Number Bonds', icon: '🔗', desc: 'Find the pairs that make a number!' },
+      { id: 5, name: 'Subtraction Rescue', icon: '⛵', desc: 'Move objects away and discover what remains!' },
+      { id: 6, name: 'Subtraction', icon: '🍪', desc: 'Take away and see what is left!' },
+      { id: 7, name: 'Complete the Equation', icon: '🧩', desc: 'Find the missing number in the sum!' },
+      { id: 8, name: 'Multiplication Garden', icon: '🌻', desc: 'Grow equal rows and count the whole garden!' },
+      { id: 9, name: 'Multiplication', icon: '🧺', desc: 'Practice equal groups and times tables!' },
+      { id: 10, name: 'Division Picnic', icon: '🐻', desc: 'Share snacks equally among every friend!' },
+      { id: 11, name: 'Division', icon: '📦', desc: 'Share equally and find each fair share!' }
+    ];
+
+    function updateAllCardsUI() {
+      let triedCount = 0;
+      let scoreSum = 0;
+      let firstUnplayedId = null;
+
+      for (let i = 1; i <= 11; i++) {
+        const best = localStorage.getItem(`number_arithmetic_g${i}_best`);
+        const played = localStorage.getItem(`number_arithmetic_g${i}_played`);
+        const badgeEl = document.getElementById(`badge-${i}`);
+        const scoreLabelEl = document.getElementById(`score-label-${i}`);
+        const barEl = document.getElementById(`bar-${i}`);
+
+        if (best !== null && played !== null && parseInt(played) > 0) {
+          const val = parseInt(best, 10);
+          triedCount++;
+          scoreSum += val;
+
+          scoreLabelEl.textContent = `${val}%`;
+          barEl.style.width = `${val}%`;
+
+          if (val >= 80) {
+            badgeEl.className = 'status-badge mastered';
+            badgeEl.textContent = 'Mastered';
+            barEl.className = 'card-bar-fill fill-mastered';
+          } else {
+            badgeEl.className = 'status-badge learning';
+            badgeEl.textContent = 'Learning';
+            barEl.className = 'card-bar-fill';
+          }
+        } else {
+          scoreLabelEl.textContent = 'Not played yet';
+          barEl.style.width = '0%';
+          badgeEl.className = 'status-badge unplayed';
+          badgeEl.textContent = 'Not played yet';
+          if (!firstUnplayedId) firstUnplayedId = i;
+        }
+      }
+
+      // Highlight the first unplayed module with "Up Next"
+      if (firstUnplayedId) {
+        const upNextBadge = document.getElementById(`badge-${firstUnplayedId}`);
+        if (upNextBadge && upNextBadge.className.includes('unplayed')) {
+          upNextBadge.className = 'status-badge up-next';
+          upNextBadge.textContent = '⚡ Up Next';
+        }
+      }
+
+      // Header calculation
+      const avgScore = triedCount > 0 ? Math.round(scoreSum / triedCount) : 0;
+      document.getElementById('headerScoreStat').textContent = `${avgScore}% ARITHMETIC SCORE`;
+      document.getElementById('headerModulesStat').textContent = `${triedCount}/11 MODULES TRIED`;
+      document.getElementById('headerProgressFill').style.width = `${avgScore}%`;
+
+      // Persist overall arithmetic score for number-world.html integration
+      if (triedCount > 0) {
+        localStorage.setItem('number_arithmetic_score', avgScore.toString());
+        localStorage.setItem('number_arithmetic_completed', triedCount.toString());
+      }
+    }
+
+    /* ========================================================
+       MODAL CONTROLLER
+       ======================================================== */
+    const gameModal = document.getElementById('gameModal');
+    const feedbackBanner = document.getElementById('feedbackBanner');
+    let currentGameId = 1;
+    let currentRoundIndex = 0;
+    let currentRoundData = null;
+    let currentScore = 0;
+    let totalRounds = 4;
+    let currentSpeechText = "";
+
+    function showFeedback(text, isCorrect = true) {
+      feedbackBanner.textContent = text;
+      feedbackBanner.className = 'feedback-banner ' + (isCorrect ? 'show-correct' : 'show-wrong');
+      setTimeout(() => {
+        feedbackBanner.className = 'feedback-banner';
+      }, 1000);
+    }
+
+    function repeatCurrentPrompt() {
+      if (currentSpeechText) {
+        speakPrompt(currentSpeechText);
+        playSound('pop');
+      }
+    }
+
+    function openGame(moduleId) {
+      currentGameId = moduleId;
+      currentRoundIndex = 0;
+      currentScore = 0;
+      totalRounds = 4;
+
+      const meta = MODULES_META.find(m => m.id === moduleId);
+      document.getElementById('modalGameIcon').textContent = meta.icon;
+      document.getElementById('modalGameTitle').textContent = meta.name;
+      document.getElementById('modalLiveScore').textContent = `Score: 0`;
+
+      // Hide all views & celebration
+      document.querySelectorAll('.game-view').forEach(v => v.classList.remove('active'));
+      document.getElementById('viewCelebration').classList.remove('open');
+
+      // Show specific game view
+      const activeView = document.getElementById(`view-game-${moduleId}`);
+      if (activeView) activeView.classList.add('active');
+
+      gameModal.classList.add('open');
+      playSound('pop');
+
+      loadModuleRound(moduleId, 0);
+    }
+
+    function closeGameModal() {
+      gameModal.classList.remove('open');
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      updateAllCardsUI();
+      playSound('pop');
+    }
+
+    // Keyboard ESC listener
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && gameModal.classList.contains('open')) {
+        closeGameModal();
+      }
+    });
+
+    /* ========================================================
+       GAME COMPLETION CELEBRATION
+       ======================================================== */
+    function showCelebration(score, total) {
+      document.querySelectorAll('.game-view').forEach(v => v.classList.remove('active'));
+      const celebView = document.getElementById('viewCelebration');
+      celebView.classList.add('open');
+
+      const pct = Math.round((score / total) * 100);
+
+      // Save to localStorage
+      const prevBest = parseInt(localStorage.getItem(`number_arithmetic_g${currentGameId}_best`) || '0', 10);
+      if (pct > prevBest) {
+        localStorage.setItem(`number_arithmetic_g${currentGameId}_best`, pct.toString());
+      }
+      const playedCount = parseInt(localStorage.getItem(`number_arithmetic_g${currentGameId}_played`) || '0', 10);
+      localStorage.setItem(`number_arithmetic_g${currentGameId}_played`, (playedCount + 1).toString());
+
+      updateAllCardsUI();
+
+      // Set celebration UI
+      document.getElementById('celebFraction').textContent = `${score}/${total}`;
+      const trophyEl = document.getElementById('celebTrophy');
+      const titleEl = document.getElementById('celebTitle');
+      const descEl = document.getElementById('celebDesc');
+      const starsEl = document.getElementById('celebStars');
+      const masteryEl = document.getElementById('celebMasteryText');
+
+      if (pct >= 80) {
+        trophyEl.textContent = '🏆';
+        titleEl.textContent = 'Super Math Champion! 🌟';
+        descEl.textContent = 'Incredible arithmetic skills! You mastered this challenge!';
+        starsEl.textContent = '⭐⭐⭐';
+        masteryEl.textContent = 'Master level';
+        playSound('win');
+        triggerConfetti(3000);
+      } else if (pct >= 50) {
+        trophyEl.textContent = '🌟';
+        titleEl.textContent = 'Terrific Work! 🚀';
+        descEl.textContent = 'Great counting and solving! Keep practicing to get 3 stars!';
+        starsEl.textContent = '⭐⭐';
+        masteryEl.textContent = 'Skilled Learner';
+        playSound('win');
+        triggerConfetti(1800);
+      } else {
+        trophyEl.textContent = '🎈';
+        titleEl.textContent = 'Good Effort! 💪';
+        descEl.textContent = 'You tried your best! Play again and get more right answers!';
+        starsEl.textContent = '⭐';
+        masteryEl.textContent = 'Great Practice';
+        playSound('pop');
+      }
+
+      // Next game button text
+      const nextBtnText = document.getElementById('btnNextGameText');
+      if (currentGameId < 11) {
+        const nextMeta = MODULES_META.find(m => m.id === currentGameId + 1);
+        nextBtnText.textContent = `Next: ${nextMeta.name}`;
+      } else {
+        nextBtnText.textContent = `Finish to Number World! 🌈`;
+      }
+    }
+
+    function nextGameFromCelebration() {
+      if (currentGameId < 11) {
+        openGame(currentGameId + 1);
+      } else {
+        window.location.href = 'number-world.html';
+      }
+    }
+
+    function replayCurrentGame() {
+      openGame(currentGameId);
+    }
+
+    /* ========================================================
+       ROUND LOADER ROUTER
+       ======================================================== */
+    function loadModuleRound(moduleId, roundIdx) {
+      currentRoundIndex = roundIdx;
+      document.getElementById('modalGameStep').textContent = `Round ${roundIdx + 1} of ${totalRounds}`;
+      document.getElementById('modalLiveScore').textContent = `Score: ${currentScore}`;
+
+      switch (moduleId) {
+        case 1: loadRoundG1(roundIdx); break;
+        case 2: loadRoundG2(roundIdx); break;
+        case 3: loadRoundG3(roundIdx); break;
+        case 4: loadRoundG4(roundIdx); break;
+        case 5: loadRoundG5(roundIdx); break;
+        case 6: loadRoundG6(roundIdx); break;
+        case 7: loadRoundG7(roundIdx); break;
+        case 8: loadRoundG8(roundIdx); break;
+        case 9: loadRoundG9(roundIdx); break;
+        case 10: loadRoundG10(roundIdx); break;
+        case 11: loadRoundG11(roundIdx); break;
+      }
+    }
+
+    function renderChoiceButtons(containerId, choices, correctAnswer, onCorrectCallback) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      choices.forEach(val => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = val;
+        btn.onclick = () => {
+          if (val === correctAnswer) {
+            btn.classList.add('correct');
+            playSound('correct');
+            showFeedback('Correct! +1 ⭐', true);
+            currentScore++;
+            document.getElementById('modalLiveScore').textContent = `Score: ${currentScore}`;
+            setTimeout(() => {
+              if (onCorrectCallback) onCorrectCallback();
+            }, 600);
+          } else {
+            btn.classList.add('wrong');
+            playSound('wrong');
+            showFeedback('Try again! 💡', false);
+            setTimeout(() => {
+              btn.classList.remove('wrong');
+            }, 600);
+          }
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function advanceToNextRoundOrFinish() {
+      if (currentRoundIndex + 1 < totalRounds) {
+        loadModuleRound(currentGameId, currentRoundIndex + 1);
+      } else {
+        showCelebration(currentScore, totalRounds);
+      }
+    }
+
+    /* ========================================================
+       MODULE 1: TREASURE CHEST
+       ======================================================== */
+    const G1_ROUNDS = [
+      { inChest: 4, outside: 3, choices: [6, 7, 8, 9] },
+      { inChest: 2, outside: 4, choices: [5, 6, 7, 8] },
+      { inChest: 5, outside: 2, choices: [6, 7, 8, 9] },
+      { inChest: 3, outside: 5, choices: [7, 8, 9, 10] }
+    ];
+    let g1CollectedCount = 0;
+
+    function loadRoundG1(idx) {
+      const data = G1_ROUNDS[idx];
+      g1CollectedCount = data.inChest;
+      const total = data.inChest + data.outside;
+
+      document.getElementById('chestCountBadge').textContent = g1CollectedCount;
+      const gemsContainer = document.getElementById('gemsContainer');
+      gemsContainer.innerHTML = '';
+
+      const gemIcons = ['💎', '🪙', '✨', '💍'];
+      for (let i = 0; i < data.outside; i++) {
+        const gem = document.createElement('span');
+        gem.className = 'gem-item';
+        gem.textContent = gemIcons[i % gemIcons.length];
+        gem.onclick = () => {
+          if (!gem.classList.contains('collected')) {
+            gem.classList.add('collected');
+            g1CollectedCount++;
+            document.getElementById('chestCountBadge').textContent = g1CollectedCount;
+            playSound('pop');
+            if (g1CollectedCount === total) {
+              playSound('correct');
+              showFeedback('Chest filled! 🌟', true);
+            }
+          }
+        };
+        gemsContainer.appendChild(gem);
+      }
+
+      currentSpeechText = `${data.inChest} treasures in chest plus ${data.outside} treasures outside. How many in total?`;
+      document.getElementById('instructionText').textContent = currentSpeechText;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-1', data.choices, total, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    function chestClicked() {
+      playSound('pop');
+      speakPrompt(`There are currently ${g1CollectedCount} gems in the treasure chest!`);
+    }
+
+    /* ========================================================
+       MODULE 2: BALANCE THE SEESAW
+       ======================================================== */
+    const G2_ROUNDS = [
+      { left: 5, right: 2, need: 3, choices: [1, 2, 3, 4] },
+      { left: 6, right: 4, need: 2, choices: [1, 2, 3, 4] },
+      { left: 7, right: 3, need: 4, choices: [2, 3, 4, 5] },
+      { left: 8, right: 5, need: 3, choices: [1, 2, 3, 4] }
+    ];
+
+    function loadRoundG2(idx) {
+      const data = G2_ROUNDS[idx];
+      const plank = document.getElementById('seesawPlank');
+      // Tilt left because left has more weights initially
+      plank.style.transform = 'rotate(-10deg)';
+
+      const panL = document.getElementById('panLeft');
+      const panR = document.getElementById('panRight');
+      panL.innerHTML = '';
+      panR.innerHTML = '';
+
+      for (let i = 0; i < data.left; i++) {
+        const b = document.createElement('div');
+        b.className = 'seesaw-weight-block weight-left';
+        b.textContent = '1';
+        panL.appendChild(b);
+      }
+      for (let i = 0; i < data.right; i++) {
+        const b = document.createElement('div');
+        b.className = 'seesaw-weight-block weight-right';
+        b.textContent = '1';
+        panR.appendChild(b);
+      }
+
+      document.getElementById('seesawHint').textContent =
+        `Left has ${data.left} blocks. Right has ${data.right} blocks. Add blocks to level the seesaw!`;
+
+      currentSpeechText = `Left has ${data.left} blocks. Right has ${data.right}. How many blocks balance the seesaw?`;
+      document.getElementById('instructionText').textContent = currentSpeechText;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-2', data.choices, data.need, () => {
+        // Balance plank!
+        plank.style.transform = 'rotate(0deg)';
+        playSound('balance');
+        for (let i = 0; i < data.need; i++) {
+          const b = document.createElement('div');
+          b.className = 'seesaw-weight-block weight-right';
+          b.textContent = '1';
+          panR.appendChild(b);
+        }
+        setTimeout(advanceToNextRoundOrFinish, 800);
+      });
+    }
+
+    /* ========================================================
+       MODULE 3: BASIC ADDITION
+       ======================================================== */
+    const G3_ROUNDS = [
+      { a: 2, b: 3, fruit: '🍎', choices: [4, 5, 6, 7] },
+      { a: 3, b: 4, fruit: '🍊', choices: [5, 6, 7, 8] },
+      { a: 4, b: 2, fruit: '🍓', choices: [5, 6, 7, 8] },
+      { a: 5, b: 4, fruit: '🍌', choices: [7, 8, 9, 10] }
+    ];
+
+    function loadRoundG3(idx) {
+      const data = G3_ROUNDS[idx];
+      const sum = data.a + data.b;
+
+      const groupA = document.getElementById('additionGroupA');
+      const groupB = document.getElementById('additionGroupB');
+      groupA.innerHTML = '';
+      groupB.innerHTML = '';
+
+      for (let i = 0; i < data.a; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'fruit-item';
+        sp.textContent = data.fruit;
+        groupA.appendChild(sp);
+      }
+      for (let i = 0; i < data.b; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'fruit-item';
+        sp.textContent = data.fruit;
+        groupB.appendChild(sp);
+      }
+
+      currentSpeechText = `${data.a} plus ${data.b} equals how many?`;
+      document.getElementById('instructionText').textContent = `${data.a} ➕ ${data.b} = ❓ Count the fruits!`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-3', data.choices, sum, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       MODULE 4: NUMBER BONDS
+       ======================================================== */
+    const G4_ROUNDS = [
+      { top: 5, left: 3, target: 2, choices: [1, 2, 3, 4] },
+      { top: 10, left: 6, target: 4, choices: [2, 3, 4, 5] },
+      { top: 10, left: 7, target: 3, choices: [2, 3, 4, 5] },
+      { top: 6, left: 4, target: 2, choices: [1, 2, 3, 4] }
+    ];
+
+    function loadRoundG4(idx) {
+      const data = G4_ROUNDS[idx];
+      document.getElementById('bondTopNode').textContent = data.top;
+      document.getElementById('bondLeftNode').textContent = data.left;
+      document.getElementById('bondRightNode').textContent = '?';
+
+      currentSpeechText = `What pairs with ${data.left} to make ${data.top}?`;
+      document.getElementById('instructionText').textContent = `${data.left} + ❓ = ${data.top}`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-4', data.choices, data.target, () => {
+        document.getElementById('bondRightNode').textContent = data.target;
+        setTimeout(advanceToNextRoundOrFinish, 700);
+      });
+    }
+
+    /* ========================================================
+       MODULE 5: SUBTRACTION RESCUE
+       ======================================================== */
+    const G5_ROUNDS = [
+      { total: 5, sailAway: 2, choices: [2, 3, 4, 5] },
+      { total: 6, sailAway: 3, choices: [2, 3, 4, 5] },
+      { total: 7, sailAway: 4, choices: [1, 2, 3, 4] },
+      { total: 8, sailAway: 3, choices: [3, 4, 5, 6] }
+    ];
+
+    function loadRoundG5(idx) {
+      const data = G5_ROUNDS[idx];
+      const remaining = data.total - data.sailAway;
+      document.getElementById('dockBoatsCount').textContent = `${data.total} Boats at harbor, ${data.sailAway} setting sail!`;
+
+      const boatsContainer = document.getElementById('boatsContainer');
+      boatsContainer.innerHTML = '';
+
+      for (let i = 0; i < data.total; i++) {
+        const boat = document.createElement('span');
+        boat.className = 'boat-item';
+        boat.textContent = '⛵';
+        boatsContainer.appendChild(boat);
+      }
+
+      // Automatically sail away items with animation
+      setTimeout(() => {
+        const boats = boatsContainer.querySelectorAll('.boat-item');
+        for (let i = 0; i < data.sailAway; i++) {
+          if (boats[i]) boats[i].classList.add('sailed');
+        }
+      }, 500);
+
+      currentSpeechText = `There were ${data.total} boats. ${data.sailAway} sailed away! How many remain?`;
+      document.getElementById('instructionText').textContent = `${data.total} boats - ${data.sailAway} sailed = ❓`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-5', data.choices, remaining, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       MODULE 6: SUBTRACTION (CROSSED-OUT)
+       ======================================================== */
+    const G6_ROUNDS = [
+      { total: 7, takeAway: 3, icon: '🍪', choices: [3, 4, 5, 6] },
+      { total: 6, takeAway: 2, icon: '🍩', choices: [3, 4, 5, 6] },
+      { total: 8, takeAway: 4, icon: '🧁', choices: [2, 3, 4, 5] },
+      { total: 9, takeAway: 5, icon: '🍭', choices: [3, 4, 5, 6] }
+    ];
+
+    function loadRoundG6(idx) {
+      const data = G6_ROUNDS[idx];
+      const remaining = data.total - data.takeAway;
+
+      const container = document.getElementById('crossItemsContainer');
+      container.innerHTML = '';
+
+      for (let i = 0; i < data.total; i++) {
+        const wrap = document.createElement('div');
+        wrap.className = 'cross-item-wrap' + (i < data.takeAway ? ' crossed' : '');
+        wrap.textContent = data.icon;
+        container.appendChild(wrap);
+      }
+
+      currentSpeechText = `${data.total} minus ${data.takeAway} crossed out. How many are left?`;
+      document.getElementById('instructionText').textContent = `${data.total} ➖ ${data.takeAway} = ❓ Count what is left!`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-6', data.choices, remaining, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       MODULE 7: COMPLETE THE EQUATION
+       ======================================================== */
+    const G7_ROUNDS = [
+      { missingPos: 1, op: '➕', val2: 4, total: 9, answer: 5, choices: [3, 4, 5, 6] },
+      { missingPos: 2, op: '➕', val1: 6, total: 8, answer: 2, choices: [1, 2, 3, 4] },
+      { missingPos: 1, op: '➖', val2: 3, total: 4, answer: 7, choices: [5, 6, 7, 8] },
+      { missingPos: 2, op: '➖', val1: 10, total: 6, answer: 4, choices: [2, 3, 4, 5] }
+    ];
+
+    function loadRoundG7(idx) {
+      const data = G7_ROUNDS[idx];
+      const slot1 = document.getElementById('eqSlot1');
+      const slot2 = document.getElementById('eqSlot2');
+      const slot3 = document.getElementById('eqSlot3');
+      const opEl = document.getElementById('eqOp');
+
+      opEl.textContent = data.op;
+      slot3.textContent = data.total;
+
+      if (data.missingPos === 1) {
+        slot1.textContent = '?';
+        slot1.className = 'eq-slot missing';
+        slot2.textContent = data.val2;
+        slot2.className = 'eq-slot';
+        currentSpeechText = `What number ${data.op === '➕' ? 'plus' : 'minus'} ${data.val2} equals ${data.total}?`;
+        document.getElementById('instructionText').textContent = `❓ ${data.op} ${data.val2} = ${data.total}`;
+      } else {
+        slot1.textContent = data.val1;
+        slot1.className = 'eq-slot';
+        slot2.textContent = '?';
+        slot2.className = 'eq-slot missing';
+        currentSpeechText = `${data.val1} ${data.op === '➕' ? 'plus' : 'minus'} what number equals ${data.total}?`;
+        document.getElementById('instructionText').textContent = `${data.val1} ${data.op} ❓ = ${data.total}`;
+      }
+
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-7', data.choices, data.answer, () => {
+        if (data.missingPos === 1) slot1.textContent = data.answer;
+        else slot2.textContent = data.answer;
+        setTimeout(advanceToNextRoundOrFinish, 700);
+      });
+    }
+
+    /* ========================================================
+       MODULE 8: MULTIPLICATION GARDEN
+       ======================================================== */
+    const G8_ROUNDS = [
+      { rows: 3, perRow: 2, choices: [4, 5, 6, 8] },
+      { rows: 2, perRow: 4, choices: [6, 7, 8, 9] },
+      { rows: 4, perRow: 2, choices: [6, 7, 8, 10] },
+      { rows: 3, perRow: 3, choices: [6, 7, 8, 9] }
+    ];
+
+    function loadRoundG8(idx) {
+      const data = G8_ROUNDS[idx];
+      const total = data.rows * data.perRow;
+      const garden = document.getElementById('gardenContainer');
+      garden.innerHTML = '';
+
+      for (let r = 0; r < data.rows; r++) {
+        const row = document.createElement('div');
+        row.className = 'garden-row';
+        for (let c = 0; c < data.perRow; c++) {
+          const flower = document.createElement('span');
+          flower.className = 'sunflower';
+          flower.textContent = '🌻';
+          flower.onclick = () => {
+            flower.style.transform = 'scale(1.3) rotate(20deg)';
+            playSound('pop');
+            setTimeout(() => { flower.style.transform = 'scale(1)'; }, 300);
+          };
+          row.appendChild(flower);
+        }
+        garden.appendChild(row);
+      }
+
+      currentSpeechText = `${data.rows} rows of ${data.perRow} sunflowers. How many flowers in all?`;
+      document.getElementById('instructionText').textContent = `${data.rows} rows × ${data.perRow} flowers = ❓`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-8', data.choices, total, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       MODULE 9: MULTIPLICATION (GROUPS)
+       ======================================================== */
+    const G9_ROUNDS = [
+      { groups: 3, perGroup: 2, item: '🍎', choices: [5, 6, 7, 8] },
+      { groups: 2, perGroup: 3, item: '🍊', choices: [4, 5, 6, 7] },
+      { groups: 4, perGroup: 2, item: '🍓', choices: [6, 7, 8, 9] },
+      { groups: 2, perGroup: 5, item: '🍌', choices: [8, 9, 10, 12] }
+    ];
+
+    function loadRoundG9(idx) {
+      const data = G9_ROUNDS[idx];
+      const total = data.groups * data.perGroup;
+      const baskets = document.getElementById('basketsContainer');
+      baskets.innerHTML = '';
+
+      for (let g = 0; g < data.groups; g++) {
+        const card = document.createElement('div');
+        card.className = 'basket-card';
+
+        const row = document.createElement('div');
+        row.className = 'basket-items';
+        for (let i = 0; i < data.perGroup; i++) {
+          const sp = document.createElement('span');
+          sp.textContent = data.item;
+          row.appendChild(sp);
+        }
+
+        const label = document.createElement('span');
+        label.className = 'basket-label';
+        label.textContent = `Basket ${g + 1} (${data.perGroup})`;
+
+        card.appendChild(row);
+        card.appendChild(label);
+        baskets.appendChild(card);
+      }
+
+      currentSpeechText = `${data.groups} baskets with ${data.perGroup} fruits each. How many in total?`;
+      document.getElementById('instructionText').textContent = `${data.groups} baskets × ${data.perGroup} fruits = ❓`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-9', data.choices, total, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       MODULE 10: DIVISION PICNIC
+       ======================================================== */
+    const G10_ROUNDS = [
+      { totalCookies: 6, friends: [ { name: 'Teddy', icon: '🐻' }, { name: 'Bunny', icon: '🐰' } ], share: 3, choices: [2, 3, 4, 5] },
+      { totalCookies: 8, friends: [ { name: 'Fox', icon: '🦊' }, { name: 'Panda', icon: '🐼' } ], share: 4, choices: [2, 3, 4, 5] },
+      { totalCookies: 6, friends: [ { name: 'Puppy', icon: '🐶' }, { name: 'Kitty', icon: '🐱' }, { name: 'Bunny', icon: '🐰' } ], share: 2, choices: [1, 2, 3, 4] },
+      { totalCookies: 9, friends: [ { name: 'Bear', icon: '🐻' }, { name: 'Fox', icon: '🦊' }, { name: 'Bunny', icon: '🐰' } ], share: 3, choices: [2, 3, 4, 5] }
+    ];
+
+    function loadRoundG10(idx) {
+      const data = G10_ROUNDS[idx];
+      document.getElementById('picnicTotalLabel').textContent =
+        `${data.totalCookies} Cookies shared equally among ${data.friends.length} friends!`;
+
+      const row = document.getElementById('picnicFriendsRow');
+      row.innerHTML = '';
+
+      data.friends.forEach(fr => {
+        const box = document.createElement('div');
+        box.className = 'friend-plate-box';
+
+        const avatar = document.createElement('div');
+        avatar.className = 'friend-avatar';
+        avatar.textContent = fr.icon;
+
+        const name = document.createElement('div');
+        name.style.fontSize = '0.9rem';
+        name.style.fontWeight = '700';
+        name.textContent = fr.name;
+
+        const plate = document.createElement('div');
+        plate.className = 'friend-plate';
+        for (let i = 0; i < data.share; i++) {
+          const cookie = document.createElement('span');
+          cookie.textContent = '🍪';
+          plate.appendChild(cookie);
+        }
+
+        box.appendChild(avatar);
+        box.appendChild(name);
+        box.appendChild(plate);
+        row.appendChild(box);
+      });
+
+      currentSpeechText = `${data.totalCookies} cookies shared equally with ${data.friends.length} friends. How many cookies each?`;
+      document.getElementById('instructionText').textContent = `${data.totalCookies} 🍪 ÷ ${data.friends.length} friends = ❓ each`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-10', data.choices, data.share, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       MODULE 11: DIVISION INTO BOXES
+       ======================================================== */
+    const G11_ROUNDS = [
+      { totalBlocks: 8, numBoxes: 4, perBox: 2, choices: [1, 2, 3, 4] },
+      { totalBlocks: 6, numBoxes: 3, perBox: 2, choices: [1, 2, 3, 4] },
+      { totalBlocks: 10, numBoxes: 2, perBox: 5, choices: [3, 4, 5, 6] },
+      { totalBlocks: 12, numBoxes: 4, perBox: 3, choices: [2, 3, 4, 5] }
+    ];
+
+    function loadRoundG11(idx) {
+      const data = G11_ROUNDS[idx];
+      document.getElementById('divisionBoxesLabel').textContent =
+        `${data.totalBlocks} Blocks divided into ${data.numBoxes} toy boxes`;
+
+      const container = document.getElementById('divisionBoxesContainer');
+      container.innerHTML = '';
+
+      for (let b = 0; b < data.numBoxes; b++) {
+        const box = document.createElement('div');
+        box.className = 'box-container';
+
+        const boxIcon = document.createElement('div');
+        boxIcon.style.fontSize = '1.8rem';
+        boxIcon.textContent = '📦';
+
+        const blocksRow = document.createElement('div');
+        blocksRow.className = 'box-blocks-row';
+        for (let i = 0; i < data.perBox; i++) {
+          const blk = document.createElement('span');
+          blk.className = 'block-mini';
+          blk.textContent = '🟦';
+          blocksRow.appendChild(blk);
+        }
+
+        box.appendChild(boxIcon);
+        box.appendChild(blocksRow);
+        container.appendChild(box);
+      }
+
+      currentSpeechText = `${data.totalBlocks} blocks divided into ${data.numBoxes} boxes. How many blocks per box?`;
+      document.getElementById('instructionText').textContent = `${data.totalBlocks} blocks ÷ ${data.numBoxes} boxes = ❓ each`;
+      speakPrompt(currentSpeechText);
+
+      renderChoiceButtons('choices-11', data.choices, data.perBox, () => {
+        advanceToNextRoundOrFinish();
+      });
+    }
+
+    /* ========================================================
+       INITIALIZATION ON LOAD
+       ======================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAllCardsUI();
+    });
+  </script>
+</body>
+</html>

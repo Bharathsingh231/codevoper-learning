@@ -1,0 +1,2976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shapes — Number World | Codevoper Learning</title>
+  <meta name="description" content="Master shape recognition, everyday object matching, and geometric construction in Codevoper Number World for Pre-Primary learners.">
+
+  <!-- Google Fonts Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --clr-primary: #8B5CF6;
+      --clr-primary-light: #C4B5FD;
+      --clr-primary-dark: #6D28D9;
+      --clr-secondary: #EC4899;
+      --clr-secondary-light: #F472B6;
+      --clr-accent: #F59E0B;
+      --clr-accent-light: #FCD34D;
+      --clr-success: #10B981;
+      --clr-success-light: #6EE7B7;
+      --clr-teal: #14B8A6;
+      --clr-blue: #3B82F6;
+      --clr-orange: #F97316;
+      --clr-red: #EF4444;
+
+      --clr-bg: #0F0A1F;
+      --clr-bg-alt: #1A1333;
+      --clr-surface: #221B38;
+      --clr-surface-light: #2D2549;
+      --clr-surface-hover: #362D52;
+      --clr-text: #F8FAFC;
+      --clr-text-muted: #94A3B8;
+      --clr-text-subtle: #64748B;
+      --clr-border: rgba(255, 255, 255, 0.08);
+
+      --grad-shapes: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+      --grad-primary: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+      --grad-accent: linear-gradient(135deg, #F59E0B 0%, #EC4899 100%);
+      --grad-success: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      --grad-gold: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+      --grad-card-1: linear-gradient(135deg, #3B0764 0%, #1E1B4B 100%);
+      --grad-card-2: linear-gradient(135deg, #064E3B 0%, #1E1B4B 100%);
+      --grad-card-3: linear-gradient(135deg, #1E1B4B 0%, #701A75 100%);
+
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-body: 'Outfit', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 35px rgba(139, 92, 246, 0.35);
+      --shadow-gold: 0 0 35px rgba(245, 158, 11, 0.3);
+
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* Ambient Glowing Orbs Background */
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.22;
+      animation: floatOrb 20s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: #8B5CF6;
+      top: -120px;
+      left: -120px;
+    }
+    .orb-2 {
+      width: 480px;
+      height: 480px;
+      background: #EC4899;
+      bottom: -60px;
+      right: -60px;
+      animation-delay: -7s;
+    }
+    .orb-3 {
+      width: 420px;
+      height: 420px;
+      background: #3B82F6;
+      top: 45%;
+      left: 50%;
+      opacity: 0.15;
+      animation-delay: -14s;
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 35px) scale(1.08); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========================================================
+       1. STICKY HEADER BAR
+       ======================================================== */
+    .header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 19, 51, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--clr-border);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.5rem;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* Left: Back & Home */
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-nav-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      height: 42px;
+      padding: 0 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--clr-text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-nav-action:hover {
+      background: rgba(139, 92, 246, 0.25);
+      border-color: rgba(196, 181, 253, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+      color: #FFFFFF;
+    }
+
+    .btn-nav-action .arrow {
+      font-size: 1.2rem;
+      line-height: 1;
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-nav-action:hover .arrow {
+      transform: translateX(-3px);
+    }
+
+    .btn-home-nav {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: var(--radius-full);
+      font-size: 1.15rem;
+    }
+
+    .btn-home-nav:hover {
+      transform: translateY(-2px) rotate(-6deg);
+    }
+
+    /* Center: Title & Subtitle */
+    .header-center {
+      text-align: center;
+      flex: 1;
+      padding: 0 0.5rem;
+    }
+
+    .header-title-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .header-icon {
+      font-size: 1.5rem;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    }
+
+    .header-title {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #FFFFFF 30%, #C4B5FD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .header-subtitle {
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      margin-top: 2px;
+    }
+
+    /* Right: Sound & Progress Box */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .sound-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text-muted);
+      font-size: 1.15rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .sound-toggle-btn:hover {
+      background: var(--clr-surface-light);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .progress-box {
+      background: var(--clr-surface);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 0.55rem 0.95rem;
+      min-width: 230px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      transition: var(--transition);
+    }
+
+    .progress-box:hover {
+      border-color: rgba(196, 181, 253, 0.35);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.2);
+    }
+
+    .progress-box-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-val-highlight {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--clr-accent-light);
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .stat-lbl-tiny {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--clr-text-muted);
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .header-prog-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header-prog-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--grad-shapes);
+      border-radius: var(--radius-full);
+      position: relative;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .header-prog-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      animation: barGleam 2.4s infinite;
+    }
+
+    @keyframes barGleam {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ========================================================
+       2. HERO BANNER & PATH INTRODUCTION
+       ======================================================= */
+    .hero-section {
+      padding: 2.5rem 0 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: var(--clr-primary-light);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title .gradient-text {
+      background: var(--grad-shapes);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--clr-text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ========================================================
+       3. ACTIVITY LIBRARY CARDS GRID
+       ======================================================== */
+    .library-section {
+      padding: 1.5rem 0 4rem;
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--clr-text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .activity-count-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-full);
+    }
+
+    .activity-count-badge .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--clr-success);
+      box-shadow: 0 0 10px var(--clr-success);
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    .module-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .module-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+
+    /* Highlighting Card 1 as "Up Next" */
+    .module-card.up-next-card {
+      border: 2px solid var(--clr-accent);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+    }
+    .module-card.up-next-card:hover {
+      border-color: var(--clr-accent-light);
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.35);
+    }
+
+    .card-top-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 5;
+      background: var(--grad-gold);
+      color: #1A0D00;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-number-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 5;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(15, 10, 31, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    /* CSS Art Header per Card */
+    .card-art-header {
+      height: 155px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .art-1 {
+      background: var(--grad-card-1);
+    }
+    .art-1 .shape-cluster {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .shape-token {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+      animation: floatShape 3s ease-in-out infinite alternate;
+    }
+    .shape-token:nth-child(1) { animation-delay: 0s; transform: rotate(-5deg); }
+    .shape-token:nth-child(2) { animation-delay: -1s; width: 62px; height: 62px; }
+    .shape-token:nth-child(3) { animation-delay: -2s; transform: rotate(8deg); }
+
+    @keyframes floatShape {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(6deg); }
+    }
+
+    .art-2 {
+      background: var(--grad-card-2);
+    }
+    .match-art-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .match-item-bubble {
+      font-size: 2.2rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatShape 3.2s ease-in-out infinite alternate;
+    }
+    .match-arrow-bubble {
+      color: var(--clr-accent-light);
+      font-size: 1.5rem;
+      font-weight: 900;
+      animation: pulseArt 2s infinite;
+    }
+    @keyframes pulseArt {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .art-3 {
+      background: var(--grad-card-3);
+    }
+    .build-art-blueprint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .blueprint-rocket {
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.5));
+      animation: rocketFloat 3s ease-in-out infinite alternate;
+    }
+    @keyframes rocketFloat {
+      0% { transform: translateY(4px) rotate(-3deg); }
+      100% { transform: translateY(-8px) rotate(3deg); }
+    }
+
+    /* Card Body */
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-meta-chips {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-level-chip {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--clr-primary-light);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .card-status-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status-not-played {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--clr-text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    .status-learning {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--clr-accent-light);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .status-mastered {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6EE7B7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.45rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--clr-text-muted);
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    /* Card Score & Progress */
+    .card-score-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.45rem;
+      font-size: 0.8rem;
+    }
+
+    .card-score-lbl {
+      color: var(--clr-text-muted);
+      font-weight: 600;
+    }
+
+    .card-score-val {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--clr-accent-light);
+    }
+
+    .card-progress-track {
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: 1.3rem;
+    }
+
+    .card-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--grad-shapes);
+      border-radius: var(--radius-full);
+      transition: width 0.6s ease;
+    }
+
+    /* Card Action Button */
+    .btn-card-play {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: var(--radius-md);
+      background: var(--grad-shapes);
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
+      cursor: pointer;
+    }
+
+    .btn-card-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.45);
+      filter: brightness(1.1);
+    }
+
+    .btn-card-play .play-arrow {
+      font-size: 1.2rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-card-play:hover .play-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ========================================================
+       4. FULLSCREEN INTERACTIVE MODAL OVERLAY
+       ======================================================== */
+    .game-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 6, 22, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .game-modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .game-modal-container {
+      background: var(--clr-surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      width: 100%;
+      max-width: 900px;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      position: relative;
+      animation: modalSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(30px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Modal Top Header */
+    .modal-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.6rem;
+      background: rgba(15, 10, 31, 0.75);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .modal-game-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .modal-game-emoji {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .modal-title-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-game-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+
+    .modal-game-step {
+      font-size: 0.84rem;
+      color: var(--clr-text-muted);
+      font-weight: 600;
+    }
+
+    .modal-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .modal-score-chip {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: var(--clr-accent-light);
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--clr-text);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-modal-close:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: rgba(239, 68, 68, 0.5);
+      color: #EF4444;
+      transform: scale(1.08);
+    }
+
+    /* Modal Progress Strip */
+    .modal-prog-strip {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .modal-prog-fill {
+      height: 100%;
+      width: 12.5%;
+      background: var(--grad-shapes);
+      transition: width 0.4s ease;
+    }
+
+    /* Modal Main Body Viewport */
+    .modal-body-viewport {
+      padding: 2rem 2.2rem;
+      overflow-y: auto;
+      max-height: calc(94vh - 120px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Floating Feedback Toast */
+    .feedback-toast {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-25px);
+      padding: 8px 24px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 50;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+    .feedback-toast.show-correct {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      background: rgba(16, 185, 129, 0.95);
+      color: #FFFFFF;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+    }
+    .feedback-toast.show-wrong {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      background: rgba(239, 68, 68, 0.95);
+      color: #FFFFFF;
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.45);
+    }
+
+    /* ========================================================
+       5. GAME 1: SHAPE RECOGNITION
+       ======================================================== */
+    .game-view {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .game-view.active {
+      display: flex;
+    }
+
+    .prompt-banner {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .prompt-label {
+      font-size: 1.05rem;
+      color: var(--clr-text-muted);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .prompt-shape-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(139, 92, 246, 0.15);
+      border: 2px dashed rgba(139, 92, 246, 0.4);
+      padding: 0.6rem 1.6rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.8rem;
+    }
+
+    .prompt-shape-name {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+    }
+
+    .prompt-audio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--clr-primary-light);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .prompt-audio-btn:hover {
+      background: rgba(139, 92, 246, 0.25);
+      color: #FFFFFF;
+      transform: scale(1.04);
+    }
+
+    /* 4 Colorful Shape Buttons Grid */
+    .shapes-choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    .shape-choice-btn {
+      background: var(--clr-surface-light);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      min-height: 145px;
+      position: relative;
+      user-select: none;
+    }
+
+    .shape-choice-btn:hover {
+      background: var(--clr-surface-hover);
+      border-color: rgba(196, 181, 253, 0.4);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .shape-choice-svg-wrap {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease;
+    }
+
+    .shape-choice-btn:hover .shape-choice-svg-wrap {
+      transform: scale(1.1);
+    }
+
+    .shape-choice-label {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--clr-text);
+      letter-spacing: 0.3px;
+    }
+
+    .shape-choice-btn.correct-pulse {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: var(--clr-success) !important;
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.5) !important;
+      transform: scale(1.06) !important;
+    }
+
+    .shape-choice-btn.wrong-shake {
+      animation: gentleShake 0.4s ease;
+      background: rgba(239, 68, 68, 0.18) !important;
+      border-color: var(--clr-red) !important;
+    }
+
+    @keyframes gentleShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+
+    /* ========================================================
+       6. GAME 2: SHAPE MATCHING (Everyday Items)
+       ======================================================== */
+    .g2-item-card {
+      background: var(--clr-surface-light);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem 2.5rem;
+      text-align: center;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: floatShape 3.5s ease-in-out infinite alternate;
+    }
+
+    .g2-item-emoji {
+      font-size: 4.8rem;
+      line-height: 1.1;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+      margin-bottom: 0.3rem;
+    }
+
+    .g2-item-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .g2-item-hint {
+      font-size: 0.9rem;
+      color: var(--clr-accent-light);
+      font-weight: 600;
+    }
+
+    /* ========================================================
+       7. GAME 3: SHAPE CONSTRUCTION (Blueprint Building)
+       ======================================================== */
+    .g3-container {
+      width: 100%;
+      max-width: 660px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+    }
+
+    .g3-header-text {
+      text-align: center;
+    }
+
+    .g3-object-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .g3-object-desc {
+      font-size: 0.92rem;
+      color: var(--clr-text-muted);
+    }
+
+    /* Blueprint Canvas Card */
+    .g3-blueprint-card {
+      width: 100%;
+      background: #131A33;
+      border: 3px solid rgba(59, 130, 246, 0.4);
+      border-radius: var(--radius-xl);
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5), 0 12px 35px rgba(0, 0, 0, 0.4);
+      padding: 1.8rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      background-image: 
+        radial-gradient(rgba(59, 130, 246, 0.2) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(59, 130, 246, 0.1) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
+
+    .g3-blueprint-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    /* Blueprint Target Slots */
+    .blueprint-slot {
+      border: 2px dashed rgba(196, 181, 253, 0.6);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .blueprint-slot.slot-empty {
+      animation: slotPulse 2.2s infinite alternate;
+    }
+
+    @keyframes slotPulse {
+      0% { border-color: rgba(196, 181, 253, 0.4); background: rgba(255, 255, 255, 0.03); }
+      100% { border-color: var(--clr-accent-light); background: rgba(245, 158, 11, 0.08); }
+    }
+
+    .blueprint-slot.slot-filled {
+      border: 2px solid transparent;
+      animation: snapPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 25px rgba(236, 72, 153, 0.4);
+    }
+
+    @keyframes snapPop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Pieces Workbench Tray */
+    .g3-tray-wrapper {
+      width: 100%;
+      background: var(--clr-surface-light);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .g3-tray-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--clr-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .g3-pieces-tray {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .g3-piece-btn {
+      background: var(--clr-surface);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      user-select: none;
+      min-height: 60px;
+    }
+
+    .g3-piece-btn:hover {
+      background: var(--clr-surface-hover);
+      border-color: var(--clr-primary-light);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .g3-piece-btn.used {
+      opacity: 0.25;
+      pointer-events: none;
+      transform: scale(0.9);
+      filter: grayscale(0.8);
+    }
+
+    .g3-piece-mini-svg {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Completed Blueprint Celebration Sparkle */
+    .blueprint-finished-banner {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 185, 129, 0.92);
+      border-radius: var(--radius-xl);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      animation: modalSlideUp 0.3s ease;
+      z-index: 10;
+    }
+
+    /* ========================================================
+       8. GAME COMPLETION CELEBRATION CARD
+       ======================================================== */
+    .celebration-view {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .celebration-view.open {
+      display: flex;
+    }
+
+    .game-complete-card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--clr-surface-light);
+      border: 2px solid rgba(245, 158, 11, 0.4);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(245, 158, 11, 0.25);
+      position: relative;
+      animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .complete-trophy-badge {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+      animation: trophyWiggle 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 8px 25px rgba(245, 158, 11, 0.5));
+    }
+
+    @keyframes trophyWiggle {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(-6deg); }
+      75% { transform: translateY(-4px) rotate(6deg); }
+    }
+
+    .complete-headline {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+
+    .complete-submessage {
+      font-size: 1rem;
+      color: var(--clr-text-muted);
+      margin-bottom: 1.6rem;
+      line-height: 1.5;
+    }
+
+    .complete-score-box {
+      background: rgba(15, 10, 31, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .complete-score-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--clr-text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .complete-score-value {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--clr-accent-light);
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .complete-mastery-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #6EE7B7;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-complete-next {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.95rem 1.6rem;
+      border-radius: var(--radius-md);
+      background: var(--grad-shapes);
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-complete-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.5);
+      filter: brightness(1.1);
+    }
+
+    .complete-bottom-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+
+    .btn-complete-sub {
+      flex: 1;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--clr-text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .btn-complete-sub:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2000;
+    }
+
+    /* ========================================================
+       9. FOOTER
+       ======================================================== */
+    .site-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--clr-border);
+      background: rgba(15, 10, 31, 0.9);
+      padding: 1.8rem 0;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--clr-text-subtle);
+    }
+
+    /* ========================================================
+       10. RESPONSIVE BREAKPOINTS
+       ======================================================== */
+    @media (max-width: 1024px) {
+      .module-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .module-card:last-child {
+        grid-column: span 2;
+        max-width: 580px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0.7rem 1rem;
+        flex-wrap: wrap;
+      }
+      .header-center {
+        order: 3;
+        width: 100%;
+        margin-top: 0.4rem;
+      }
+      .header-title {
+        font-size: 1.35rem;
+      }
+      .progress-box {
+        min-width: 170px;
+        padding: 0.45rem 0.75rem;
+      }
+      .module-grid {
+        grid-template-columns: 1fr;
+      }
+      .module-card:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .shapes-choice-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .shape-choice-btn {
+        padding: 1rem 0.6rem;
+        min-height: 120px;
+      }
+      .shape-choice-svg-wrap {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .header-right .stat-lbl-tiny {
+        display: none;
+      }
+      .shapes-choice-grid {
+        grid-template-columns: 1fr;
+      }
+      .prompt-shape-name {
+        font-size: 2rem;
+      }
+      .complete-bottom-actions {
+        flex-direction: column;
+      }
+      .btn-complete-sub {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glowing Orbs Background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Confetti Canvas for Victory Celebrations -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ========================================================
+       STICKY HEADER BAR
+       ======================================================== -->
+  <header class="header-bar">
+    <div class="header-container">
+      <!-- Left: Back to Number World & Home -->
+      <div class="header-left">
+        <a href="number-world.html" class="btn-nav-action" title="Back to Number World">
+          <span class="arrow">←</span>
+          <span>Number World</span>
+        </a>
+        <a href="dashboard-preprimary.html" class="btn-nav-action btn-home-nav" title="Home Dashboard">
+          <span>🏠</span>
+        </a>
+      </div>
+
+      <!-- Center: Shapes Title & Path Subtitle -->
+      <div class="header-center">
+        <div class="header-title-wrap">
+          <span class="header-icon">🔷</span>
+          <h1 class="header-title">Shapes</h1>
+        </div>
+        <p class="header-subtitle">Shape Recognition, Matching & Construction</p>
+      </div>
+
+      <!-- Right: Sound Toggle & Dynamic Progress Box -->
+      <div class="header-right">
+        <button id="soundToggleBtn" class="sound-toggle-btn" title="Toggle Sound (Audio & Speech)" aria-label="Toggle Sound">
+          <span id="soundIcon">🔊</span>
+        </button>
+
+        <div class="progress-box">
+          <div class="progress-box-stats">
+            <div class="stat-item">
+              <span class="stat-val-highlight" id="headerScoreVal">0%</span>
+              <span class="stat-lbl-tiny">Shapes Score</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-val-highlight" id="headerModulesVal">0/3</span>
+              <span class="stat-lbl-tiny">Modules Tried</span>
+            </div>
+          </div>
+          <div class="header-prog-bar-bg">
+            <div class="header-prog-bar-fill" id="headerProgFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ========================================================
+         HERO INTRO SECTION
+         ======================================================== -->
+    <section class="hero-section">
+      <div class="hero-badge-pill">
+        <span>⭐ Pre-Primary Math Mastery</span>
+      </div>
+      <h2 class="hero-title">Welcome to <span class="gradient-text">Shape Kingdom!</span> 🔷</h2>
+      <p class="hero-description">
+        Explore circles, squares, triangles, and magical stars! Match shapes to real-world objects like pizza slices and clocks, and assemble colorful geometric blocks to build rockets and houses!
+      </p>
+    </section>
+
+    <!-- ========================================================
+         ACTIVITY LIBRARY SECTION (3 Cards)
+         ======================================================== -->
+    <section class="library-section">
+      <div class="section-header-row">
+        <div>
+          <h3 class="section-title">
+            <span>🎮</span>
+            <span>Interactive Shape Activities</span>
+          </h3>
+          <p class="section-subtitle">Choose a fun module below. Master all 3 activities to become a Shape Grandmaster!</p>
+        </div>
+        <div class="activity-count-badge">
+          <span class="live-dot"></span>
+          <span>3 Learning Modules</span>
+        </div>
+      </div>
+
+      <div class="module-grid">
+        <!-- CARD 1: Shape Recognition -->
+        <article class="module-card up-next-card" id="card-module-1">
+          <span class="card-top-tag">⭐ Up Next</span>
+          <span class="card-number-badge">1</span>
+          
+          <div class="card-art-header art-1">
+            <div class="shape-cluster">
+              <div class="shape-token">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="art-tri" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#F59E0B" />
+                      <stop offset="100%" stop-color="#EF4444" />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="50,12 88,86 12,86" fill="url(#art-tri)" rx="8" />
+                </svg>
+              </div>
+              <div class="shape-token">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="art-circ" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#3B82F6" />
+                      <stop offset="100%" stop-color="#8B5CF6" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="50" cy="50" r="42" fill="url(#art-circ)" />
+                </svg>
+              </div>
+              <div class="shape-token">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="art-sq" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#10B981" />
+                      <stop offset="100%" stop-color="#14B8A6" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="14" y="14" width="72" height="72" rx="12" fill="url(#art-sq)" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-meta-chips">
+              <span class="card-level-chip">✨ Up next</span>
+              <span class="card-status-badge status-not-played" id="card1Status">Not played yet</span>
+            </div>
+            <h4 class="card-title">Shape Recognition</h4>
+            <p class="card-desc">Discover circles, squares, triangles, rectangles, stars and hearts!</p>
+            
+            <div class="card-score-row">
+              <span class="card-score-lbl">Best Score</span>
+              <span class="card-score-val" id="card1ScoreVal">0%</span>
+            </div>
+            <div class="card-progress-track">
+              <div class="card-progress-fill" id="card1ProgFill" style="width: 0%;"></div>
+            </div>
+
+            <button class="btn-card-play" onclick="openGame(1)">
+              <span>Play</span>
+              <span class="play-arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 2: Shape Matching -->
+        <article class="module-card" id="card-module-2">
+          <span class="card-number-badge">2</span>
+
+          <div class="card-art-header art-2">
+            <div class="match-art-row">
+              <div class="match-item-bubble" title="Pizza slice">🍕</div>
+              <span class="match-arrow-bubble">➔</span>
+              <div class="shape-token" style="width: 58px; height: 58px;">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <polygon points="50,14 86,84 14,84" fill="#F59E0B" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-meta-chips">
+              <span class="card-level-chip">Matching</span>
+              <span class="card-status-badge status-not-played" id="card2Status">Not played yet</span>
+            </div>
+            <h4 class="card-title">Shape Matching</h4>
+            <p class="card-desc">Match everyday objects like pizza slices, clocks, and doors to their shapes!</p>
+
+            <div class="card-score-row">
+              <span class="card-score-lbl">Best Score</span>
+              <span class="card-score-val" id="card2ScoreVal">0%</span>
+            </div>
+            <div class="card-progress-track">
+              <div class="card-progress-fill" id="card2ProgFill" style="width: 0%;"></div>
+            </div>
+
+            <button class="btn-card-play" onclick="openGame(2)">
+              <span>Play</span>
+              <span class="play-arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 3: Shape Construction -->
+        <article class="module-card" id="card-module-3">
+          <span class="card-number-badge">3</span>
+
+          <div class="card-art-header art-3">
+            <div class="build-art-blueprint">
+              <div class="blueprint-rocket">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <!-- Nosecone -->
+                  <polygon points="50,8 70,36 30,36" fill="#EF4444" />
+                  <!-- Body -->
+                  <rect x="34" y="36" width="32" height="40" fill="#3B82F6" rx="4" />
+                  <!-- Left Fin -->
+                  <polygon points="34,60 18,76 34,76" fill="#F59E0B" />
+                  <!-- Right Fin -->
+                  <polygon points="66,60 82,76 66,76" fill="#F59E0B" />
+                  <!-- Window -->
+                  <circle cx="50" cy="52" r="8" fill="#FFFFFF" />
+                  <circle cx="50" cy="52" r="5" fill="#0EA5E9" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="card-meta-chips">
+              <span class="card-level-chip">Building</span>
+              <span class="card-status-badge status-not-played" id="card3Status">Not played yet</span>
+            </div>
+            <h4 class="card-title">Shape Construction</h4>
+            <p class="card-desc">Assemble geometric shapes to build houses, trucks, and rockets!</p>
+
+            <div class="card-score-row">
+              <span class="card-score-lbl">Best Score</span>
+              <span class="card-score-val" id="card3ScoreVal">0%</span>
+            </div>
+            <div class="card-progress-track">
+              <div class="card-progress-fill" id="card3ProgFill" style="width: 0%;"></div>
+            </div>
+
+            <button class="btn-card-play" onclick="openGame(3)">
+              <span>Play</span>
+              <span class="play-arrow">→</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================
+       FULLSCREEN INTERACTIVE MODAL FOR GAMES
+       ======================================================== -->
+  <div class="game-modal-overlay" id="gameModal" role="dialog" aria-modal="true">
+    <div class="game-modal-container">
+      <!-- Modal Top Navigation Bar -->
+      <div class="modal-top-bar">
+        <div class="modal-game-info">
+          <span class="modal-game-emoji" id="modalGameIcon">🔷</span>
+          <div class="modal-title-box">
+            <h3 class="modal-game-title" id="modalGameTitle">Shape Recognition</h3>
+            <span class="modal-game-step" id="modalGameStep">Round 1 of 8</span>
+          </div>
+        </div>
+
+        <div class="modal-top-actions">
+          <div class="modal-score-chip" id="modalScoreChip">
+            <span>⭐</span>
+            <span id="modalCurrentScore">0</span>
+          </div>
+          <button class="btn-modal-close" onclick="closeGameModal()" title="Close Game (Esc)" aria-label="Close">✕</button>
+        </div>
+      </div>
+
+      <!-- Modal Progress Strip -->
+      <div class="modal-prog-strip">
+        <div class="modal-prog-fill" id="modalProgFill" style="width: 12.5%;"></div>
+      </div>
+
+      <!-- Modal Body Viewport -->
+      <div class="modal-body-viewport">
+        <!-- Floating Feedback Banner -->
+        <div class="feedback-toast" id="feedbackToast">Awesome! Correct! 🌟</div>
+
+        <!-- ==============================================
+             GAME 1 VIEW: SHAPE RECOGNITION (8 Rounds)
+             ============================================== -->
+        <div class="game-view" id="gameView1">
+          <div class="prompt-banner">
+            <div class="prompt-label">Tap the matching shape:</div>
+            <div class="prompt-shape-box">
+              <span class="prompt-shape-name" id="g1PromptName">Triangle ▲</span>
+            </div>
+            <br>
+            <button class="prompt-audio-btn" onclick="speakG1Prompt()" title="Hear Shape Name Again">
+              <span>🔊</span>
+              <span>Say Shape Again</span>
+            </button>
+          </div>
+
+          <div class="shapes-choice-grid" id="g1ChoicesGrid">
+            <!-- 4 shape choice buttons dynamically rendered -->
+          </div>
+        </div>
+
+        <!-- ==============================================
+             GAME 2 VIEW: SHAPE MATCHING (8 Rounds)
+             ============================================== -->
+        <div class="game-view" id="gameView2">
+          <div class="prompt-banner" style="margin-bottom: 1.2rem;">
+            <div class="prompt-label">What geometric shape does this item look like?</div>
+          </div>
+
+          <div class="g2-item-card" id="g2ItemCard">
+            <div class="g2-item-emoji" id="g2ItemEmoji">🍕</div>
+            <div class="g2-item-name" id="g2ItemName">Pizza Slice</div>
+            <div class="g2-item-hint" id="g2ItemHint">Look closely at the 3 sides!</div>
+          </div>
+
+          <button class="prompt-audio-btn" style="margin-bottom: 1.6rem;" onclick="speakG2Prompt()">
+            <span>🔊</span>
+            <span>Listen to Object</span>
+          </button>
+
+          <div class="shapes-choice-grid" id="g2ChoicesGrid">
+            <!-- 4 shape choice buttons dynamically rendered -->
+          </div>
+        </div>
+
+        <!-- ==============================================
+             GAME 3 VIEW: SHAPE CONSTRUCTION (6 Rounds)
+             ============================================== -->
+        <div class="game-view" id="gameView3">
+          <div class="g3-container">
+            <div class="g3-header-text">
+              <h4 class="g3-object-title" id="g3ObjectTitle">🏠 Cozy House</h4>
+              <p class="g3-object-desc" id="g3ObjectDesc">Tap the correct geometric pieces below to assemble the blueprint!</p>
+            </div>
+
+            <!-- Blueprint Card -->
+            <div class="g3-blueprint-card" id="g3BlueprintCard">
+              <div class="g3-blueprint-stage" id="g3BlueprintStage">
+                <!-- Blueprint target outline slots dynamically loaded -->
+              </div>
+            </div>
+
+            <!-- Pieces Tray -->
+            <div class="g3-tray-wrapper">
+              <div class="g3-tray-label">
+                <span>🧩</span>
+                <span>Shape Pieces Tray (Tap to Place)</span>
+              </div>
+              <div class="g3-pieces-tray" id="g3PiecesTray">
+                <!-- Pieces dynamically rendered -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+             CELEBRATION FINISH SCREEN
+             ============================================== -->
+        <div class="celebration-view" id="celebrationView">
+          <div class="game-complete-card">
+            <div class="complete-trophy-badge" id="celebTrophy">🏆</div>
+            <h2 class="complete-headline" id="celebTitle">Terrific Building! 🌟</h2>
+            <p class="complete-submessage" id="celebMessage">You solved all rounds with outstanding accuracy!</p>
+
+            <div class="complete-score-box">
+              <div class="complete-score-label">YOUR SCORE</div>
+              <div class="complete-score-value" id="celebScoreVal">8/8</div>
+              <div class="complete-mastery-tag" id="celebMasteryTag">
+                <span id="celebStars">⭐⭐⭐</span>
+                <span id="celebMasteryText">Master level</span>
+              </div>
+            </div>
+
+            <button class="btn-complete-next" id="btnCelebNext" onclick="handleCelebNext()">
+              <span id="celebNextBtnText">Next: Shape Matching</span>
+              <span>→</span>
+            </button>
+
+            <div class="complete-bottom-actions">
+              <button class="btn-complete-sub" onclick="replayCurrentGame()">Play Again</button>
+              <button class="btn-complete-sub" onclick="closeGameModal()">Back</button>
+              <a href="dashboard-preprimary.html" class="btn-complete-sub">Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Codevoper Learning. Made with ❤️</p>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       EMBEDDED JAVASCRIPT: AUDIO, SPEECH & GAME ENGINES
+       ======================================================== -->
+  <script>
+    /* ========================================================
+       1. WEB AUDIO API SYNTHESIZER & SPEECH SYNTHESIS ENGINE
+       ======================================================== */
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type, duration, startTime = 0, gainVal = 0.18) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime + startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + startTime);
+        osc.stop(ctx.currentTime + startTime + duration);
+      } catch (e) {
+        console.warn('Audio tone error', e);
+      }
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      if (type === 'correct') {
+        // Bright cheerful arpeggio chime: C5 -> E5 -> G5 -> C6
+        playTone(523.25, 'sine', 0.16, 0);
+        playTone(659.25, 'sine', 0.16, 0.07);
+        playTone(783.99, 'sine', 0.20, 0.14);
+        playTone(1046.50, 'triangle', 0.32, 0.21);
+      } else if (type === 'wrong') {
+        // Soft kid-friendly boing
+        playTone(240, 'triangle', 0.2, 0);
+        playTone(180, 'sine', 0.3, 0.1);
+      } else if (type === 'pop') {
+        // Crisp bubble pop
+        playTone(850, 'sine', 0.08, 0, 0.25);
+      } else if (type === 'snap') {
+        // Snappy click for construction
+        playTone(720, 'sine', 0.07, 0, 0.2);
+        playTone(960, 'sine', 0.12, 0.04, 0.22);
+      } else if (type === 'win') {
+        // Joyful victory fanfare
+        const fanfare = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        fanfare.forEach((freq, idx) => {
+          playTone(freq, 'triangle', 0.35, idx * 0.11, 0.22);
+        });
+      } else if (type === 'celebrate') {
+        // Extra sparkling celebration chord
+        playTone(523.25, 'sine', 0.3, 0);
+        playTone(659.25, 'sine', 0.3, 0.06);
+        playTone(783.99, 'sine', 0.3, 0.12);
+        playTone(1046.50, 'sine', 0.45, 0.18);
+      }
+    }
+
+    function speakText(text) {
+      if (!soundEnabled) return;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.88;
+        utterance.pitch = 1.15;
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Nav Sound Toggle
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        soundIcon.textContent = '🔊';
+        playSound('pop');
+      } else {
+        soundIcon.textContent = '🔇';
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      }
+    });
+
+    /* ========================================================
+       2. CONFETTI CANVAS ANIMATION
+       ======================================================== */
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimId = null;
+
+    function resizeConfetti() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfetti);
+    resizeConfetti();
+
+    function triggerConfetti(duration = 2800) {
+      confettiParticles = [];
+      const colors = ['#8B5CF6', '#EC4899', '#3B82F6', '#F59E0B', '#10B981', '#FCD34D', '#14B8A6'];
+      for (let i = 0; i < 90; i++) {
+        confettiParticles.push({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height * 0.45,
+          w: Math.random() * 10 + 6,
+          h: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 6,
+          vy: Math.random() * 4 + 3,
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 10,
+          shape: Math.random() > 0.4 ? 'rect' : 'circle'
+        });
+      }
+      const startTime = performance.now();
+
+      function animateConfetti(time) {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        confettiParticles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vRot;
+          confettiCtx.save();
+          confettiCtx.translate(p.x, p.y);
+          confettiCtx.rotate((p.rot * Math.PI) / 180);
+          confettiCtx.fillStyle = p.color;
+          if (p.shape === 'rect') {
+            confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          } else {
+            confettiCtx.beginPath();
+            confettiCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+            confettiCtx.fill();
+          }
+          confettiCtx.restore();
+        });
+
+        if (time - startTime < duration) {
+          confettiAnimId = requestAnimationFrame(animateConfetti);
+        } else {
+          confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+          cancelAnimationFrame(confettiAnimId);
+        }
+      }
+      cancelAnimationFrame(confettiAnimId);
+      confettiAnimId = requestAnimationFrame(animateConfetti);
+    }
+
+    /* ========================================================
+       3. SHAPES METADATA & REUSABLE SVG GENERATOR
+       ======================================================== */
+    const SHAPE_DATA = {
+      circle: {
+        name: 'Circle',
+        symbol: '🔴',
+        color: '#EC4899',
+        grad: ['#EC4899', '#F43F5E'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-circ" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F472B6" />
+                <stop offset="100%" stop-color="#EC4899" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="42" fill="url(#g-circ)" />
+          </svg>`
+      },
+      square: {
+        name: 'Square',
+        symbol: '🟦',
+        color: '#3B82F6',
+        grad: ['#60A5FA', '#2563EB'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-sq" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#60A5FA" />
+                <stop offset="100%" stop-color="#2563EB" />
+              </linearGradient>
+            </defs>
+            <rect x="14" y="14" width="72" height="72" rx="12" fill="url(#g-sq)" />
+          </svg>`
+      },
+      triangle: {
+        name: 'Triangle',
+        symbol: '🔺',
+        color: '#F59E0B',
+        grad: ['#FCD34D', '#D97706'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-tri" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FCD34D" />
+                <stop offset="100%" stop-color="#F59E0B" />
+              </linearGradient>
+            </defs>
+            <polygon points="50,12 88,86 12,86" fill="url(#g-tri)" />
+          </svg>`
+      },
+      rectangle: {
+        name: 'Rectangle',
+        symbol: '🟩',
+        color: '#10B981',
+        grad: ['#34D399', '#059669'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-rect" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#34D399" />
+                <stop offset="100%" stop-color="#10B981" />
+              </linearGradient>
+            </defs>
+            <rect x="8" y="24" width="84" height="52" rx="10" fill="url(#g-rect)" />
+          </svg>`
+      },
+      star: {
+        name: 'Star',
+        symbol: '⭐',
+        color: '#EAB308',
+        grad: ['#FDE047', '#CA8A04'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-star" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FEF08A" />
+                <stop offset="100%" stop-color="#EAB308" />
+              </linearGradient>
+            </defs>
+            <polygon points="50,6 63,35 95,38 71,59 78,92 50,74 22,92 29,59 5,38 37,35" fill="url(#g-star)" />
+          </svg>`
+      },
+      diamond: {
+        name: 'Diamond',
+        symbol: '🔷',
+        color: '#8B5CF6',
+        grad: ['#A78BFA', '#6D28D9'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-dia" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#C4B5FD" />
+                <stop offset="100%" stop-color="#8B5CF6" />
+              </linearGradient>
+            </defs>
+            <polygon points="50,10 90,50 50,90 10,50" fill="url(#g-dia)" />
+          </svg>`
+      },
+      heart: {
+        name: 'Heart',
+        symbol: '💖',
+        color: '#F43F5E',
+        grad: ['#FB7185', '#E11D48'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-heart" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FDA4AF" />
+                <stop offset="100%" stop-color="#F43F5E" />
+              </linearGradient>
+            </defs>
+            <path d="M50,86 C50,86 14,60 14,34 C14,19 26,14 36,14 C44,14 50,20 50,23 C50,20 56,14 64,14 C74,14 86,19 86,34 C86,60 50,86 50,86 Z" fill="url(#g-heart)" />
+          </svg>`
+      },
+      oval: {
+        name: 'Oval',
+        symbol: '🥚',
+        color: '#14B8A6',
+        grad: ['#2DD4BF', '#0F766E'],
+        renderSvg: (size = 64) => `
+          <svg viewBox="0 0 100 100" width="${size}" height="${size}">
+            <defs>
+              <linearGradient id="g-oval" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5EEAD4" />
+                <stop offset="100%" stop-color="#14B8A6" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="50" cy="50" rx="44" ry="30" fill="url(#g-oval)" />
+          </svg>`
+      }
+    };
+
+    /* ========================================================
+       4. LOCALSTORAGE STATE MANAGEMENT
+       ======================================================== */
+    function updateProgressUI() {
+      const g1Best = parseInt(localStorage.getItem('number_shapes_g1_best') || '0', 10);
+      const g2Best = parseInt(localStorage.getItem('number_shapes_g2_best') || '0', 10);
+      const g3Best = parseInt(localStorage.getItem('number_shapes_g3_best') || '0', 10);
+
+      const g1Played = parseInt(localStorage.getItem('number_shapes_g1_played') || '0', 10);
+      const g2Played = parseInt(localStorage.getItem('number_shapes_g2_played') || '0', 10);
+      const g3Played = parseInt(localStorage.getItem('number_shapes_g3_played') || '0', 10);
+
+      // Card 1
+      const c1ScoreVal = document.getElementById('card1ScoreVal');
+      const c1Prog = document.getElementById('card1ProgFill');
+      const c1Status = document.getElementById('card1Status');
+      c1ScoreVal.textContent = `${g1Best}%`;
+      c1Prog.style.width = `${g1Best}%`;
+      updateStatusBadge(c1Status, g1Played, g1Best);
+
+      // Card 2
+      const c2ScoreVal = document.getElementById('card2ScoreVal');
+      const c2Prog = document.getElementById('card2ProgFill');
+      const c2Status = document.getElementById('card2Status');
+      c2ScoreVal.textContent = `${g2Best}%`;
+      c2Prog.style.width = `${g2Best}%`;
+      updateStatusBadge(c2Status, g2Played, g2Best);
+
+      // Card 3
+      const c3ScoreVal = document.getElementById('card3ScoreVal');
+      const c3Prog = document.getElementById('card3ProgFill');
+      const c3Status = document.getElementById('card3Status');
+      c3ScoreVal.textContent = `${g3Best}%`;
+      c3Prog.style.width = `${g3Best}%`;
+      updateStatusBadge(c3Status, g3Played, g3Best);
+
+      // Overall Progress Box Calculation
+      let modulesTried = 0;
+      if (g1Played > 0) modulesTried++;
+      if (g2Played > 0) modulesTried++;
+      if (g3Played > 0) modulesTried++;
+
+      const avgScore = Math.round((g1Best + g2Best + g3Best) / 3);
+
+      // Sync overall score for number-world.html
+      localStorage.setItem('number_shapes_score', avgScore);
+
+      document.getElementById('headerScoreVal').textContent = `${avgScore}%`;
+      document.getElementById('headerModulesVal').textContent = `${modulesTried}/3`;
+      document.getElementById('headerProgFill').style.width = `${avgScore}%`;
+    }
+
+    function updateStatusBadge(badgeElem, played, score) {
+      if (played === 0) {
+        badgeElem.className = 'card-status-badge status-not-played';
+        badgeElem.textContent = 'Not played yet';
+      } else if (score >= 80) {
+        badgeElem.className = 'card-status-badge status-mastered';
+        badgeElem.textContent = 'Mastered ⭐';
+      } else {
+        badgeElem.className = 'card-status-badge status-learning';
+        badgeElem.textContent = 'Learning 🚀';
+      }
+    }
+
+    /* ========================================================
+       5. MODAL & FEEDBACK TOAST CONTROLLER
+       ======================================================== */
+    const gameModal = document.getElementById('gameModal');
+    let currentGameId = 1;
+    let feedbackTimer = null;
+
+    function openGame(gameId) {
+      currentGameId = gameId;
+      document.querySelectorAll('.game-view').forEach(v => v.classList.remove('active'));
+      document.getElementById('celebrationView').classList.remove('open');
+      gameModal.classList.add('open');
+      playSound('pop');
+
+      const modalIcon = document.getElementById('modalGameIcon');
+      const modalTitle = document.getElementById('modalGameTitle');
+
+      if (gameId === 1) {
+        modalIcon.textContent = '🔷';
+        modalTitle.textContent = 'Shape Recognition';
+        document.getElementById('gameView1').classList.add('active');
+        initGame1();
+      } else if (gameId === 2) {
+        modalIcon.textContent = '🍕';
+        modalTitle.textContent = 'Shape Matching';
+        document.getElementById('gameView2').classList.add('active');
+        initGame2();
+      } else if (gameId === 3) {
+        modalIcon.textContent = '🏗️';
+        modalTitle.textContent = 'Shape Construction';
+        document.getElementById('gameView3').classList.add('active');
+        initGame3();
+      }
+    }
+
+    function closeGameModal() {
+      gameModal.classList.remove('open');
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      updateProgressUI();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && gameModal.classList.contains('open')) {
+        closeGameModal();
+      }
+    });
+
+    function showFeedback(isCorrect, message = null) {
+      const toast = document.getElementById('feedbackToast');
+      clearTimeout(feedbackTimer);
+      toast.className = 'feedback-toast';
+      void toast.offsetWidth;
+
+      if (isCorrect) {
+        toast.textContent = message || 'Awesome! Correct! 🌟';
+        toast.classList.add('show-correct');
+      } else {
+        toast.textContent = message || 'Try another one! 💪';
+        toast.classList.add('show-wrong');
+      }
+
+      feedbackTimer = setTimeout(() => {
+        toast.className = 'feedback-toast';
+      }, 1200);
+    }
+
+    /* ========================================================
+       6. GAME 1: SHAPE RECOGNITION (8 Rounds)
+       ======================================================== */
+    const G1_ROUNDS = [
+      { target: 'triangle', options: ['triangle', 'circle', 'square', 'rectangle'] },
+      { target: 'circle', options: ['square', 'circle', 'diamond', 'triangle'] },
+      { target: 'square', options: ['rectangle', 'triangle', 'square', 'star'] },
+      { target: 'rectangle', options: ['square', 'rectangle', 'oval', 'circle'] },
+      { target: 'star', options: ['heart', 'triangle', 'star', 'diamond'] },
+      { target: 'diamond', options: ['diamond', 'square', 'circle', 'triangle'] },
+      { target: 'heart', options: ['star', 'oval', 'circle', 'heart'] },
+      { target: 'oval', options: ['circle', 'oval', 'rectangle', 'square'] }
+    ];
+
+    let g1CurrentRound = 0;
+    let g1Score = 0;
+    let g1AnswerLocked = false;
+
+    function initGame1() {
+      g1CurrentRound = 0;
+      g1Score = 0;
+      g1AnswerLocked = false;
+      document.getElementById('modalCurrentScore').textContent = '0';
+      loadG1Round();
+    }
+
+    function loadG1Round() {
+      g1AnswerLocked = false;
+      const roundData = G1_ROUNDS[g1CurrentRound];
+      const targetShape = SHAPE_DATA[roundData.target];
+
+      document.getElementById('modalGameStep').textContent = `Round ${g1CurrentRound + 1} of ${G1_ROUNDS.length}`;
+      document.getElementById('modalProgFill').style.width = `${((g1CurrentRound + 1) / G1_ROUNDS.length) * 100}%`;
+      document.getElementById('g1PromptName').textContent = `${targetShape.name} ${targetShape.symbol}`;
+
+      // Voice prompt
+      speakText(`Can you find the ${targetShape.name}?`);
+
+      // Render 4 Shape choice buttons
+      const grid = document.getElementById('g1ChoicesGrid');
+      grid.innerHTML = '';
+
+      // Shuffle options for engagement
+      const shuffled = [...roundData.options].sort(() => Math.random() - 0.5);
+
+      shuffled.forEach(key => {
+        const item = SHAPE_DATA[key];
+        const btn = document.createElement('button');
+        btn.className = 'shape-choice-btn';
+        btn.setAttribute('aria-label', item.name);
+        btn.innerHTML = `
+          <div class="shape-choice-svg-wrap">
+            ${item.renderSvg(72)}
+          </div>
+          <span class="shape-choice-label">${item.name}</span>
+        `;
+
+        btn.addEventListener('click', () => handleG1Choice(key, btn));
+        grid.appendChild(btn);
+      });
+    }
+
+    function speakG1Prompt() {
+      const targetKey = G1_ROUNDS[g1CurrentRound].target;
+      const targetShape = SHAPE_DATA[targetKey];
+      speakText(`Find the ${targetShape.name}`);
+    }
+
+    function handleG1Choice(chosenKey, btnElem) {
+      if (g1AnswerLocked) return;
+      const targetKey = G1_ROUNDS[g1CurrentRound].target;
+
+      if (chosenKey === targetKey) {
+        g1AnswerLocked = true;
+        g1Score++;
+        document.getElementById('modalCurrentScore').textContent = g1Score;
+        btnElem.classList.add('correct-pulse');
+        playSound('correct');
+        showFeedback(true, `Super! That's the ${SHAPE_DATA[targetKey].name}! ⭐`);
+
+        setTimeout(() => {
+          g1CurrentRound++;
+          if (g1CurrentRound < G1_ROUNDS.length) {
+            loadG1Round();
+          } else {
+            finishGame1();
+          }
+        }, 1200);
+      } else {
+        btnElem.classList.add('wrong-shake');
+        playSound('wrong');
+        showFeedback(false, `Oops! That's a ${SHAPE_DATA[chosenKey].name}. Try again!`);
+        setTimeout(() => {
+          btnElem.classList.remove('wrong-shake');
+        }, 500);
+      }
+    }
+
+    function finishGame1() {
+      const pct = Math.round((g1Score / G1_ROUNDS.length) * 100);
+      const prevBest = parseInt(localStorage.getItem('number_shapes_g1_best') || '0', 10);
+      const played = parseInt(localStorage.getItem('number_shapes_g1_played') || '0', 10);
+
+      localStorage.setItem('number_shapes_g1_best', Math.max(pct, prevBest));
+      localStorage.setItem('number_shapes_g1_played', played + 1);
+
+      showCelebration(
+        pct,
+        pct >= 75 ? 'Super Shape Master! 🏆' : 'Great Exploration! 🌟',
+        `You recognized ${g1Score} out of ${G1_ROUNDS.length} shapes correctly!`,
+        `${g1Score}/${G1_ROUNDS.length}`,
+        'Next: Shape Matching'
+      );
+    }
+
+    /* ========================================================
+       7. GAME 2: SHAPE MATCHING (8 Everyday Items)
+       ======================================================== */
+    const G2_ROUNDS = [
+      { item: 'Pizza Slice', emoji: '🍕', target: 'triangle', hint: 'Look at the 3 pointed corners!' },
+      { item: 'Wall Clock', emoji: '⏰', target: 'circle', hint: 'It is round all the way around!' },
+      { item: 'Front Door', emoji: '🚪', target: 'rectangle', hint: 'Tall with two long sides and two short sides!' },
+      { item: 'Gift Box', emoji: '🎁', target: 'square', hint: 'All four sides are neat and equal!' },
+      { item: 'Camping Tent', emoji: '⛺', target: 'triangle', hint: 'It points straight up like a pyramid!' },
+      { item: 'Car Wheel', emoji: '🛞', target: 'circle', hint: 'It rolls smoothly on the road!' },
+      { item: 'Flying Kite', emoji: '🪁', target: 'diamond', hint: 'Tilted with four corners in the sky!' },
+      { item: 'Chocolate Bar', emoji: '🍫', target: 'rectangle', hint: 'Wide and sweet with long sides!' }
+    ];
+
+    let g2CurrentRound = 0;
+    let g2Score = 0;
+    let g2AnswerLocked = false;
+
+    function initGame2() {
+      g2CurrentRound = 0;
+      g2Score = 0;
+      g2AnswerLocked = false;
+      document.getElementById('modalCurrentScore').textContent = '0';
+      loadG2Round();
+    }
+
+    function loadG2Round() {
+      g2AnswerLocked = false;
+      const round = G2_ROUNDS[g2CurrentRound];
+      const targetShape = SHAPE_DATA[round.target];
+
+      document.getElementById('modalGameStep').textContent = `Round ${g2CurrentRound + 1} of ${G2_ROUNDS.length}`;
+      document.getElementById('modalProgFill').style.width = `${((g2CurrentRound + 1) / G2_ROUNDS.length) * 100}%`;
+
+      document.getElementById('g2ItemEmoji').textContent = round.emoji;
+      document.getElementById('g2ItemName').textContent = round.item;
+      document.getElementById('g2ItemHint').textContent = round.hint;
+
+      speakText(`What shape is this ${round.item}?`);
+
+      // 4 choices
+      const allKeys = ['circle', 'square', 'triangle', 'rectangle', 'star', 'diamond'];
+      const distractors = allKeys.filter(k => k !== round.target).sort(() => Math.random() - 0.5).slice(0, 3);
+      const options = [round.target, ...distractors].sort(() => Math.random() - 0.5);
+
+      const grid = document.getElementById('g2ChoicesGrid');
+      grid.innerHTML = '';
+
+      options.forEach(key => {
+        const item = SHAPE_DATA[key];
+        const btn = document.createElement('button');
+        btn.className = 'shape-choice-btn';
+        btn.setAttribute('aria-label', item.name);
+        btn.innerHTML = `
+          <div class="shape-choice-svg-wrap">
+            ${item.renderSvg(68)}
+          </div>
+          <span class="shape-choice-label">${item.name}</span>
+        `;
+        btn.addEventListener('click', () => handleG2Choice(key, btn));
+        grid.appendChild(btn);
+      });
+    }
+
+    function speakG2Prompt() {
+      const round = G2_ROUNDS[g2CurrentRound];
+      speakText(`What shape does the ${round.item} look like?`);
+    }
+
+    function handleG2Choice(chosenKey, btnElem) {
+      if (g2AnswerLocked) return;
+      const round = G2_ROUNDS[g2CurrentRound];
+
+      if (chosenKey === round.target) {
+        g2AnswerLocked = true;
+        g2Score++;
+        document.getElementById('modalCurrentScore').textContent = g2Score;
+        btnElem.classList.add('correct-pulse');
+        playSound('correct');
+        showFeedback(true, `Spot on! The ${round.item} is shaped like a ${SHAPE_DATA[round.target].name}! 🎯`);
+
+        setTimeout(() => {
+          g2CurrentRound++;
+          if (g2CurrentRound < G2_ROUNDS.length) {
+            loadG2Round();
+          } else {
+            finishGame2();
+          }
+        }, 1300);
+      } else {
+        btnElem.classList.add('wrong-shake');
+        playSound('wrong');
+        showFeedback(false, `Not quite! Look at the outline. Try again!`);
+        setTimeout(() => {
+          btnElem.classList.remove('wrong-shake');
+        }, 500);
+      }
+    }
+
+    function finishGame2() {
+      const pct = Math.round((g2Score / G2_ROUNDS.length) * 100);
+      const prevBest = parseInt(localStorage.getItem('number_shapes_g2_best') || '0', 10);
+      const played = parseInt(localStorage.getItem('number_shapes_g2_played') || '0', 10);
+
+      localStorage.setItem('number_shapes_g2_best', Math.max(pct, prevBest));
+      localStorage.setItem('number_shapes_g2_played', played + 1);
+
+      showCelebration(
+        pct,
+        pct >= 75 ? 'Match Grandmaster! 🍕' : 'Good Matcher! 🌟',
+        `You matched ${g2Score} of ${G2_ROUNDS.length} everyday items to their shapes!`,
+        `${g2Score}/${G2_ROUNDS.length}`,
+        'Next: Shape Construction'
+      );
+    }
+
+    /* ========================================================
+       8. GAME 3: SHAPE CONSTRUCTION (6 Blueprint Creations)
+       ======================================================== */
+    const G3_ROUNDS = [
+      {
+        name: 'Cozy House',
+        emoji: '🏠',
+        desc: 'Build the roof, wall, and door!',
+        slots: [
+          { id: 'roof', shape: 'triangle', label: 'Roof (Triangle)', w: 120, h: 56, type: 'triangle', color: '#F59E0B' },
+          { id: 'wall', shape: 'square', label: 'Wall (Square)', w: 110, h: 90, type: 'square', color: '#3B82F6' },
+          { id: 'door', shape: 'rectangle', label: 'Door (Rectangle)', w: 46, h: 64, type: 'rectangle', color: '#10B981' }
+        ],
+        pieces: [
+          { shape: 'triangle', label: 'Triangle Roof' },
+          { shape: 'square', label: 'Square Wall' },
+          { shape: 'rectangle', label: 'Rectangle Door' },
+          { shape: 'circle', label: 'Circle Sun' }
+        ]
+      },
+      {
+        name: 'Space Rocket',
+        emoji: '🚀',
+        desc: 'Build the nosecone, rocket body, and wings!',
+        slots: [
+          { id: 'nose', shape: 'triangle', label: 'Nosecone', w: 90, h: 54, type: 'triangle', color: '#EF4444' },
+          { id: 'body', shape: 'rectangle', label: 'Body (Rectangle)', w: 80, h: 100, type: 'rectangle', color: '#3B82F6' },
+          { id: 'finLeft', shape: 'triangle', label: 'Left Fin', w: 50, h: 44, type: 'triangle', color: '#F59E0B' },
+          { id: 'finRight', shape: 'triangle', label: 'Right Fin', w: 50, h: 44, type: 'triangle', color: '#F59E0B' }
+        ],
+        pieces: [
+          { shape: 'triangle', label: 'Triangle Top' },
+          { shape: 'rectangle', label: 'Rectangle Body' },
+          { shape: 'triangle', label: 'Triangle Left Fin' },
+          { shape: 'triangle', label: 'Triangle Right Fin' }
+        ]
+      },
+      {
+        name: 'Pine Tree',
+        emoji: '🌲',
+        desc: 'Stack green triangles on top of a trunk!',
+        slots: [
+          { id: 'topTree', shape: 'triangle', label: 'Top Branches', w: 90, h: 50, type: 'triangle', color: '#10B981' },
+          { id: 'midTree', shape: 'triangle', label: 'Wide Branches', w: 130, h: 60, type: 'triangle', color: '#059669' },
+          { id: 'trunk', shape: 'rectangle', label: 'Tree Trunk', w: 40, h: 60, type: 'rectangle', color: '#B45309' }
+        ],
+        pieces: [
+          { shape: 'triangle', label: 'Small Triangle' },
+          { shape: 'triangle', label: 'Big Triangle' },
+          { shape: 'rectangle', label: 'Trunk Rectangle' },
+          { shape: 'star', label: 'Gold Star' }
+        ]
+      },
+      {
+        name: 'Sailboat',
+        emoji: '⛵',
+        desc: 'Place sails and hull to ride the waves!',
+        slots: [
+          { id: 'bigSail', shape: 'triangle', label: 'Big Sail', w: 84, h: 90, type: 'triangle', color: '#8B5CF6' },
+          { id: 'smallSail', shape: 'triangle', label: 'Small Sail', w: 60, h: 70, type: 'triangle', color: '#EC4899' },
+          { id: 'boatHull', shape: 'rectangle', label: 'Boat Hull', w: 170, h: 45, type: 'rectangle', color: '#F59E0B' }
+        ],
+        pieces: [
+          { shape: 'triangle', label: 'Big Triangle Sail' },
+          { shape: 'triangle', label: 'Small Triangle Sail' },
+          { shape: 'rectangle', label: 'Rectangle Boat' }
+        ]
+      },
+      {
+        name: 'Little Car',
+        emoji: '🚗',
+        desc: 'Put together cabin, body, and two round wheels!',
+        slots: [
+          { id: 'cabin', shape: 'square', label: 'Cabin (Square)', w: 80, h: 56, type: 'square', color: '#38BDF8' },
+          { id: 'carBody', shape: 'rectangle', label: 'Car Body', w: 180, h: 54, type: 'rectangle', color: '#EF4444' },
+          { id: 'wFront', shape: 'circle', label: 'Front Wheel', w: 48, h: 48, type: 'circle', color: '#334155' },
+          { id: 'wBack', shape: 'circle', label: 'Rear Wheel', w: 48, h: 48, type: 'circle', color: '#334155' }
+        ],
+        pieces: [
+          { shape: 'square', label: 'Square Cabin' },
+          { shape: 'rectangle', label: 'Red Car Body' },
+          { shape: 'circle', label: 'Circle Wheel 1' },
+          { shape: 'circle', label: 'Circle Wheel 2' }
+        ]
+      },
+      {
+        name: 'Friendly Robot',
+        emoji: '🤖',
+        desc: 'Construct robot head, torso, and eyes!',
+        slots: [
+          { id: 'head', shape: 'square', label: 'Robot Head', w: 80, h: 64, type: 'square', color: '#8B5CF6' },
+          { id: 'body', shape: 'rectangle', label: 'Robot Torso', w: 110, h: 84, type: 'rectangle', color: '#06B6D4' },
+          { id: 'eyeL', shape: 'circle', label: 'Left Eye', w: 32, h: 32, type: 'circle', color: '#FBBF24' },
+          { id: 'eyeR', shape: 'circle', label: 'Right Eye', w: 32, h: 32, type: 'circle', color: '#FBBF24' }
+        ],
+        pieces: [
+          { shape: 'square', label: 'Square Head' },
+          { shape: 'rectangle', label: 'Torso Rectangle' },
+          { shape: 'circle', label: 'Left Eye' },
+          { shape: 'circle', label: 'Right Eye' },
+          { shape: 'triangle', label: 'Triangle Antenna' }
+        ]
+      }
+    ];
+
+    let g3CurrentRound = 0;
+    let g3Score = 0;
+    let g3FilledSlots = {};
+
+    function initGame3() {
+      g3CurrentRound = 0;
+      g3Score = 0;
+      document.getElementById('modalCurrentScore').textContent = '0';
+      loadG3Round();
+    }
+
+    function loadG3Round() {
+      const round = G3_ROUNDS[g3CurrentRound];
+      g3FilledSlots = {};
+
+      document.getElementById('modalGameStep').textContent = `Round ${g3CurrentRound + 1} of ${G3_ROUNDS.length}`;
+      document.getElementById('modalProgFill').style.width = `${((g3CurrentRound + 1) / G3_ROUNDS.length) * 100}%`;
+
+      document.getElementById('g3ObjectTitle').textContent = `${round.emoji} ${round.name}`;
+      document.getElementById('g3ObjectDesc').textContent = round.desc;
+
+      speakText(`Let's build the ${round.name}! Tap the shapes below.`);
+
+      // Render Blueprint Stage
+      const stage = document.getElementById('g3BlueprintStage');
+      stage.innerHTML = '';
+
+      // Create layout row or stack
+      round.slots.forEach(slot => {
+        const slotEl = document.createElement('div');
+        slotEl.className = 'blueprint-slot slot-empty';
+        slotEl.id = `slot-${slot.id}`;
+        slotEl.style.width = `${slot.w}px`;
+        slotEl.style.height = `${slot.h}px`;
+        slotEl.setAttribute('data-shape', slot.shape);
+        slotEl.innerHTML = `<span>${slot.label}</span>`;
+        stage.appendChild(slotEl);
+      });
+
+      // Render Pieces Tray
+      const tray = document.getElementById('g3PiecesTray');
+      tray.innerHTML = '';
+
+      // Shuffle pieces
+      const shuffledPieces = [...round.pieces].sort(() => Math.random() - 0.5);
+
+      shuffledPieces.forEach((piece, idx) => {
+        const pieceBtn = document.createElement('button');
+        pieceBtn.className = 'g3-piece-btn';
+        pieceBtn.id = `piece-btn-${idx}`;
+        pieceBtn.setAttribute('data-shape', piece.shape);
+        pieceBtn.innerHTML = `
+          <div class="g3-piece-mini-svg">
+            ${SHAPE_DATA[piece.shape].renderSvg(32)}
+          </div>
+          <span>${piece.label}</span>
+        `;
+        pieceBtn.addEventListener('click', () => handleG3PieceClick(piece.shape, pieceBtn));
+        tray.appendChild(pieceBtn);
+      });
+    }
+
+    function handleG3PieceClick(pieceShape, btnElem) {
+      const round = G3_ROUNDS[g3CurrentRound];
+
+      // Find first unfilled slot that expects this shape
+      const targetSlot = round.slots.find(slot => slot.shape === pieceShape && !g3FilledSlots[slot.id]);
+
+      if (targetSlot) {
+        // Place piece!
+        g3FilledSlots[targetSlot.id] = true;
+        btnElem.classList.add('used');
+        playSound('snap');
+
+        const slotEl = document.getElementById(`slot-${targetSlot.id}`);
+        slotEl.classList.remove('slot-empty');
+        slotEl.classList.add('slot-filled');
+        slotEl.style.backgroundColor = targetSlot.color;
+        slotEl.style.borderColor = 'transparent';
+        slotEl.innerHTML = `
+          <div style="display:flex;align-items:center;gap:6px;color:#fff;">
+            <span>✓</span>
+            <span>${SHAPE_DATA[pieceShape].name}</span>
+          </div>
+        `;
+
+        showFeedback(true, `Placed ${SHAPE_DATA[pieceShape].name}! ✨`);
+
+        // Check if all slots in this creation are filled
+        const allFilled = round.slots.every(slot => g3FilledSlots[slot.id]);
+        if (allFilled) {
+          handleG3RoundComplete();
+        }
+      } else {
+        // Piece doesn't fit or already placed
+        btnElem.classList.add('wrong-shake');
+        playSound('wrong');
+        showFeedback(false, `No empty slot for ${SHAPE_DATA[pieceShape].name} right now!`);
+        setTimeout(() => {
+          btnElem.classList.remove('wrong-shake');
+        }, 400);
+      }
+    }
+
+    function handleG3RoundComplete() {
+      g3Score++;
+      document.getElementById('modalCurrentScore').textContent = g3Score;
+      playSound('win');
+      triggerConfetti(1800);
+
+      const round = G3_ROUNDS[g3CurrentRound];
+      const stage = document.getElementById('g3BlueprintStage');
+
+      const finishBanner = document.createElement('div');
+      finishBanner.className = 'blueprint-finished-banner';
+      finishBanner.innerHTML = `
+        <span>🎉 Great Job!</span>
+        <span style="font-size: 1.15rem; font-weight: 600;">You built the ${round.name}!</span>
+      `;
+      stage.appendChild(finishBanner);
+      speakText(`Wonderful! You built the ${round.name}!`);
+
+      setTimeout(() => {
+        g3CurrentRound++;
+        if (g3CurrentRound < G3_ROUNDS.length) {
+          loadG3Round();
+        } else {
+          finishGame3();
+        }
+      }, 2000);
+    }
+
+    function finishGame3() {
+      const pct = Math.round((g3Score / G3_ROUNDS.length) * 100);
+      const prevBest = parseInt(localStorage.getItem('number_shapes_g3_best') || '0', 10);
+      const played = parseInt(localStorage.getItem('number_shapes_g3_played') || '0', 10);
+
+      localStorage.setItem('number_shapes_g3_best', Math.max(pct, prevBest));
+      localStorage.setItem('number_shapes_g3_played', played + 1);
+
+      showCelebration(
+        pct,
+        'Master Geometric Architect! 🚀',
+        `You constructed all ${G3_ROUNDS.length} blueprints from shapes!`,
+        `${g3Score}/${G3_ROUNDS.length}`,
+        'Back to Number World'
+      );
+    }
+
+    /* ========================================================
+       9. CELEBRATION MODAL SYSTEM
+       ======================================================== */
+    function showCelebration(scorePct, titleText, messageText, scoreFraction, nextBtnText) {
+      document.querySelectorAll('.game-view').forEach(v => v.classList.remove('active'));
+      const celebView = document.getElementById('celebrationView');
+      celebView.classList.add('open');
+
+      playSound('win');
+      triggerConfetti(3200);
+
+      document.getElementById('celebTitle').textContent = titleText;
+      document.getElementById('celebMessage').textContent = messageText;
+      document.getElementById('celebScoreVal').textContent = scoreFraction;
+      document.getElementById('celebNextBtnText').textContent = nextBtnText;
+
+      const trophy = document.getElementById('celebTrophy');
+      const stars = document.getElementById('celebStars');
+      const mastery = document.getElementById('celebMasteryText');
+
+      if (scorePct >= 80) {
+        trophy.textContent = '🏆';
+        stars.textContent = '⭐⭐⭐';
+        mastery.textContent = 'Master level';
+      } else if (scorePct >= 50) {
+        trophy.textContent = '🌟';
+        stars.textContent = '⭐⭐';
+        mastery.textContent = 'Great Explorer';
+      } else {
+        trophy.textContent = '🎖️';
+        stars.textContent = '⭐';
+        mastery.textContent = 'Good Practice';
+      }
+
+      speakText(titleText);
+      updateProgressUI();
+    }
+
+    function handleCelebNext() {
+      document.getElementById('celebrationView').classList.remove('open');
+      if (currentGameId === 1) {
+        openGame(2);
+      } else if (currentGameId === 2) {
+        openGame(3);
+      } else {
+        window.location.href = 'number-world.html';
+      }
+    }
+
+    function replayCurrentGame() {
+      document.getElementById('celebrationView').classList.remove('open');
+      openGame(currentGameId);
+    }
+
+    /* ========================================================
+       10. INITIALIZATION
+       ======================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProgressUI();
+    });
+  </script>
+</body>
+</html>
